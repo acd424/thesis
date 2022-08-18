@@ -10,6 +10,8 @@
 \usepackage{multirow}
 \usepackage{caption}
 \usepackage{subcaption} %multiple images in single insert
+\usepackage{array}% http://ctan.org/pkg/array for extra row height
+\usepackage[table,xcdraw]{xcolor} % table colours
 
 % Page formatting
 \addtolength{\textwidth}{5mm}
@@ -56,6 +58,7 @@
 
 
 \DeclareUnicodeCharacter{0301}{*************************************}
+\DeclareUnicodeCharacter{2212}{-} % for using minus sign
 
 
 \begin{document}
@@ -108,7 +111,7 @@ This research has been carried out by a team which has included (name the indivi
 \newpage 
 \pagenumbering{arabic}
 \setcounter{page}{1}
-
+\part{Background}
 \include{introduction}
 \include{core_frameworks}
 \include{pop}
@@ -116,9 +119,13 @@ This research has been carried out by a team which has included (name the indivi
 \include{NLP}
 \include{NLP_crime}
 \include{research_qs}
+\part{Case Studies}
+\include{data}
+\include{Method}
 \include{study_1a}
 \include{study_1b}
 \include{study_1c}
+\part{Discussion}
 
 
 
@@ -162,4 +169,218 @@ Instrument instrument used to commit the crime, e.g. crowbar, could be unusual b
 Mode mode of transport used to commit the crimes 
 Entry the actual point where entry was made
 Signature something unusual done by the criminal, their ‘signature’, e.g. creates an escape route by wedging doors open, closes curtains, ejaculates into women’s underwear, defecates.
+
+
+The ten points of the modus operandi system
+The points to be borne in mind when collecting information for the system are:
+Style the style of deception used in criminal deception cases, e.g. dressed as a church minister, documents claiming to be an insurance collector
+Time relative to an event (not to the clock), e.g. only on market days, early closing days, on certain days of the months
+Objective the objective of the crime, e.g. gain, lust, revenge
+Pal accomplice or friend
+Class the class of person or property attacked
+Reason reason for being in the area, the criminal’s self-account,
+Instrument instrument used to commit the crime, e.g. crowbar, could be unusual bodily force (sitting on victim)
+Mode mode of transport used to commit the crimes 
+Entry the actual point where entry was made
+Signature something unusual done by the criminal, their ‘signature’, e.g. creates an escape route by wedging doors open, closes curtains, ejaculates into women’s underwear, defecates.
+
+
+\subsection{Weaknesses with Police Data.} The primary weakness with police data with respect to this study is that not all crime is reported to the police, \citep{buil2021accuracy}. In addition because the missing crimes are not missing at random, but are correlated with victim characteristics \citep{Tarling} it means that any insights from the recorded crimes analysed here will also be biased against certain victim types. This is a problem inherent to all police data sets, though it should not be ignored, and arguably should become more important for consideration as data analytical tools allow greater use of police data.
+
+This issue was discussed in part one under data bias as an example of how the output from this work might be biased against certain victim groups. Bias will be explored in each study, but bias introduced from missing crimes is hard to quantify, though others \citep{buil2021accuracy} have attempted to understand at a more aggregate level the impact of this missing data. This issue of bias through missing data will be returned to in the discussion in part 3.
+
+
+
+
+
+
+@article{devlin2018bert,
+  title={Bert: Pre-training of deep bidirectional transformers for language understanding},
+  author={Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  journal={arXiv preprint arXiv:1810.04805},
+  year={2018}
+}
+
+@misc{Longformer,
+  doi = {10.48550/ARXIV.2004.05150},
+  
+  url = {https://arxiv.org/abs/2004.05150},
+  
+  author = {Beltagy, Iz and Peters, Matthew E. and Cohan, Arman},
+  
+  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Longformer: The Long-Document Transformer},
+  
+  publisher = {arXiv},
+  
+  year = {2020},
+  }
+  
+  
+  @article{wolf2019huggingface,
+  title={Huggingface's transformers: State-of-the-art natural language processing},
+  author={Wolf, Thomas and Debut, Lysandre and Sanh, Victor and Chaumond, Julien and Delangue, Clement and Moi, Anthony and Cistac, Pierric and Rault, Tim and Louf, R{\'e}mi and Funtowicz, Morgan and others},
+  journal={arXiv preprint arXiv:1910.03771},
+  year={2019}
+}
+
+
+
+@article{scikit-learn,
+ title={Scikit-learn: Machine Learning in {P}ython},
+ author={Pedregosa, F. and Varoquaux, G. and Gramfort, A. and Michel, V.
+         and Thirion, B. and Grisel, O. and Blondel, M. and Prettenhofer, P.
+         and Weiss, R. and Dubourg, V. and Vanderplas, J. and Passos, A. and
+         Cournapeau, D. and Brucher, M. and Perrot, M. and Duchesnay, E.},
+ journal={Journal of Machine Learning Research},
+ volume={12},
+ pages={2825--2830},
+ year={2011}
+}
+
+@inproceedings{ribeiro2016should,
+  title={" Why should i trust you?" Explaining the predictions of any classifier},
+  author={Ribeiro, Marco Tulio and Singh, Sameer and Guestrin, Carlos},
+  booktitle={Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining},
+  pages={1135--1144},
+  year={2016}
+}
+
+@article{munoz2018instance,
+  title={Instance spaces for machine learning classification},
+  author={Mu{\~n}oz, Mario A and Villanova, Laura and Baatar, Davaatseren and Smith-Miles, Kate},
+  journal={Machine Learning},
+  volume={107},
+  number={1},
+  pages={109--147},
+  year={2018},
+  publisher={Springer}
+}
+
+
+@article{SMITHMILES201412,
+title = {Towards objective measures of algorithm performance across instance space},
+journal = {Computers & Operations Research},
+volume = {45},
+pages = {12-24},
+year = {2014},
+issn = {0305-0548},
+doi = {https://doi.org/10.1016/j.cor.2013.11.015},
+url = {https://www.sciencedirect.com/science/article/pii/S0305054813003389},
+author = {Kate Smith-Miles and Davaatseren Baatar and Brendan Wreford and Rhyd Lewis},
+keywords = {Comparative analysis, Heuristics, Graph coloring, Algorithm selection, Performance prediction},
+abstract = {This paper tackles the difficult but important task of objective algorithm performance assessment for optimization. Rather than reporting average performance of algorithms across a set of chosen instances, which may bias conclusions, we propose a methodology to enable the strengths and weaknesses of different optimization algorithms to be compared across a broader instance space. The results reported in a recent Computers and Operations Research paper comparing the performance of graph coloring heuristics are revisited with this new methodology to demonstrate (i) how pockets of the instance space can be found where algorithm performance varies significantly from the average performance of an algorithm; (ii) how the properties of the instances can be used to predict algorithm performance on previously unseen instances with high accuracy; and (iii) how the relative strengths and weaknesses of each algorithm can be visualized and measured objectively.}
+}
+
+@article{pyhard,
+  title={PyHard: a novel tool for generating hardness embeddings to support data-centric analysis},
+  author={Paiva, Pedro Yuri Arbs and Smith-Miles, Kate and Valeriano, Maria Gabriela and Lorena, Ana Carolina},
+  journal={arXiv preprint arXiv:2109.14430},
+  year={2021}
+}
+
+
+@inproceedings{nayak-etal-2020-domain,
+    title = "Domain adaptation challenges of {BERT} in tokenization and sub-word representations of Out-of-Vocabulary words",
+    author = "Nayak, Anmol  and
+      Timmapathini, Hariprasad  and
+      Ponnalagu, Karthikeyan  and
+      Gopalan Venkoparao, Vijendran",
+    booktitle = "Proceedings of the First Workshop on Insights from Negative Results in NLP",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.insights-1.1",
+    doi = "10.18653/v1/2020.insights-1.1",
+    pages = "1--5",
+    abstract = "BERT model (Devlin et al., 2019) has achieved significant progress in several Natural Language Processing (NLP) tasks by leveraging the multi-head self-attention mechanism (Vaswani et al., 2017) in its architecture. However, it still has several research challenges which are not tackled well for domain specific corpus found in industries. In this paper, we have highlighted these problems through detailed experiments involving analysis of the attention scores and dynamic word embeddings with the BERT-Base-Uncased model. Our experiments have lead to interesting findings that showed: 1) Largest substring from the left that is found in the vocabulary (in-vocab) is always chosen at every sub-word unit that can lead to suboptimal tokenization choices, 2) Semantic meaning of a vocabulary word deteriorates when found as a substring in an Out-Of-Vocabulary (OOV) word, and 3) Minor misspellings in words are inadequately handled. We believe that if these challenges are tackled, it will significantly help the domain adaptation aspect of BERT.",
+}
+
+
+@article{goldfarb2020intrinsic,
+  title={Intrinsic bias metrics do not correlate with application bias},
+  author={Goldfarb-Tarrant, Seraphina and Marchant, Rebecca and S{\'a}nchez, Ricardo Mu{\~n}oz and Pandya, Mugdha and Lopez, Adam},
+  journal={arXiv preprint arXiv:2012.15859},
+  year={2020}
+}
+
+@article{hardt2016equality,
+  title={Equality of opportunity in supervised learning},
+  author={Hardt, Moritz and Price, Eric and Srebro, Nati},
+  journal={Advances in neural information processing systems},
+  volume={29},
+  year={2016}
+}
+
+
+@inproceedings{verma2018fairness,
+  title={Fairness definitions explained},
+  author={Verma, Sahil and Rubin, Julia},
+  booktitle={2018 ieee/acm international workshop on software fairness (fairware)},
+  pages={1--7},
+  year={2018},
+  organization={IEEE}
+}
+
+
+%for future .... use this technique to mitigate bias
+@inproceedings{dixon2018measuring,
+  title={Measuring and mitigating unintended bias in text classification},
+  author={Dixon, Lucas and Li, John and Sorensen, Jeffrey and Thain, Nithum and Vasserman, Lucy},
+  booktitle={Proceedings of the 2018 AAAI/ACM Conference on AI, Ethics, and Society},
+  pages={67--73},
+  year={2018}
+}
+
+@article{PTMsurvey,
+  title={Pre-trained models for natural language processing: A survey},
+  author={Qiu, Xipeng and Sun, Tianxiang and Xu, Yige and Shao, Yunfan and Dai, Ning and Huang, Xuanjing},
+  journal={Science China Technological Sciences},
+  volume={63},
+  number={10},
+  pages={1872--1897},
+  year={2020},
+  publisher={Springer}
+}
+Transformers are based upon Attention functions, which take numerical inputs and output numerical inputs after linear transformations. It is these linear transformations that are 'learnt' through the training. Transformers use multiple-attention mechanisms at once so that different linear transformations can be learnt, with these transformations paying attention to different parts of the input sequence, thus utilising information from all parts of the input.
+
+
+ALGO-CARE
+http://data.parliament.uk/writtenevidence/committeeevidence.svc/evidencedocument/science-and-technology-committee/algorithms-in-decisionmaking/written/69002.html
+
+
+In 2017 a seminal paper was released  by a team from Google\parencite{vaswani2017attention} that introduced the transformer as a method for NLP. The team from Google had managed to improve on the previous state of the art language models by simplifying the existing models to dispense with two types of neural networks. By simplifying the model, the real benefit was realised by being able to conduct the remaining computations in parallel rather than sequentially. This allowed the models to train much faster and, by leveraging modern hardware, they were able to train the transformer models with relatively limited resource whilst still surpassing the then gold standard on language translation. BERT is a made from layers of transformer modules. The BERT base model has twelve layers of transformers, and each transformer has twelve attention heads. Within these attention heads there are 768 hidden states (analogous to separate computations). This equates to a model with around 110 million parameters, these parameters are learnt during the pre-training and are then refined during the fine tuning stage.  The pre-training phase for the BERT models has already been completed and is not part of the work of this research, but the fine-tuning was completed on the police text data available. The next section will explain how the two part training regime for the model works. 
+
+
+\subsubsection{Instance Based Analysis.} Instance Based Analysis(IBA) was first developed  as a way of exploring how well different algorithms were performing against different data sets (instances). Generally performance of algorithms is viewed at an aggregate level, that is performance metrics are viewed at an overall level with the whole datset considered as one. For example in this research the MCC used is an aggregate level performance metric. Aggregate measures give an indication of how successful overall the language model has been, but it does not given any information about how well particular texts or groups of texts were handled.  IBA seeks to address this problem by exploring beneath the aggregate metric level and understanding if there any systematic areas where particularly algorithms do well and others do not \parencite{munoz2018instance}. 
+
+Firstly each dataset is described by metadata, that is metrics that characterise that particular data set. An example of metadata might be  ( --hardness measures?). As there are often multiple metadata characteristics in order to simplify the process a dimension-reduction technique is used to produce a two-dimensional instance space that reflects the import characteristics of the dataset. By projecting the instances into a 2D instance space, identification of systematic variations can show where algorithms are better and where they are worse, crucially these variations can be mapped back to particular characteristics of the dataset, thus allowing a deeper understanding of where the algorithm is likely to make the correct decision and where it is not. These visual outputs can also be more formally registered through instance space metrics.  The IBA concept has recently been extended to look at singular data sets at the instance level \parencite{pyhard}. With this new approach, instead of observing how well an algorithm does across multi data sets, it is now focuses on how well an algorithm compares across multiple data points from within the same data set. This is of interest to this research because this is a means of identifying algorithmic bias within a data set. 
+
+The general process for conducting IBA is:
+
+\begin{itemize}
+    \item 
+\end{itemize}
+
+\subsubsection{Constructing the Metadata.} As highlighted above the metadata for the data set are characteristics of the data set that are thought to influence the outcome   can be explicit or latent to the dataset. 
+
+
+\begin{itemize}
+    \item{Observable Variables.} These are variables that are directly observable by the language model. Examples of observable variables include 1) the length of a text 2) the proportion of non-BERT words 3)Structured text (from online reporting tools)  4) Proportion of redacted words.  
+    \item{Latent Variables}. Latent variables are not directly observed by the language model, but may through the data generating process have had an effect on what (or indeed) what wasn't written. Typically examples include victim characteristics (age, sex), location and crime classification. 
+\end{itemize}
+
+
+
+
+
+
+Additionally a specific weakness of MO data and police incident logs is that there is no negative reporting. For example Burglary MO texts will generally report if a car is stolen, but it will not report that a car is not stolen. This is obviously because there is so much crime variation that not every aspect can be reported upon. It does mean however that the approach taken with NLP models is that if it was not reported in the MO then it is assumed that it did not happen.
+
+
+
+
+   From \citep{brown_sturge} the definition of ASB is  Anti-social behaviour (ASB) encompasses criminal and nuisance behaviour that causes distress to others. Typical examples include: noisy neighbours, vandalism, graffiti, public drunkenness, littering, fly tipping and street drug dealing. 
 

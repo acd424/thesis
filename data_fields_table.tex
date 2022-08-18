@@ -1,0 +1,40 @@
+\setlength{\extrarowheight}{12pt}
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+\multicolumn{3}{c}{Crime Data Fields}                          \\ \midrule
+Investigation number & Call origin       & Crown victim        \\
+Storm ref            & Outcome           & Town                \\
+Committed from date  & Status            & Postcode            \\
+Committed from time  & Offence           & Easting             \\
+Committed to date    & Primary offence   & Northing            \\
+Committed to time    & Included offences & MO keywords         \\
+Reported date        & Victim age        & Factors             \\
+Reported time        & Gender            & MO Text*            \\
+Recorded date        & Occupation        & Relationship type$^{\dagger}$ \\
+Recorded time        & Ethnicity         & Linked vehicle$^{\dagger}$   \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:data_fields_crime} A table of all the data fields exported from Lancashire Police for the crime data.* Indicates a free text field. $^{\dagger}$ Indicates a field sent post analysis.}
+\end{table}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+\multicolumn{3}{c}{Incident Data Fields}        \\ \midrule
+Incident number & Complainant   & Disposed time \\
+Initial theme   & Priority      & Postcode      \\
+Final Theme     & Origin        & Easting       \\
+Initial         & Input date    & Northing      \\
+Final           & Input time    & Covid\_19     \\
+External ref    & Disposed date & Incident text*  \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:data_fields_inc} A table of all the data fields exported from Lancashire Police for the Incident data.* Indicates a free text field.}
+\end{table}
