@@ -1,0 +1,114 @@
+\chapter{Natural Language Processing}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{transfer_figs/Slide9.jpeg}
+  \caption[NLP process Overview.]{This figure demonstrates a generic machine learning task containing NLP. Source: Author generated}
+  \label{fig:overview}
+\end{figure}
+
+Natural Language Processing (NLP) is a branch of Artificial Intelligence that seeks to extract information from text, principally free text. The main purpose of NLP is to \say{make human language accessible to computers} \parencite{eisenstein2018natural}, this is generally accomplished by accepting data as words and then representing them in the form of numbers. Once the data is in the form of numbers it can then be manipulated by the machine learning processes outlined in Chapter 4.
+
+Within NLP there is a tension between knowledge (trying to understand the structure of language)  and  learning (using algorithms to efficiently code representations with a focus only on the results) \parencite{eisenstein2018natural}.  The knowledge advocates have been working on language problems for sometime under the guise of computational linguistics, they have laid down many important NLP foundations that can be used to automatically extract information form text such as part of speech tagging and parsing a sentence so that the dependencies between words can be understood. As \textcite{manning2015computational} states there has been a shift in NLP more recently to those with more of a focus on the learning. That is they want to use modern machine learning processes, and especially deep learning processes, to translate raw text directly into the desired output \parencite{eisenstein2018natural}. This research will aim to balance both methods, noting that most of the models that have been developed by both camps have been trained on text that is not police generated free text. Most of the models have been trained on edited text such as news reports or other structurally published material. For that reason the models will have been built on text that is likely to have a different compositional structure than police free text data.
+
+
+Figure \ref{fig:overview} gives a generic language processing pipeline that might be used to gain information from free text. The focus of the previous chapter was on the machine learning models to the right of the diagram, this chapter however comes before machine learning in the process and is concerned with the processing of the data, that is finding an appropriate representation of the text in the form of numbers.
+
+A few notes on terminology. A token is an individual element of interest, generally this will be a word, but it can be a piece of punctuation, it is the lowest level of investigation. Tokens are collected together to produce a document. A document in this research is a single description of a Modus Operandi for one crime, however other examples may be a single tweet, or in certain cases a whole book. A collection of documents is called a corpus, so in this research the corpus will be a collection of Modus Operandi data,  all from the same police force and of the same crime type.
+
+This section will start with a note on different applications for NLP then move onto techniques that can be used to harmonise and understand the individual tokens in a document, the section will then progress on to how these tokens can be represented within a document, and how the differences between documents within the same corpus can be mapped. 
+
+\section{Applications}
+
+Natural language processing has many applications, just like machine learning in general. However some important applications are as follows:
+
+\begin{itemize}
+
+\item{Classification.} Classifying documents into one of a number of categories, this can be fairly general such as a positive movie review, or perhaps more specific such as a modus operandi where the offender has used a knife.
+
+\item{Information Extraction.} This may be to extract the disease from clinical notes, without knowing exactly what disease it is you are searching for.
+
+\item{Question and Answering.} In this application questions are asked of a specific corpus and the answer is returned. In this application both the question and the corpus may need to be subjected to NLP techniques to generate the answer.
+
+\item{Translation.} Translating form one language to another.
+
+\item{Chatbots.} Where computers are designed to respond to conversations with humans.
+
+\end{itemize}
+
+For this research it is likely that the focus will be centred around classification, as it is generally considered a gateway task before moving onto more complex applications.
+
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{transfer_figs/Slide12.jpeg}
+  \caption[Bag-of-Words Example.]{This figure demonstrates how a bag-of-words algorithm operates. The tokens in each document are counted and a matrix is formed with a column for each word in the corpus and a row for each document in the corpus. If document 1 contains the word in col 2, then a 1 is placed in the cell (2,1). Two techniques to provide a mores succinct output are also shown. Stemming, which reduces word forms, and stop word removal which removes common words of little value. Source: Author generated}
+  \label{fig:BOW}
+\end{figure}
+
+\section{Text Normalisation} On of the most simplest forms of NLP output is what is known as the bag-of-words modelling. This method produces, an unordered, representation of all the words in a given document by producing a matrix with \emph{1} if the word is present and \emph{0} if the word is not present, Figure \ref{fig:BOW} gives a toy example. This matrix, called a word-document matrix, can then be used as input to machine learning algorithms. Some elements to note here are that the order of words is not kept, so some of the semantics of the language can be lost. Secondly, with slight different variation in word forms, even a small selection of basic sentences can give rise to a relatively large matrix, this makes it harder for the computer to grasp the meaning of the words, is \emph{cat} really that much different from \emph{cats} that they need separate columns? Reducing the size of the matrix will also make the computation more efficient as there is less matrix manipulation to conduct. What follows is a brief exploration of the techniques to reduce the variation in tokens within a document to help convey the same or very similar meaning with less tokens.
+
+\subsection{Stemming} Stemming is the process of removing inflectional affixes from a word. Examples of inflectional affixes include the plural marker \emph{s} and the past tense marker \emph{ed} \parencite{eisenstein2018natural}. See Figure \ref{fig:BOW} for an example. Stemming groups words with the same underlying concept and so reduces the total number of different tokens in a document and corpus, allowing similarities between tokens to be more easily identified. As an example horse, horses and horsed all become hors once stemmed, note the stem in this instance is not a real word, but that wouldn't affect the algorithm \parencite{jivani2011comparative}. Stemming is conducted through a rules based system, and so on some occasions the stemming generated are not correct, they can either be over-stemmed where two words of differing meaning are given the same stem e.g.Williams to William. Or an error can be under-stemming where two words with the same meaning have different stems e.g. tooth and teeth. 
+
+\subsection{Lemmatizing} Lemmatization is an additional step that can be used to reduce the amount of individual tokens in a word-document matrix. it is similar to stemming but attempts to avoid some of the pitfalls of the rule based system by additionally understanding the context of the word. One of the more popular lemmatizers, WordNet \parencite{MillerGeorgeA1990ItWA}, is a lexical reference system, similar to a database or dictionary, which lists words and there synonyms under a joint lemma, this means that WordNet can be interrogated with a given word, and its part of speech, noun verb etc and after a look-up a lemma will be returned. The system can make less mistakes than stemming as the rules are hardcoded, however computationally it can be more expensive. 
+
+\subsection{Stop words} Stop words are words that are so common, e.g. \emph{the}, \emph{a} and \emph{to} that they are generally thought to play little role in the linguistic meaning of a document. Stopwords are corpus dependant, so whilst there are lists of common words it is best practice to tailor each list to the task at hand. As an example we can see that even after the removal of some classic stop words in Figure \ref{fig:BOW}, \emph{have} appears in all documents. If this was a real example then there would be serious consideration for including \emph{have} as a stop word as it does not assist in the discrimination between documents. 
+
+Normalising text can have its advantages, the meaning of a document can be distilled to a smaller size and additional rules and dictionaries can be leveraged to clear some ambiguities. However  removal or changing of a token can reduce the information that is left in a document, information that may be useful for discrimination further into the NLP model. Bag-of-words models in general lose all of their semantic value as the word order is lost, so these techniques are particularly useful for those situations where semantic importance is not that high.
+
+ \section{Part of Speech Tagging} Another method for enriching the data set is to understand what part of the syntax of a document each token is representing. That is a part of speech (POS) tagger will label each word as to whether it is a noun or a verb etc. By labelling the words in this way some ambiguous meaning can be avoided.  Take the following headline as an example \emph{Dealers will hear car talk at noon}, if \emph{talk} in this example is a noun, then there are no surprises, however if it is a verb then we may question what kind of dealers they are and what they have been doing with their produce. A popular and effective \parencite{zeman-etal-2018-conll} open source tagger - UDPipe \parencite{straka-2018-udpipe} - can label an English sentence with the correct POS tags with around 90\% accuracy. These models have been built utilising labelled data from the universal dependancies treebank, in this tree bank around 37,000 english sentences have been hand labelled with their POS tags, this labelled data has then been used to generate the open source model UDPipe. Part of speech tagging is useful for understanding text in general, however it can have more specific uses such as finding entities like names or addresses, in a process know as Named Entity Recognition, this will be described next.
+  
+\section{Named Entity Recognition} As the name suggests Named Entity Recognition (NER) helps to draw out information from text relating to real world entities, be they people, places or organisations \parencite{eisenstein2018natural}. More recently the types of subject entities has been widened to include drugs, medical conditions and different types of biomedical items of interest such as protein types \parencite{goyal2018recent}. NER is an important steps in many NLP applications because it helps to draw out salient information between document types. These named entities once discovered can form part of the feature engineering of a document, and be linked across documents as additional information. A popular open NER model is the Stanford NER \parencite{finkel2005incorporating}, this model was trained on Newspaper reports that have been manually tagged.  The data a model was trained on will have implications for its use outside of that domain, as \textcite{prokofyev2014effective} show models trained outside of highly specialised domains show significant drops in their effectiveness, as such testing of open source models and possibly adaption is required on new styles of corpus.
+
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{transfer_figs/Slide13.jpeg}
+  \caption[Sentence Dependancy Parse.]{This figure demonstrates the dependancy parsing of two similar sentences. Both parses produce a similar structure of dependancies despite the difference in the wording. \emph{suspect} and \emph{hammer} both join to \emph{smash(ed)} before they reach the \emph{window} in both parses. Source: Author generated}
+  \label{fig:dep}
+\end{figure}
+
+
+\section{Sentence Parsing} An additional measure that can be taken with sentences within documents is to parse them so that the internal dependancies are understood. Dependency parsing takes a sentence then produces a dependancy for that sentence, beginning at the root of the sentence then cascading to all words within it.  The root is decided by a set of deterministic rules dependant on the type of sentence and the word types within it \parencite{eisenstein2018natural}.  Two examples of a dependancy tree, the result of sentence parsing, are shown in Figure  \ref{fig:dep}. Knowing the dependancies between words is useful, both for information extraction but also question and answering tasks because understanding the underlying dependencies in a sentence can help clear some of the ambiguities away that were introduced from the manner in which it was presented. The clarity sentence parsing can bring is seen in Figure \ref{fig:dep} where the two sentences, with essentially the same meaning, have very similar dependancies despite the difference in wording. We see that both the \emph{suspect} and the \emph{hammer} have to pass through \emph{smash(ed)} before they reach the \emph{window} in both cases. An additional important application of sentence parsing is negation, whereby it is important to tract where a negative clause is acting. 
+
+
+\section{Word Representation Methods}
+
+
+\epigraph{\centering You shall know a word by the company it keeps}{J. R. Firth}
+
+
+In this section so far there has been an introduction to how to normalise the text by reducing the amount of individual tokens in a document, then building upon that by understanding what each token contributes to the meaning of the document by dependancy parsing and POS tagging. What we explore here is the meaning of the individual words, how the meaning contributes to the totality of the document meaning and how similar words can have similar meanings across documents. 
+
+\begin{table}[]
+\centering
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Token} & \multicolumn{1}{l}{\textbf{TF}} & \multicolumn{1}{l}{\textbf{DF}} & \multicolumn{1}{l}{\textbf{IDF}} & \multicolumn{1}{l}{\textbf{TF-IDF}} \\ \midrule
+pet  & 1 & 10  & 1   & 1    \\
+dog  & 2 & 50  & 0.3 & 6.65 \\
+cat  & 2 & 100 & 0   & 0    \\
+Fido & 1 & 1   & 2   & 0.5  \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:search} Example TF-IDF values for a 100 document corpus.}
+\end{table}
+
+
+The bag-of-words model utilises the simplest representation of words, the words presence or absence is noted by a binary marker (generally 1 or 0) see Figure \ref{fig:BOW}. This method does not draw any explicit meaning from the word itself, it only marks its presence. The next stage up from this is to change the binary marker to a count maker, so that the number of times the token is present in a document is now recorded, giving additional weight to multiple uses, although as there is a tendency of words to cluster this method tends not to show much improvement on the simple binary choice \parencite{eisenstein2018natural}, this is known as term frequency. 
+
+An additional method, utilising the same approach seeks to understand how important a word is in that document, given its prevalence in the corpus as a whole. This method is known as TF-IDF which stands for Term Frequency - Inverse Document Frequency.  The first part, term frequency, was outlined above and is a count of the terms in that document, the second part - the Inverse Document Frequency - is a measure of the number of documents that the word is mentioned in, it is inverted because we want words that are rare in the corpus to have more discriminatory power \parencite{manning2008introduction}, typically a logarithmic measure is used. 
+
+Each of the procedures outline above was demonstrated with single tokens, however these procedures can be generalised to groups of tokens which represent phrases. Groups of tokens are known as \emph{n-gramms} where  \emph{n} relates to the number of individual tokens in a phrase. An example of a tri-gram is \emph{New York City}. n-grams can either be used exclusively or alongside single tokens so that common phrases can be extracted for greater fidelity, especially useful, if as with the example above, the n-gram is a single entity. 
+
+The examples above have distilled the information from each token into a document down to a single number, and the presence or size of that number contributes to the meaning of that document within that corpus along with the distribution of the other tokens. That single number represents that word. What this process still does not allow for though is the individual meanings of words, as apposed to mere presence, to contribute to the characterisation of the document. For this reason word embeddings were invented that would more accurately contribute the meaning of individual words. The general idea behind word embeddings is to represent each word with a vector of numbers (typically they can go as high as 300 numbers for one word) such that words with similar meanings have similar vectors. These embeddings can either be generated for individual corpuses or previously derived embeddings can be used, typically these derived embeddings have been trained on a massive corpus such as the whole of Wikipedia. 
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{transfer_figs/Slide14.jpeg}
+  \caption[Word Embeddings visual example]{Left panel shows vector offsets for three word pairs illustrating the gender relation. Right panel shows a different projection, and the singular/plural relation for two words. In high-dimensional space, multiple relations can be embedded for a single word. Source: \textcite{mikolov2013linguistic}}
+  \label{fig:word}
+\end{figure}
+
+Embeddings are generated in a number of different ways, but in essence they exploit the same relationship given in the quote at the start of this section, that is that a word is defined by those around it. A single word of interest may occur in a corpus a number of times, but if it is conveying the same meaning, then the words surrounding it will be similar. Embeddings are created by investigating the probability of seeing a neighbouring word, given the target word \parencite{mikolov2013efficient}. Those target words with similar property distributions for the same neighbouring words, will have similar meaning. The property distributions are encoded into the vectors of interest and relationships and similarities can be easily found. Figure \ref{fig:word} demonstrates how these vectors and their relationships can be explored visually. Recently other embeddings have been introduced that have further pushed the envelope of some standard NLP tasks, the most promising of which are BERT \parencite{devlin2018bert} and GPT-2 \parencite{radford2019language}.
+
+
+\section{ NLP Conclusions} This section has demonstrated that there are modern techniques available to assist with the extraction of information from unstructured free text data. These techniques have, for the most part, been developed into open source models that can produce state of the art results on the material for which they were trained. These open models are coupled together into a processing pipeline, that rely on the success of each step to produce a numerical representation of the subject text that can then be explored through the use of the aforementioned machine learning techniques.
+
+When these models are used outside of the types of data they were trained on however their efficiency drops. This is especially true if the underlying structure, grammar, of the text changes. As the focus of this research will be centred on police data, the next section will survey which and to what extent the techniques in this section have utilised with police generated free text data and what kind of benefits they produced if any.  
+

@@ -1,0 +1,23 @@
+
+\begin{table}[]
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+\multicolumn{6}{c}{\textbf{Equality Of Outcome}}                                                                                                                  \\ \midrule
+Model         & Partition & \multicolumn{1}{l}{Actual 18/19} & \multicolumn{1}{l}{Actual 20/21} & \multicolumn{1}{l}{CV Mean} & \multicolumn{1}{l}{CV p value} \\\midrule
+Motor vehicle & Ethnicity & 0.000                            & -0.040                           & -0.049                   & 0.001*                      \\
+Motor vehicle & Gender    & 0.000                            & -0.129                           & 0.002                    & 0.902                       \\
+Force         & Ethnicity & -0.022                           & 0.056                            & 0.004                    & 0.593                       \\
+Force         & Gender    & 0.048                            & 0.014                            & 0.004                    & 0.530                       \\
+Outbuilding   & Ethnicity & -0.012                           & -0.017                           & -0.005                   & 0.462                       \\
+Outbuilding   & Gender    & -0.017                           & 0.001                            & -0.004                   & 0.147                       \\\midrule
+\multicolumn{6}{c}{\textbf{Predictive Parity} }                                                                                                                   \\
+Model         & Partition & \multicolumn{1}{l}{Actual 18/19} & \multicolumn{1}{l}{Actual 20/21} & \multicolumn{1}{l}{CV Mean} & \multicolumn{1}{l}{CV p value} \\\midrule
+Motor vehicle & Ethnicity & 0.000                            & -0.077                           & 0.155                    & 0.078                       \\
+Motor vehicle & Gender    & 0.000                            & -0.005                           & 0.045                    & 0.060                       \\
+Force         & Ethnicity & -0.040                           & -0.040                           & -0.108                   & 0.024*                      \\
+Force         & Gender    & 0.091                            & -0.120                           & 0.001                    & 0.948                       \\
+Outbuilding   & Ethnicity & -0.012                           & -0.017                           & -0.003                   & 0.821                       \\
+Outbuilding   & Gender    & -0.032                           & 0.009                            & 0.000                    & 0.989                       \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:lancs_bias} Extrinsic bias metrics for the Lancashire Burglary models. AL refers to the model built with data selected by active learning, the following digits represent the year of the test set. The mean refers to the mean result from the 10 cross-fold validation experiment. The p value relates to the hypothesis test that the mean, from the cross-fold experiment, is not zero. * is for a p value that is significant.}
+\end{table}

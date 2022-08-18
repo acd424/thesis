@@ -1,0 +1,139 @@
+\chapter{ Proposed Research Outline} This section follows on from the introduction of the main research areas and the identified gaps in the existing literature and provides an overview of the primary research question investigated and a proposed outline of how each research question will be addressed. Firstly it will explore the overall question of what techniques can be used to extract information and  what practical applications does it have. Then the research sub-question will be restated before a detailed review into how each question might be explored.  As a key driver of the research will be data availability, there is a brief note on that first.
+
+\section{Data Availability} As with all studies, access to data somewhat drives the analysis and research that can take place. The questions and depth of this study will also be limited by the data available. The data primarily known to be available for this research is Modus Operandi data from at least one police force. Given the sensitivities of other police data, MO data is written from the outset to be shared with other agencies (e.g. Crown Prosecution Service), it is unlikely that other free text data types will be made available for this research. 
+
+The availability of only MO data though should not be seen as a deficiency. The method MO data is stored in police IT systems means that it is relatively easy to access in bulk and so can be easily made available for analysis. MO data is also normally stored with other crime meta-data such as location, recorded time, victim characteristic, crime code etc. This allows a richer data set to be constructed for subsequent analysis once information has been extracted from the free text. In this context the availability of only free text MO data concentrates the study, rather than hampers it. As the data will also only be from UK Police Forces, this will likely limit the study to the utility of problem solving to a UK context. Additional data from other Police Forces would allow the generalisability of any models to be understood and to understand if Police Forces ``are separated are by a common language" or not.
+
+\section{Research Questions}
+The thesis will be motivated by the following overarching research question: 
+
+\emph{Can NLP techniques be used efficiently to extract information from Modus Operandi free-text data, and if so what practical applications for problem-oriented policing does this approach have?}
+
+With sub questions:
+\begin{itemize}
+\item How effective are established NLP models in analysing police generated modus operandi free text?
+
+\item What are the challenges associated with preparing modus operandi data for analyses by existing NLP methods, and how might they be overcome?  
+
+\item Which parts of the POP process might be best supported by the use of these techniques? 
+\end{itemize}
+
+Across these sub questions the issue of practicality will also be addressed, for practicality, in light of the issues that have been discussed, it will be defined to encompass usability and explainability. For usability this will include the ability to set the system up and to reuse it across different cases. For explainability this will encompass the ability to be able to interrogate the models used to understand how and why they made their decisions. 
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{transfer_figs/Slide10.jpeg}
+  \caption[Research Question Overview.]{This figure demonstrates pictorially how the research questions relate to a generic NLP model.}
+  \label{fig:questions}
+\end{figure}
+
+\section{Main Research Question}
+
+\emph{Can NLP techniques be used efficiently to extract information from Modus Operandi free-text data, and if so what practical applications for problem-oriented policing does this approach have?}
+
+\subsection{Aim} 
+
+The overarching aim of this study is to investigate how natural language processing techniques may be used to facilitate the conduct of POP by reducing the analytical burden. 
+
+
+\subsection{Discussion} 
+
+The previous chapters have discussed how POP focuses on specificity in identifying problems and the underlying conditions that contribute to their occurrence. Subsequently, the challenges associated conducting the POP process wee discussed. It was highlighted that while rich in content free text data was often under utilised in this process due to a range of logistical challenges. 
+
+Chapter 5 discussed how a diverse range NLP methods can be used to extract meaningful insights from free text data, and how fruitful applications of these methods have been observed in a range of domains including a relatively new field where NLP methods had been applied to police free text data.
+
+Drawing these observations together, the overarching aim of this study is to extend investigation into the effectiveness of NLP methods in analysing police free text data, with a particular focus on how such analyses of commonly recorded modus operandi notes may provide novel insights into the specificity of problems and in turn support the application of  POP. 
+
+The research will focus on building end-to-end models so that the general utility of the models can be understood as well as the technical aspects. That is the study will not just focus on the possibility of extracting the information - but once it is extracted, does the information have any utility for POP.
+
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{transfer_figs/Slide11.jpeg}
+  \caption[Research Experimental Overview.]{This figure demonstrates an experimental overview for the research proposed.}
+  \label{fig:experiment}
+\end{figure}
+
+\subsection{Experimentation Outline} The main experimentation outline can be seen in Figure \ref{fig:experiment}. This figure shows how different aspects of the subquestions will be integrated in to a smaller number of analysis to address each aspect of the main research question. As this is a potentially large scope of research some limits will be placed initially to focus the study, these will include:
+
+\begin{itemize}
+
+\item Classification models only. Question  and Answering and information extraction will be more powerful and would be an obvious next step if the more basic models are successful.
+
+\item No model retraining. The research will seek to test existing models such as NER and POS taggers, where these models are found deficient it will be noted, but there will be no effort to retrain them.
+
+\item Single crime models. The models will be built for crime as it has been classified, models will not be built across crime classifications.
+
+\end{itemize}
+
+The experimental outline is focussed on whole NLP models. Sub elements will be judged on their abilities both as stand-alone elements, but also by how much they alter the end results of the whole model. This will allow a broad view of the expected benefit from fine tuning sub-elements.
+
+
+\section{How effective are established NLP models in analysing police generated modus operandi free text?}
+
+\subsection{Aim} Find the optimum set of state of the art models for analysing police free text data.
+
+
+\subsection{Discussion}
+
+This question relates to those tasks labeled 1 in Figure \ref{fig:questions}. As discussed in chapters 4 and 5 – there are a wide array of existing machine learning and natural language processing methods that can be applied to free text data. Extending on from the literature survey, in addressing this question I will investigate the applicability of a range of these methods and models to extract meaningful insights from police modus operandi notes. As an example as stated in chapter 5 there are a number of existing open source Part of Speech taggers, evaluating their performance on Police Free text data will highlight the most appropriate tagger to use. 
+
+In addition to existing NLP models I will also explore the accuracy of different machine learning model types. The appropriateness of machine learning models - will also need to consider the explainability of the model and how analysts may be able to interface with the model as well as the more traditional accuracy metrics. In this sense the research will  attempt to quantify the trade-off between accuracy and explainability that different models may offer.
+
+
+\subsection{Experimentation Outline}Many of the standard NLP tasks have existing solutions, and to some extent are considered solved tasks. For example for part of speech tagging there are a number of freely available models \parencite{toutanova2003feature} that have been pre-trained and are available for use. However as the data they used for training (Penn Treebank\footnote{\protect\url{https://catalog.ldc.upenn.edu/LDC2015T13}} )may differ from the Police MO data the models may not work as well as they have on other datasets. 
+
+Testing the appropriateness of these pre-trained models will be an important first step in building the NLP pipelines. Steps to be tested will included POS taggers, Named Entity Recognition, word disambiguation and word embeddings. Most of the NLP task experiments will based on a simple run of the existing model on the data, followed by a review of the results. As an example POS tagging will be run on a random selection of MO data, the tags will then be reviewed by a panel to adjudicate on the appropriateness of the tag or not.
+
+The second stage of appropriateness will be focussed on the Machine learning models. The main aim of this experiment, given the current research, will be to understand how well shallow models (Naive Bayse, decision trees etc) perform against deep learning models such as neural networks. This will then allow an informed decision on the explainability/accuracy trade-off. 
+
+Where possible these experiments will be replicated across data from different police forces and or crimes to understand the generalisability of the results, as shown in Figure \ref{fig:experiment}
+
+
+\section{What are the challenges associated with labelling modus operandi data for analyses by existing NLP methods, and how might they be overcome?  }
+
+\subsection{Aim} Explore the most efficient means of labelling police data sets for use with supervised models. 
+
+\subsection{Discussion}In order to utilise the more powerful machine learning techniques it is necessary to first label the data. As we have seen this can be a time consuming process, and if the labels or models are not generalisable then it can be necessary to repeat the process for each investigation into the data. By exploring different procedures for labelling the data the barrier to utilising the powerful analytical techniques can be reduced, making the application of these models in a practical setting more likely.  
+
+As demonstrated in chapter 4 there are a number of different labelling strategies that can be implemented. The focus for this research will  be to compare the effectiveness of rule based labelling against active learning. Rule based learning and active learning have been chosen because their strengths and weaknesses compliment each other. Active learning can be rapidly employed to different information extraction problems, however offers no portability of labelling effort over random labelling. Rules based learning which may take longer to initially set-up may have have greater portability between similar information extraction problems, and so may be more appropriate for analysts with many different but suitably similar tasks.
+
+
+\subsection{Experimentation Outline} Whichever labelling strategy is used, resources will be required to label the data, or produce rules to do so. This resource will need to be tightly managed as it will require external participants from the project and potentially subject matter expertise. This will impact the experimentation as the ability to run multiple labelling strategies across different sets of data will be limited. Thus there will be a tension between exploring active labelling, and understanding the portability of models across crimes and police forces. 
+
+
+\section{Which parts of the POP process might be best supported by the use of NLP techniques?}
+
+
+\subsection{Aim} Understand the utility of the information generated from Police Modus Operandi data to POP and where in the POP process the application of NLP models is best utilised.  
+
+
+\subsection{Discussion} Models are only useful if they produce a meaning simplification of the original data. The purpose of this question is to begin to explore if the models that have been built can extract useful information. That is it extends beyond the technical competence of the model and will try to understand the utility of the information provided. 
+
+As explored in Chapter 3, the analytical burden of POP to implement the SARA framework is high, and is frequently an impediment to the successful conduct of POP. Even though the problems solvers have the required data, they do not have the resources to process and analyse it to produce the right information. Lack of processing power is especially true when the data is contained in free text information. 
+
+Although the final of the three sub-questions in many ways this is the first to be considered. What information POP analysts and practitioners need will need to drive the design of the models, how the data is labelled and what is extracted. This question will certainly require interaction with those who need the information to both define the information required and secondly to adjudicate on the utility of the information extracted.
+
+Perhaps, as intimated by the lack of practical feedback within the literature survey in chapter 6, this will be difficult to quantify, but nevertheless it is essential to attempt to asses the final output. Links with police forces have been established and problems have been shared, principally these include how to utilise police Modus Operandi data to cluster similar crimes at a strategic level
+
+\subsection{Experimentation} Experimentation is likely to focus on two key areas. Firstly I will explore how NLP models can enhance the strategic scanning of problems.  Strategic scanning will help in the initial effort to identify problems at the force level. As mentioned in Chapter 3 identifying problems at a high level can be difficult because the particulars of a crime can be poorly understood at that level. Although there will be access to crime classification and accompanying meta-data, details of the crimes are either in free-text data and/or in the minds of the Officers dealing with the case, that is they are not readily accessible. By extracting information likely to characterise the crime these characteristics can be used as additional variables for which to either asses the sub-type of crime or increase specificity relating to the severity of the crime. This may allow a different strategic perspective to be taken to inform resource application. 
+
+Secondly I will investigate the application of NLP models in the assessment phase of POP. In particular for detecting an intra-crime change after an intervention or event. The crime classifications that the Police are directed to use are relatively wide and as seem by the previous research \parencite{kuang2017crime, birks2020unsupervised} have substantial intra-classification variation. This internal variation means that an intervention could have changed the mechanism or severity of criminal behaviour, without necessarily reducing the total number of incidents. A change may itself be a success for POP techniques if the harm is reduced, or of a process has been altered to a narrower set of crime generating mechanisms, thus making it more vulnerable to further action.
+
+%\subsection{Strategic Scanning - Harm Differentiation}
+ 
+ 
+%\subsection{Covid19 Crime changes}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{transfer_figs/Slide15.jpeg}
+  \caption[Proposed Research Timeline.]{Proposed Research Timeline. Source: Author.}
+  \label{fig:timeline}
+\end{figure}
+
+\section{Proposed Project Timeline} Having provided a brief outline on the intended research, a timeline for completion of the research is provided at Figure \ref{fig:timeline}. The project outline broadly follows the logical order of a NLP pipeline as shown in Figure \ref{fig:overview}. 
+
+The early stages of the research will focus on data preparation, literature review and thesis writing. This will set the foundations for producing good representation of the text for the machine learning models. Concurrent to this stage will also be the investigation of a more detailed design for evaluation of the information utility.
+
+Once the data has been prepared then there will be experimentation for the most suitable labelling strategies. Ideally this will include input from POP practitioners and analysts to assist with the formulation of rules and information requirements.   Once evaluated then models will be reused to investigate the portability of the models. This may mean that some stages of the model build will need to be revisited, but it is hoped that this will given an indiction of the utility of transfer learning in the context of police data, across forces and crime problems. 
+
+Practicality will be explored by seeking feedback from POP practitioners on the utility of the information, the exact process for this feedback will be explored earlier in the project as mentioned above. However it is thought that metrics such as time saved,  quality of information and confidence in the information will be judged.
+

@@ -1,0 +1,115 @@
+\chapter{ Natural Language Processing with Police Data}
+
+\section{Literature Survey}
+
+Having demonstrated a need for enhanced analytical power for POP in Chapter 4 and the new techniques available for extracting information from text in Chapters 5 and 6, this chapter will now map the extent of the current research in the intersection of natural language processing and police generated free text data. This mapping will be conducted through a literature survey. The literature survey shows that despite some utilisation of NLP techniques, there is a gap for the use of supervised learning techniques, built on open source models, to extract pertinent information for crime prevention work. Additionally few of the models found in the survey have demonstrated extrinsic utility, that is utility for the ultimate stated purpose e.g. crime prevention.  Therefore quantifying this extrinsic value is important to judge the importance of NLP techniques to POP and other crime prevention efforts.
+
+Machine learning, text mining and data science have been seen as useful tools for crime science for a while \parencite{marshall2006needles}. However as a recent review into the intersection of crime and AI has shown\parencite{campedelli2019we}, although some methods of AI and machine learning are relatively prevalent in the criminology  literature, NLP and text mining are not that prevalent with relation to crime data. Neither NLP or text mining  get a mention in the top ten keywords of those articles discovered by \textcite{campedelli2019we}. 
+
+Much of the crime free-text analysis currently is dominated either by non-supervised learning see \parencite{kuang2017crime, seo2018partially, birks2020unsupervised} and revolves around the problem of crime linkage rather than crime reduction \parencite{hassani2016review}. Recently however the complexities of the models have increased and there has been work to extract specific information directly from police free text data, \parencite{karystianis2018automatic, karystianis2019automated}.  What follows is the results of a scoping review \parencite{arksey2005scoping} into the use of police generated free text data and natural language processing. 
+
+The scoping review was conducted with the aim of establishing \emph{What is known from the existing literature about the utility and extent of Natural Language Processing with police generated free-text data}. Although quite a narrow search question, the previous two sections have demonstrated that this research will nests into much larger bodies of work that are well established and documented. That is the use of NLP techniques extends far beyond what will be discussed in this literature survey, and many of the techniques explored in the previous sections will be highly useful to this research to guide experimental design and model selection. However as an emerging field it is useful to understand exactly what has been achieved in the field of police generated free text data and NLP. 
+
+
+The literature review was conducted in four steps in accordance with \textcite{arksey2005scoping}:
+
+\begin{enumerate}
+
+\item State research question. \emph{What is known from the existing literature about the utility and extent of Natural Language Processing with police free-text data}
+\item Identifying relevant studies. This was completed through searches of online databases. Scopus and Web of Science for journal articles and EThOS for Phd theses.
+
+\item Study selection. Once identified the studies were read to ensure suitability. If found suitable then the references were checked for further studies.
+
+\item Reporting the results. The results were synthesised and are reported below.
+
+
+\end{enumerate}
+
+
+\subsection{Identifying relevant studies}
+
+The search for journal articles and proceedings was conducted through Scopus and Web of Science and the search of past PhD theses was conducted using EThOS (administered by the British library). The details of the searches and the number of items identified and found suitable are at Table \ref{tab:search}. Although the search terms varied slightly between databases essentially they were all made of three components. The first component was highlighting the need for a link to the police of crime literature. The second search component related to the analytical process of NLP and text mining, and the third component emphasised the focus on text data. In total the database search found 38 unique and provisionally useful studies.
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+\centering
+\begin{tabular}{@{}llcc@{}}   %{@{}|l|l|c|c|@{}}
+\toprule
+Database &
+  Search Terms &
+  \parbox{0.1\linewidth}{\centering Number of Items} &
+   \parbox{0.15\linewidth}{\centering Number of Relevant Items} \\ \midrule
+EThOS &
+   \parbox{0.5\linewidth}{"Modus Operandi" OR "police" OR "crime" AND "text" OR "analysis" OR "data mining"} &
+  \parbox{0.1\linewidth}{\centering 122}&
+  \parbox{0.1\linewidth}{\centering 1} \\ \midrule
+Web of Science & 
+ \parbox{0.5\linewidth}{\raggedright AB = ( ( police or policing or crime ) \\ AND \\( "NLP" OR "text mining" OR “information extraction” OR “entity extraction”  OR “data mining” OR "topic modeling" OR “classification)\\ AND \\(text) ) } &
+ \parbox{0.1\linewidth}{\centering 126}&
+  \parbox{0.1\linewidth}{\centering 19} \\ \midrule
+Scopus         &
+  \parbox{0.5\linewidth}{\raggedright ABS( ( ( police  OR  policing  OR  crime )  \\AND \\ ( "NLP" OR "text mining" OR “information extraction” OR “entity extraction”  OR “data mining” OR "topic modeling" OR “classification )  \\AND\\  ( text ) ) ) \\ AND \\(LIMIT-TO (DOCTYPE ,  "cp")  OR\\LIMIT-TO (DOCTYPE ,  "ar")  OR\\LIMIT-TO (DOCTYPE ,  "re") ) }                                         &
+ \parbox{0.1\linewidth}{\centering 199} &
+  \parbox{0.1\linewidth}{\centering 34}  \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:search} Database survey search parameters.}
+\end{table}
+
+%%%%%%%%%%%phd search
+
+
+\input{lit_table.txt}
+
+
+\subsection{Study selection} The studies from the searches above were investigated then duplicates and unsuitable studies were removed, from 38 unique studies 11 were found suitable on closer inspection. The selected studies were read and the references investigated to gather further suitable studies, in addition local subject matter experts were consulted for additional references. At the end of the study selection there were 16 suitable items of research. The study selection focussed heavily on the use of police generated narrative data, most of the studies that were filtered out did not focus on police generated narrative data. The studies selected with a brief overview can be found at Table \ref{tab:results}. Where the studies have only used the narrative as part of a larger model the description focusses on that narrative element.
+
+\subsection{Reporting the results}
+
+In the course of the investigation no overarching review of the area in question was found, that is there was no review into the utility of natural language processing and police generated free text data. Two reviews of a more general nature were identified \parencite{krishnamurthy2012survey, hassani2016review}. These reviews were of a more general nature and  did not either concentrate on police data or natural language processing. A good proportion of the studies from these two reviews included free text data that was non-police crime data such as news reports and so would not be subject to the same issues as Modus Operandi data, poor grammar and dialect, as highlighted by \textcite{Keyvanpour2011872}. Neither review was systematic or identified specific search criteria. The selected studies generated from all searches were analysed and the key observations from the studies are as follows:
+
+
+\paragraph{Generating useful information from Police free text, especially MO fields, is possible.} There has been widespread evidence that useful information can be sourced from Police free text data. The usage of police free text has been remarkable, with utility ranging from quantifying road accident black spots \textcite{Krause2019} to drafting prosecutors indictment statements \parencite{chen2010use}. Although most of the evidence comes from processing of the police narratives some older studies, demonstrate that MO data has been systematically used effectively for some time for crime prevention work \textcite{bowers2004commits} and \parencite{adderley2003modus} albeit not using NLP. 
+
+
+Perhaps one of the most intricate models has been used to produce a series of research exploring police free text data to uncover domestic violence and mental health issues in Australia \parencite{karystianis2018automatic, karystianis2019automated, Hwang2020}. Utilising an off the shelf NLP framework, General Architecture for Text Engineering (GATE), the researchers formulate (247) semantic rules utilising additional medicine and diagnosis dictionaries (21) to label the data. An example of a rule is the following text would be in a document,  \emph{continued to X the victim} where X would be an assault type from one of the dictionaries.  They achieve results of up to 90\% precision by only accessing 200 examples of data for training.  They complete this work for mental health, domestic violence and an investigation into autism extracting information that hitherto has been to time consuming to extract. The effort to produce the rules and dictionaries is not reflected on in the research though, so the utility of this approach when dealing with changing information requirements is difficult to quantify. Another weakness of this approach is the changing nature of the terms used, these dictionaries and rules will need to be kept up to date with modern terms ,such as new drug names, if they are to be used on a continuing basis. A further weakness that the authors identify is that similar, but unknown terms are not picked up by the rules, this problem can be ameliorated by utilising word embeddings that allow similar words and phrases to be identified.
+
+
+\textcite{rogerson2016utility} is a thorough exposition of British MO data and the analysis of free text data, though they acknowledge none of the processes used were automated. Importantly the thesis demonstrates that there is information in the MO data that is useful for crime prevention work, though that the crimes analysed do not fit neatly and exclusively into the crime codes given, drawing similar conclusions to that of \textcite{birks2020unsupervised} and \textcite{kuang2017crime}. In relation to problem solving they were also able to successfully group sub-categories of crimes using clustering techniques, which could then be used to identify interventions. However the clusters did not partition along the same characteristic of the crimes, some clusters predominated on the type of environment and some on the type of objects involved in the crime. This means that only partial information about each crime is being used to cluster the crimes, as the topics are predicated on only the most likely words. Additionally this the type of information gained is not consistent across clusters, so true partitions are possibly not observed.  
+
+ 
+Utility of NLP and crime data is not limited to Modus Operandi data. \textcite{Helbich2013326} demonstrate that NLP techniques can be used across a variety of documents, within one investigation, and the results drawn together to produce \say{useful} insights. Though due to the sensitivity of the case what the insights were or how effective they were can not be divulged. A separate studies  \textcite{cocx2006distance}, focussed on crime linkage has shown that models can be used to identify links between crime incidents. This was achieved by reviewing different documents from the same case, though there is little practical evidence presented that the links have a real world practicality. 
+
+\paragraph{Most of work so far has been unsupervised learning.} Notable examples of this are \textcite{birks2020unsupervised} and \textcite{kuang2017crime} who use unsupervised natural language processing to understand how crimes may be grouped relative to how they were committed rather than traditional crime classifications. \textcite{birks2020unsupervised} completes this within a crime classification and \textcite{kuang2017crime} conducted this across multiple crime classifications. This is referred to a crime topic modelling and seeks to understand crime from an ecological perspective. This idea is extended further by \textcite{Pandey201876} who investigate the crime topics through spatial distribution, suggesting that as crime is also a function of an environment then the spatial concentration of a crime topic can be seen as a proxy measure for its coherence.
+
+
+In addition to the previous studies there have been a pair of studies conducted with police data from Brazil, \parencite{Basilio2020849, Basilio2019333}, that have used unsupervised NLP techniques to cluster crimes to begin to understand what policing strategies will be suited to different areas of the city. They clustered the crimes, then showed police officers a representative sample of the clusters to name a suitable policing style ( traditional, POP etc). They do not report if the styles were subsequently adopted or if they were successful.
+
+Unsupervised learning has presumably been popular because it can be conducted in a computer lab, with minimal resources and/or input form practitioners. The unsupervised research is very much exploratory, but as of yet this research has yet to prove that those results found have utility for crime prevention. \textcite{kuang2017crime}  investigate their results and prove that they have found partitions along violent and property crime, and separately between gun and non-gun crime, though presumably they would have been sorely disappointed had these divisions been missing. \textcite{birks2020unsupervised}  investigate their results through presentation of a dashboard however this, nor their topics, are validated by practitioners as a useful crime prevention tool.  \textcite{Pandey201876} utilise the idea of spatial coherence to strengthen the validity of their crime topics, but fail to account for environmental descriptors or entities in the data or the fact that police officers in the same areas may use similar language. Additionally most of the unsupervised learning has yet to explore more powerful methods of word embedding that may have strengthened their results, word embeddings may have been able to link words of  similar meaning and thus overcome some of the choice of language that may be unnecessarily partitioning the topics.
+
+
+\paragraph{Prevalence of classification over Information Extraction}
+
+The results also show that classification of incidents has been more prevalent than information extraction. As noted in the earlier chapters , particularly Chapter 3, specific information about an incident is required in order to group similar incidents with similar processes. Classification of incidents is useful, and the research found has proved that (see next paragraph for evidence), but the evidence from crime prevention theory is that extraction of pertinent information from free text data, e.g. method of entry, is required in order to apply suitable interventions.  
+
+As an example of classification with extrinsic validation, police free text data was used to better classify incidences of domestic violence which had previously relied on officers tagging keywords. Utilising a machine learning technique,  Self Organising Maps, \textcite{Poelmans200911864} were able to more accurately label those incidents that included domestic violence and with that information they were able to better educate Officers ability to recognise domestic violence but also help to better define the issue. \parencite{ Poelmans2009247, Poelmans20113870, Poelmans200911864}.
+
+
+\textcite{seo2018partially} takes a slightly different approach to classification by trying to understand which crimes are gang related. They use free text description as a narrative variable among a host of other structured variables to feed a neural network. They find that of all the variables used the narrative variables were the most important for the model - highlighting the valuable information contained in the narrative reports. Though as they only use an average of the documents word vectors most of the information in those documents will have been lost.
+
+\textcite{bache2010language}  use free text MO data (and keywords) to try and predict offender characteristics such as ethnicity and employment status. This was achieved through a bag of words approach then a form of reverse topic modelling with known topics e.g. male or female. Once split into these known topics the defining words in the topics were used to understand the characteristic unique to those topics. 
+
+\paragraph{Where supervised learning has been used feature engineering was key to success.} This was especially true using shallow models ( i.e non-neural networks) as one would expect. This serves to further highlight the trade-off that utilising Machine learning will bring to police analysts. Shallower models will require more input, and possibly longer to build as the features are developed, however they may offer greater insight into why classifications were labelled. \parencite{vandePutte2009425, Bachenko200841,Ku201318}. It is possible to partially automate feature engineering through the use of neural-networks, however as explained above this may lead to a reduction in the explainability of the model.
+
+\paragraph{Corpus generated word embeddings work better.} Where word embeddings have been mentioned they have indicated that embeddings generated from the data themselves has been better than pre-trained models e.g. Word2Vec \parencite{Schraagen201979,Haleem20192279}. This again reflects on the difference between police data, and the more widely used (often edited) data that is traditionally used for pre-training open source models. This evidence reinforces the need to ascertain how effective pre-trained NLP models are and how they can be tuned if necessary.
+
+
+
+
+\section{ NLP with Crime Conclusions} In summary there has been a spread of use of police generated free-text or narrative data. Most of that presented in the literature has been intrinsically successful, that is the models built have generally been found to prove accurate results. Extrinsic validation has been less well shown however, and by this I mean have the models built have not shown real utility for their intended ultimate purpose.  This in part may be down to most of the research emanating from the computer science community who may not benefit from the stronger working relationships with police forces that the criminologists do. The NLP success rate will of course have benefited from publication bias, but knowing the relative recent success of NLP in the larger community, and against published standardised data sets,  it is not surprising that success has been found with police free-text data. 
+
+Given the additional burden required for labelling to enable supervised learning, it is not surprising that most of the work has focused on unsupervised techniques. When labelled data has been provided though it is clear to see that much more specific information has been extracted. Indicating that labelling data for police free-text is a worthwhile endeavour, and any activity that can reduce this burden is going to have real practical significance. 
+
+The existing research demonstrates that useful information can be extracted from police free-text data. The data extracted can have utility for crime prevention strategies, but that the practical application of NLP systems has not been fully tested. However, particularly for UK police free-text data, there is no example of an automated NLP solution for information extraction that has proven portability across different crime types and police forces.  
+
+

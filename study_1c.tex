@@ -1,0 +1,181 @@
+\chapter{Study 1c - Replication Study}
+
+\section{Introduction} In Study 1a the use of PTMs was explored in two classification problems, namely the use of force and whether a motor vehicle was stolen or not during a burglary. The PTMs performed well and were able to produce models that could accurately classify the MO texts. In addition the investigation into explainability gave confidence that the models were using the same words within the documents that a human would use for the classification, and therefore they were not picking up on spurious correlations. Although bias in classification errors was investigated due to a lack of victim data it was not possible to complete a thorough investigation.
+
+This study follows on from the first study by replicating the analysis of burglary MO texts in a different police force area. Police forces in the UK can have subtly different processes and training standards and so it is not immediately obvious that what will work in one force area will work in another. This study will also take the analysis further in four different aspects. Firstly the data for this study contained victim characteristics and so an exploration of bias related to victim characteristics is possible. Secondly the third classification task, breaking into an outbuilding only, is possible with this data. Third as there are now two police forces it is possible to use models fine-tuned in one area to label data generated in another area to see if the models can offer utility between forces. Finally models are fine-tuned on data from one year and used to label dat from a later year to understand if or how performance drops over time. All of these additional investigations are further explained below.
+
+The study shows that the results of study 1a can be replicated in a different police force with similar results without any bias. This study demonstrates that models built in one police force area are useful in a second and that there is not systematic drop in performance over time.
+
+This chapter will first introduced the research questions to be explored in this study, then will briefly review the data and methods introduced earlier. Results will be stated before being explained in the discussion.
+
+
+\subsection{Research Questions} This chapter will aim to answer the following research questions:
+
+
+\subsubsection{Can the results in study 1a be replicated in a different police force?} Study 1a investigated whether PTMs could be used to classify burglary MO texts in two different scenarios, whether force was used and if a motor vehicle was stolen. In each case models were fine-tuned on SaferLeeds data that produced good accuracy. This study will fine-tune the same models on the same problems using the Lancashire MO text data.  In addition it was also possible to build a model for the out-building only model introduced, but not completed in study 1a.
+
+\subsubsection{Can models trained with data from one police force be used in another force?} By fine-tuning models on the same task in two different police forces, it is then possible to use the models from one police force into another police force area to see if the models have broader applicability. If they do have broader applicability then there is likely to be huge benefits in sharing the models across police forces thereby reducing the resource burden for model creation.
+
+\subsubsection{Are models accurate overtime?} Language changes, both in the introduction of new words and how old words are used. If the language of MO texts changes away from the language that the PTM was fine-tuned with then we can expect a drop in performance. Although limited by two years worth of data we test this hypothesis by fine-tuning a model on data from one period then testing the model on a subsequent period. Understanding how or when a models performance may drop is important to ensuring that a correctly trained model is always being used.
+
+\section{Data} The data used for this study is from Lancashire Police Force. The data was introduced fully in Chapter 4. The Lancashire data was whitelisted by the project team to remove personally identifying information. The main difference from the SaferLeeds data though is the addition of victim characteristics, namely ethnicity and sex which allow a greater investigation into potentially biases whilst using the PTMs. 
+
+Alongside the victim characteristics, additional detail was also provided after the models were built to help validate the models. To assist with validation of the motor vehicle theft model, links to stolen vehicles were provided. A link between a burglary and a stolen vehicle is made in the police database if a vehicle is stolen from that crime during that burglary. This provides an additional verification check to understand how well the fine-tuned PTM is performing, especially in the data that has not been hand labelled.
+
+The Lancashire data also had more details surrounding the date and time of the offences committed. The Saferleeds data just included the month of the year, no year, date or time. The Lancashire data contained detailed committed and reported dates and times, down to the minute. Allowing greater analysis by date of the offence. The Lancashire data also contained the initial period of the Covid-19 pandemic in the UK including the first lockdown. Effects of the first lockdown on intra-crime variation for burglary can be seen.   
+
+
+\section{Methods} The methods for this study were introduced in Chapter 4 and recapped for study 1a. The general process is similar to that already explained. The variations form the general introduction are listed below.
+
+\subsection{Labelling} Data was labelled by two researchers with the author providing the casting vote in event of disagreement. The MO text was selected through an active learning strategy as before, but on this occasion the training pool was limited to those burglaries committed in  October 2018 to end of 2019 (as mentioned in the data chapter October 2018 coincides with the introduction of the new data recording system for Lancashire police). This restriction was to facilitate the investigation into model accuracy over time. Active learning was only conducted for the motor vehicle model, so all models were fine tuned on data that had been selected through active learning for the motor-vehicle model. In total 1982 MO texts were labelled for the burglary models.
+
+\subsubsection{Fine-tuning} There were no significant differences for the fine-tuning of the PTMs. Again the BERT large model was used throughout. The hyper-parameters were all set as mentioned in the methods chapter. 
+
+\subsubsection{Performance} With the Lancashire data in this study we were able to more fully investigate bias related to sex and ethnicity by comparing across groupings with different victim characteristics. Bias was explored using the metrics Equality of Opportunity (EoO) and Predictive parity (PP) (both introduced in the methods chapter). EoO is based on recall and measures the disparity of the probability of a true positive across groups. PP is a based on precision and is a measure of disparity on the probability of false positives across groups. These metrics were calculated for each test set, however in order to understand the spread of values that these metrics could take, rather than just a single metric, a cross-validation of model building was implemented to provide robust estimates. 
+
+For the cross validation experiment 20\% of the available labelled data was randomly selected (available includes all data labelled either randomly for previous test sets and the active learning data). This 20\% was used as the test set. The remaining 80\% was used as the train set. There was no validation set as the hyper parameters were fixed. A PTM was fine-tuned using the 80\% train set then used to label the test set. Bias metrics EoO and PP were then calculated on the labelled test set. This whole process was repeated 10 times so that there were 10 sets of bias metrics. For each bias metric a non-parametric hypothesis test of equal means was conducted for each metric, essentially testing if the mean of the metric was 0 or not using all ten data points. A significant p value would indicate bias. The reference group was White-European and Male throughout, they were therefore compared against all other ethnicity's and females respectively. Unknown or missing values were excluded from the analysis. 
+
+The comparison to a basic keyword model was not conducted.
+
+\subsubsection{Model performance over time.} Model performance over time was investigated by fine-tuning on data from one period of time then testing on a separate later period of time. All models were fine-tuned and initially tested on data  from late 2018 to end of 2019. For the replication element of this study all MCC metrics were gathered from a test set randomly selected form the same set of dates. However a separate test set was also built for the year 2020, this allowed the model built in the earlier time period to be tested on 2020 data. 2020 may not be an ideal comparison as it  was the year in which the Covid-19 pandemic hit the UK and induced severe mobility restrictions as the government tried to curtail the spread of the virus. Certainly this pandemic expanded the lexicon of the general public, however the effect on burglary MO texts we hope may be less severe in that the words used in the descriptions remain the same even if the style and/or proportion of burglary changed. If there is a significant degradation of model performance across years, Covid-19 induced variation could be one source of change that needs investigating.     
+
+\subsubsection{Model transfer-ability} Models fine-tuned on SaferLeeds data were ported into the secure area for the Lancashire data and were used to label the Lancashire test sets. MCC scores were calculated and they will be directly compared with the MCC scores from the models built on the Lancashire data.
+
+\section{Results} The results will be presented for the replication study first. The MCC scores and explian-ability are directly comparable to the earlier study with the SaferLeeds data. Bias is different as the Lancashire data has victim characteristics so extrinsic bias metrics can be investigated along sex and ethnicity groupings. After theses results have been explored then the MCC results for both the change in time-period and the reuse of models across forces will be stated.
+
+\subsection{MCC} The MCC results are presented in Table \ref{tab:results_1c}. MCC results are presented with reference to the validation set and the test set. The approach with the active learning strategy was to stop labelling when the MCC reached above 0.9 on the validation set. This was not achieved with the motor vehicle model, and as this was the first model picked for labelling the active learning strategies were therefore not conducted in full with the force and the outbuilding models. The model MCC scores are reported in turn in the following subsections. A MCC score of 1 is a perfect score, 0 is equivalent to random. The results discussed below are confined to the 18/19 test set. The 20/21 test set scores are discussed later.  
+
+\subsubsection{Motor Vehicle model} As explained the motor vehicle model was selected as the first model for labelling via the active learning strategy. The values of the MCC after each active learning batch, calculated using the validation data, can be seen in Figure \ref{fig:mcc_burg_lancs} and in Table \ref{tab:results_1c}. The highest value attained was 0.88, which was below the requirement for the stop condition (0.9). The labelling was stopped after the sixteenth batch after it had become apparent that there were no more positive classifications within the pool of potential training data. In other words the active learning strategy had already selected all MO texts with a motor vehicle theft for the training data, there were no more positive samples to learn from in the potential training data. In fact the last positive example had been found in batch 11. From the plot at Figure \ref{fig:mcc_burg_lancs} it is clear that the additional negative examples, forming batch 12 to 16, did not aid the model fine tuning and so further fine-tuning was not deemed necessary. Consequently model fine-tuning stopped at 16 batches and the model was tested on the test set.
+
+\begin{figure}[!tbp]
+  \centering
+    \includegraphics[width=\textwidth]{images/mcc_burg_lancs.png}
+    \caption{{MCC scores for the Lancashire burglary models.} MCC scores are shown after each iteration of the active learning strategy. The Force and Outbuilding models peak relatively early on at batch 5 and 6. Whereas the motor vehicle model peaks at 11. Some of the variation will be attributable to the random initialisation of the models.}
+    \label{fig:mcc_burg_lancs}
+\end{figure}
+
+
+MCC scores on the test set can be found at Table \ref{tab:lancs_mcc}. The fine-tuned model had good MCC scores across all 10 runs, with a mean of 0.98. On half of the runs the model correctly classified each of the 200 MO texts from the test set. The MCC metrics for the motor vehicle model are comparable to the scores from the motor vehicle model built and used on the SaferLeeds data (mean of 0.97). 
+
+\subsubsection{Force model} The force model used the same data labelled from the active learning conducted on the motor vehicle model. The mean MCC score from the final ten initialisations was 0.93 on the 2018/19 test set. These scores are higher than the MCC score for the validation set. These results are comparable to  those models fine-tuned and tested on the Saferleeds data (mean of 0.91). 
+
+
+\subsubsection{Outbuilding Model} The MCC scores for the outbuilding model on the test data were again better than the validation set scores. The mean of the 10 fine-tunes on all of the 2018/19 test set is 0.90. This is the lowest score across all three models. The outbuilding model was not built with the SaferLeeds data as the data was not suitable. Therefore there is no direct replication for the outbuilding results presented in this study.
+
+
+\begin{table}[]
+\centering
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+Batch       & 1    & 2    & 3    & 4    & 5    & 6    & 7    & 8    \\ \midrule
+Motor vehicle          & 0    & 0.48 & 0.65 & 0.73 & 0.56 & 0.82 & 0.8  & 0.82 \\
+Force       & 0.52 & 0.71 & 0.82 & 0.88 & 0.92 & 0.93 & 0.88 & 0.92 \\
+Outbuilding & 0.33 & 0.23 & 0.72 & 0.84 & 0.87 & 0.85 & 0.85 & 0.86 \\\midrule
+Batch       & 9    & 10   & 11   & 12   & 13   & 14   & 15   & 16   \\\midrule
+Motor vehicle         & 0.75 & 0.72 & 0.88 & 0.86 & 0.82 & 0.75 & 0.82 & 0.72 \\
+Force       & 0.88 & 0.92 & 0.92 & 0.9  & 0.92 & 0.91 & 0.93 & 0.91 \\
+Outbuilding & 0.85 & 0.86 & 0.85 & 0.84 & 0.86 & 0.84 & 0.85 & 0.86 \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:results_1c}MCC values (based on the validation set) for models fine-tuned on Lancashire Burglary data. Batch refers to the active learning batch e.g. after 5 batches of labelling (500 MO texts) the motor vehicle model had an MCC of 0.56 }
+\end{table}
+
+
+
+\begin{table}[]
+\centering
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+         & \multicolumn{2}{c}{Motorvehicle} & \multicolumn{2}{c}{Force} & \multicolumn{2}{c}{Outbuilding} \\ \midrule
+Run      & 18/19           & 20/21          & 18/19       & 20/21       & 18/19          & 20/21          \\
+1        & 1.00            & 0.89           & 0.93        & 0.92        & 0.91           & 0.94           \\
+2        & 1.00            & 0.93           & 0.94        & 0.93        & 0.90           & 0.93           \\
+3        & 0.94            & 0.88           & 0.93        & 0.94        & 0.90           & 0.94           \\
+4        & 0.97            & 0.93           & 0.93        & 0.95        & 0.89           & 0.93           \\
+5        & 0.94            & 0.88           & 0.94        & 0.96        & 0.92           & 0.94           \\
+6        & 1.00            & 0.91           & 0.90        & 0.93        & 0.91           & 0.94           \\
+7        & 0.97            & 0.88           & 0.90        & 0.94        & 0.85           & 0.96           \\
+8        & 1.00            & 0.91           & 0.92        & 0.95        & 0.90           & 0.92           \\
+9        & 0.97            & 0.90           & 0.92        & 0.96        & 0.91           & 0.94           \\
+10       & 1.00            & 0.90           & 0.95        & 0.96        & 0.89           & 0.92           \\\midrule
+Mean     & 0.98            & 0.90           & 0.93        & 0.94        & 0.90           & 0.94           \\\midrule
+Best Run & 1.00            & 0.93           & 0.94        & 0.96        & 0.92           & 0.96           \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:lancs_mcc}MCC values (based on the test sets) for models fine-tuned on Lancashire Burglary data. Scores are generated from 10 separate fine-tunes based on all labelled data. 18/19 refers to the test set from only the years 2018 and 2019, similarly 20/21 refers to the years 2020 and 2021.}
+\end{table}
+
+
+
+
+\subsection{Explainability} LIME was again used to understand how the words of the texts are contributing to the final classification. As a reminder BERT uses the word and the surrounding context of the word, so a global understanding of how the model works is difficult to ascertain. LIME provides a local understanding for each MO text by randomly deleting words to see what effect they have on the final classification. This is scaled up in this thesis by utilising LIME on all MOs in the test set then using word-clouds to show the most important words based on the individual LIME model coefficients. Word clouds for the motor vehicle, force and outbuildings model can be seen in Figures x , y and z respectively.
+
+The word clouds for the motor vehicle model demonstrate a similar pattern as those from the SaferLeeds data. Firstly the word cloud for the words contributing to a positive classification i.e. a motor vehicle was stolen are all words that a human would also expect to use. The three most important words being car, vehicle and keys. Also note that these words are disproportionately important, they are much larger than the remainder of the words. This contrast with those word contributing to a negative classification where the word sizes are much more even. Again the words for the negative classification have no real theme, and this is because it is not reported when a car is not stolen.
+
+Word clouds for the force model again show that for the positive case, force was used, the model is using words that are commensurate with what a human might use. Although some of the more important verbs are less prominent, and there appears to be more of a focus on nouns than the SaferLeeds data. Overall though the pattern of important words is clear and logical. Unlike the motor vehicle model, the negative classification, no force used, is often reported and so there is a clear pattern to the second word cloud. Here the word insecure is the most important word for obvious reasons. \say{Unknown} is also prominent as it is often used to say that the method of entry was unknown, a lack of obvious force used to enter the building. 
+
+The outbuilding word cloud is similar in structure to the motor vehicle model. The positive classification cloud has a smaller amount of disproportionately important words, here \say{shed}, \say{Garage} and \say{garden} being the most important words. The negative classification word-cloud has words that are more equitable in size, and in general the cloud represents words that are encountered throughout all Burglary MOs, as again negative reporting of outbuildings is not reported. 
+
+Each of the word-cloud pairs has given confidence that the model is using the words that a human might use in determining the classification of each text. This gives confidence that the models are picking up on the correct features of the text, and not spurious correlations. The next section investigates any bias that the models may have in relation to sex and ethnicity.
+
+\subsection{Bias} Bias within the models was investigated along gender and ethnicity lines. The reference groups were male and white-European respectively. Models were investigated by exploring extrinsic bias metrics, equality of outcome and parity of prediction. Table \ref{tab:lancs_bias} has the results from both the models built on the active learning data and also the 10 cross-validation experiment. The results are described in relation to the partition of the data i.e gender and ethnicity rather than by model. As a reminder 0 is no bias, a positive number is bias in favour of the reference group and a negative number is bias against the reference group. The maximum and minimum possible values are 1 and -1 respectively.
+
+\subsubsection{Ethnicity} There are two significant p values from the cross-validation experimentation and they are both for ethnicity. One is for equality of outcome for the motor vehicle model, the other one is for predictive parity for the force model. In both cases the mean shows that the bias is very slightly against the reference group, that is white Europeans are discriminated against. 
+
+When reviewing the results of the model built from the active learning data we see that most values of both equality of outcome and predictive parity are close to zero indicating little bias. Four out of six of the metrics are negative for the equality of outcome and five out of the six predictive parity metrics are negative, again both indicate a slight discrimination against white Europeans. The results are mixed across the models however as bias is only consistent in one direction for the outbuilding model, however even then it does not register a statistically significant result with the cross-validation experiment. In summary there are small registrations of bias, but not consistent results to indicate systemic bias for PTMs classifying MO texts in the Lancashire data.
+ 
+\subsubsection{Gender} The evidence for gender bias is weaker still, there are no statistically significant results from the cross-validation experiments. The predictive parity has an equal number of negative values as it does positive values. For equality of outcome there is one more value of positive than negative. In conclusion there is no evidence of gender bias from the PTM when classifying MO texts for the Lancashire data.
+
+\input{bias_table}
+
+
+\subsection{Model transfer-ability} This section of the results reports on the usage of models from one police force area in another police force area. The results are for  the use of SaferLeeds models on Lancashire data, the reverse was not possible due to data security limitations. The MCC results in Table \ref{tab:results_transfer} show that the models are reasonably transferable. In each case the MCC is lower for the transferred model, which as one would expect, but the drop is not that significant in all cases. This demonstrates that models built in one area will have some utility in another force area. The implications of which are discussed later.  
+
+
+\begin{table}[]
+\begin{tabular}{@{}llcc@{}}
+\toprule
+\multicolumn{1}{c}{Test Set} & \multicolumn{1}{c}{Model} & Leeds Model Lancs Data & Lancs Model Lancs Data \\ \midrule
+18/19                        & Motor vehicle             & 0.93                   & 0.98                   \\
+20/21                        & Motor vehicle             & 0.80                   & 0.90                   \\
+18/19                        & Force                     & \multicolumn{1}{l}{}   & \multicolumn{1}{l}{}   \\
+20/21                        & Force                     & \multicolumn{1}{l}{}   & \multicolumn{1}{l}{}   \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:results_transfer} MCC scores for the use of models built with SaferLeeds data and used to classify Lancashire data. Lancashire metrics included for comparison. }
+\end{table}
+
+\subsection{Performance over time} Test sets were built for 2018/19 and 2020/21, even though the training data only came from 2018/19. This allowed a view of how the models would fare overtime. The results in Table \ref{tab:lancs_mcc} show the results of the 10 model initialisation using the active learning data to fine-tune the PTM, the mean result of the ten initialisations is reported here. For the motor-vehicle model there is a sizeable drop in performance from a 0.98 to 0.90. For the force model there is an increase, but it is very small from 0.93 to 0.94 (also not the the 20/21 test set has a higher top scoring run than the 18/19 set). The outbuilding model also increase this time by a larger amount going from 0.90 to 0.94.
+
+
+\section{Discussion} This section synthesises the results presented in the section above in relation to the main research questions given at the start of the chapter. Each question is explored in turn with comparisons to the original study with the SaferLeeds data.
+
+\subsection{Can the results in Study 1a be replicated in a different police force?}Study 1a set out to understand if PTMs can be utilised to classify MO texts, in particular Burglary MO texts with the classification if a motor vehicle was stolen or force was used to enter the building. Additionally Study 1a explored whether the PTMs would be explainable and therefore generate trust that the models were working as human might do, and not relying on perhaps spurious correlations in the data. Bias was studied to a limited extent due to a lack of victim characteristic data.
+
+Performance results in the replication study were equivalent to the results in the original study, both produce high MCC scores indicating high performing models are possible from fine-tuning PTMs. In addition in the replication study an additional classification problem was explored, that of burglaries into out-buildings only. A model was also fine-tuned on this problem and the resulting model also showed good performance with a high MCC score.
+
+To test explain-ability the LIME model was also used to generate word clouds which showed the most important words for each classification model. As with the SaferLeeds models, the replication study produced word clouds that enhance trustworthiness. The important words highlighted by these clouds were entirely consistent with the words that a human may use to make the classification judgement and therefore they again give confidence that the model is classifying in a way commensurate with how a human would classify the texts.
+
+In the replication study there was more victim characteristic data than the original study, so the models could be explored for bias along ethnicity and gender groupings. The results showed that there was no systematic bias in the classifications of the fine-tuned PTMs. It should be noted that within the texts there was very little reference to the particular characteristics mentioned i.e. victim gender and ethnicity generally was not described or referenced to. This means that any bias was likely to be introduced indirectly through systematic variation in language and or quality of the MO rather than explicit mentions. From the bias investigation in the original study, 1a,  we note that length of text and percentage of BERT words was not correlated with either of the bias metrics and so, even if for instance Asian victims had short MO texts the model would not necessarily perform poorly against those MOs. 
+
+As a reminder there \emph{may} be a number of different routes to introduce biases in the chain that leads from a crime being committee to the formulation of a MO text and the subsequent classification. Firstly the crime may not be recorded as the victim may prefer not to interact with the police therefore there is no MO text. If the victim does interact with the police the interaction might be sub-optimal (e.g. due to language barriers) and so the information passed might not describe the whole crime. Finally the PTM is built on data that has been scraped from the internet, this data is almost certainly likely to reflect biases in everyday society and so may perpetuate these into the classifications. The bias investigation in this study can only pass comment on the final route - the use of the PTM. The first two routes are beyond the scope of this study as already explained. The bias results found here therefore indicate that any biases that are inherent in the PTM are not affecting the classification of burglary texts for the problems investigated. 
+
+In summary the replication study has replicated the good results from the first study and has extended them proving that PTMs offer good unbiased performance in the classification of burglary texts. Additionally the models are classifying the texts using the same words that humans would use offering evidence that the models are working in a trustworthy manner.
+
+
+\subsection{Can models trained in one police force area be used in another force?} By replicating the first study in a second police force area the opportunity arose to use the models trained in one police force on the data of another police force. If models performance is able to be transformed then model utility becomes more enhanced as models can be re-used across forces without the need to share data. The results have shown that models can be transformed from one police force to another and retain a reasonable level of performance. The implications are that models can therefore be shared across forces for direct use or to seed the start of fine-tuning of a separate model and therefore reduce the labelling burden. This may have important practical implications if for instance the knowledge for classifying a model is relatively specialised, for example the detection of modern day slavery. 
+
+That models can be reused across forces also has implications for PTM implementation. In the UK for instance there are 43 police forces, all with similar crime recording techniques, a common language and resource pressures. If models can be shared then a central repository of models would therefore have utility across all forces. A central repository of models would allow maximum sharing and a commensurate reduction of the labelling burden. Additionally the technical aspects of model running and fine-tuning could also be housed centrally reducing the training burden across the 43 forces.
+
+
+\subsection{Are fine-tuned PTMs accurate over time?} As language use changes so will eventually the performance of the models. The language in a MO text is reflective of the intra-variation of a crime, so as the variations changes, for instance in response to a new security technique, then so will the language in the MO texts change. Models will therefore have to be checked to ensure that they remain relevant for the language used. In this study the models were trained on data from one year the tested on data from a subsequent year. There was no perceptible drop in performance in either of the three classifications tasks. This gives confidence that the models are robust to some time change, and this during a change of significant social upheaval - the covid-19 pandemic. 
+
+However there is no evidence to suggest that, despite a general decline in burglary, that there was any new type of variation that would have changed the language being used. This means that whilst we have limited evidence that models are robust to the passage of time, there is no evidence about the robustness to new criminal techniques and therefore a change in language. Changes like this will have to be guarded against and the findings here certainly do not exclude the necessity to check the validity of fine-tuned PTMs over time.
+
+
+\section{Conclusions}This replication study has provided additional evidence that PTM are able to effectively classify Police MO texts by extending the problem to another police force area and one more additional classification task. In addition the study was able to extend the investigation into bias by showing that there was no evidence for bias in classification power on either gender or ethnicity basis. The replication study also investigated the utility of models overtime, there was no perceptible drop in classification power indicating models will remain useful over extended periods, the study was relatively weak though and so a more thorough study will be required for a definitive overview on the refresh rate for models. Models were were also shown to be effective on the same problems but on data from a different police force, opening the door for model sharing which can lower the labelling, computational and skills burden. 
+
+These studies have shown that PTM can be effective with MO text data, across a number of different classification problems. However MO texts are the only text that police forces have. Another style of text are police incident logs, that encompass crime and non-crime data. The next study will take forward the success from this chapter and use PTMs to classify Anti-social behaviour incident logs.
+
+
+\chapter{Applied Insights from Study 1}
+
+
+

@@ -1,0 +1,290 @@
+\chapter{Study 1a - SaferLeeds data}
+\section{Introduction}
+
+The previous chapters laid the ground work for this study, firstly the reason for the study was set out -  enabling POP through more quickly identifying intra-crime variation with free text data. Then the more general theories of machine learning and NLP were laid out that lead the way for the methods chapter and a general introduction to the data for the study. This study is the first of the studies within this thesis and is focused on classification of burglary MO texts from SaferLeeds data. The study sets out to classify burglary MOs for three factors. Firstly identification of car key burglaries, secondly burglaries where force is used and thirdly burglaries that have only targeted an out-building. This latter classification was not taken forward as no burglaries with outbuildings were in the  SaferLeeds data, but it is explored in the replication study. The two chapters after this will also be related to this study. These next two chapters will cover the effectiveness of the active learning strategy (study 1b)  and then the replication of this study in a different police force (study 1c).      
+
+
+Primarily the focus of this chapter is on the utility of PTM, and in particular BERT as a popular example of these model types, with police MO data. Utility falls into three main areas, firstly can PTMs produce accurate results with Police MO data, secondly can these results be achieved within an acceptable resource envelope and thirdly are the models acceptable for use (are they explainable? Is there any bias?). 
+
+This chapter will begin with an overview of the problems and how they were selected. The data to be used will be explained, followed by a brief review of the methods. One additional method is added above those introduced in the methods chapter and that method is to help quantify the PTM model against existing police practice, this is achieved through the use of a key word model that is explained fully in the methods section. Finally the results will be presented and discussed.
+
+
+\subsection{Problem overview} In order to test the utility of the PTMs a selection of representative problems had to be selected. Previous work in this area had selected burglary data \parencite{birks, sheard2020developing } to explore NLP effectiveness and so we continue that trend here. The following sections set out the three classification problems identified for this study. The specification of these tasks also starts to raise valid question about exactly what is and what is not in the classification, this is highlighted below and returned to in the final part of the thesis when discussing lesson around labelling texts. 
+
+\begin{enumerate}
+   
+\item The first classification follows on from the work of \parencite{sheard2020developing}. In her thesis Sheard states that \say{this thesis presents empirical evidence that failure to disaggregate beyond official crime classifications risks neglecting heterogeneity of offence characteristics within these. A potential implication of this is that the spatio-temporal parameters on which some prevailing crime modelling techniques are based might not apply to all offences, meaning that any related decision-making could be misinformed}. Sheard investigates this by showing that car key burglaries have a different spatial-temporal pattern than non-car key burglaries. However in doing this Sheard highlights the difficulty and time consuming process of differentiating between the two types of burglary, as there was no encoded variable in the police data to differentiate the crimes. More formally this classification task was to highlight any burglary where a motor-vehicle was also stolen. Motor-vehicles included cars vans and motorbikes, after much discussion mobility scooters were excluded. Although often referred to as car key burglaries, if only the keys were stolen then the burglary was not classified as motor-vehicle stolen. This level of detail is required in order to provide consistent results. 
+
+ \item The second classification task originated from a discussion between Dr Daniel Birks and a Detective Chief Inspector (DCI) from Durham Constabulary. Burglaries in an area of Durham had suddenly spiked, from a preliminary review of the problem the DCI thought that the spike was due to an increase in burglaries of outbuildings, however there were not sufficient resources to comprehensively check this hypothesis as it required reading the textual information for all burglaries to establish a baseline and a recent trend. This problem therefore seemed like a good representative task that a police force may like to conduct. Burglaries of peoples homes may be considered more harmful than burglaries of out-buildings only and therefore police forces may wish to understand this intra-crime variation and target resources accordingly.  This classification task therefore was to highlight burglaries when only an outbuilding had been broken into, not a home, and not an out-building \emph{and} a home in the same crime.  
+
+
+ \item The final classification task was designed to complement the first two. Both out-building burglaries and car key burglaries are relatively rare ( approximately 9\% of burglaries in SaferLeeeds data included the theft of a motorvehicle) leading to imbalanced classes within the data. As a complement a classification was required that had more balanced classes, that is the act was mentioned much more frequently than the theft of a motor vehicle. On reviewing a selection of MO texts, the use of force or not to get inside the building was decided upon as almost every text appeared to mention if force was used or not. Use of force was present in approximately 60\% of MO texts given a much more balanced problem. This classification therefore focused on the method of entry into the building and whether force was used or not to achieve this. Force used within the home, for example smashing furniture, was not included.
+
+\end{enumerate}
+
+
+Three diffent classification tasks have been proposed to more readily understand the intra-crime variation within the Burglary MO data. These tasks are representative of those tasks that an analyst or Police Officer may wish to know, in order to either implement crime prevention strategies or allocate resources more appropriately. The next section recaps the data that will be used to explore these classification tasks. 
+
+
+\section{Data} The data was introduced in Chapter 4. For this study only the burglary data from the SaferLeeds data was used, and the text data was taken from the \emph{Crimenotes} column. Examples of the MO texts can be found in Table \ref{tab:MOexample}. The SaferLeeds data had already been processed, exact mechanisms unknown, to replace identifiable information with 'XXXXX'. No other data processing was undertaken. There were a total of 9961 burglary MO texts, spanning two years of data.
+
+The data was split into three sets as previously mentioned. The test set was 200 randomly selected texts. The validation set was 200 randomly selected texts. The training set was selected using an active learning strategy. Active learning is explained in the methods chapter and the effectiveness explored separately in the next chapter. In total 1200 MO texts were manually labelled for the test sets. 
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+\begin{tabular}{p{0.9\linewidth}}
+\toprule
+MO 1 “Attacked property is mid town house with driveway to the front along with gardens to both front and rear located within a residential area. At time stated person/s unknown go to front door and open letter box and using unknown instrument hook door key from a shelf in the porch. Use same keys to open front door and gain entry remove two sets of car keys from the porch area. Go to a XXXX parked on the drive gain access using keys. Make off at speed with both vehicles direction of travel towsrds XXXX having been disturbed by the occupant.”             \\ \midrule
+MO 2 “Attacked property is a large detached dwelling on a busy road. Property is surrounded by large fences, gates and bushes. Between times stated suspect approach rear patio doors at locus and attempt to gain entry by using mole grip type implement to snap lock. Lock snapped however unable to gain entry. Suspects then use molegrip type implement to snap lock on front porch door. Lock snapped, door opened and house alarm sounds. Suspects jump over wall at front of dwelling, get into vehicle parked opposite and make off down XXXXX in direction of XXXXX.” \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:MOexample} An example of MO texts from SaferLeeds Burglary data. Reproduced from \cite{birks}.}
+\end{table}
+
+
+\section{Methods} Methods for all studies were introduced in the Methods Chapter, so this section will give a brief outline of the methods used and highlight any areas where the methods differed from the methods chapter.
+
+\subsection{Labelling} The data was labelled by a single person, the author. Data selection for the test set labelling was completed using an active learning strategy. The batch size for the active learning was 100. Each model , force-used, motor-vehicle stolen and outbuilding was labelled according to its own active learning strategy. However, in order to generate more labelled instances, and because the additional time cost was marginal, every MO read was labelled for all modes independent of what active learning strategy was being followed. As an example, when conducting the force model active learning the MO texts were selected by fine-tuning a model on force used, however each MO  was labelled for force, outbuilding and motor-vehicle when read.
+
+Within a few hundred MO texts it was clear that burglaries involving outbuildings was not mentioned in any of the burglary MOs, for this reason the analysis of outbuildings was not continued and no models were fine-tuned. In total there were 900 MO texts labelled using the active learning process for the motor-vehicle model and 700 MO texts labelled for the force model. In total there were 1500 different Burglary MOs labelled (1500 = 900 + 700 - 100 ( as they both used the same initial random selection)). The active learning process, and therefore data labelling, was stopped when the MCC on the validation set was greater than 0.9.
+
+\subsection{Fine-tuning the PTM} The modelling was completed using the BERT-large-uncased model. The model was utilised through the transformers package hosted on python as explained in the methods section. All hyper-parameters were set as explained in the methods section. There was no hyper parameter tuning, except for the selection of epochs for the final fine-tune. 200 MO texts were used for the test set and a separate 200 texts were used for the validation set.  
+
+\subsection{Performance} As described in the methods chapter we interrogate three aspects of performance, firstly overall performance we use MCC, for explainability we use LIME and for exploring bias we utilise statistical properties of the MO as there is no victim data. In addition to these we add a fourth aspect for this study alone. The fourth aspect is to compare the PTM to the workflow that analyst currently use. For this we utilise a basic keyword search, which can be completed relatively easily, using readily accessible software like Microsoft Excel.  This keyword modelling process is explained below.
+
+\subsubsection{Keyword Model.} The keyword model is based upon simple searches for keywords that are likely to be in the required MOs. This model is designed to represent what police analysts and/or police officers use now, and so the model was kept relatively simple. The keyword model does not use complex rules where words can be chained or there presence negated to develop more intricate searches. Essentially if an MO text contained a keyword then the model labelled that MO text as a positive example. 
+
+The keyword model was developed after reading a substantial number of MOs, and so the keyword search may be relatively good compared to one that would have been produced without that experience. Having said that as this is reflective of how a police analyst may be conducting business, we should assume that they will have had some previous exposure to MO text and so can make good educated guesses to the keywords present. The keyword list was built from words that were associated with burglaries where a motor vehicle has also been stolen e.g. (car, motorbike). The keyword list was also made more robust to unseen data by adding in a list of popular car makes\footnote{https://yougov.co.uk/ratings/transport/fame/car-brands/all}, as the vehicle can often be referred to by brand name alone. The final list of keywords for the motor vehicle model can be found in Table \ref{tab:Keywords}, A similar process was used for the force model, and the final keywords for that model can be found in Table \ref{tab:Keywords_force} . The model was built in R and searched each MO description for each word. If any of the words were present the MO was labelled as being in the positive class for that classification model.
+
+Although built in R the same model could easily be built in Excel or by using SQL queries (a database manipulation language that police analysts are often familiar with). To fully explore the differences between the keyword model and the PTMs it was found important to track another metric called recall alongside MCC in order to understand model performance. Recall is explained below. Time was also used as a proxy for effort to understand how the burden on the analyst compares between PTMs and the traditional keyword models.
+
+\subsubsection{Recall.} Recall is graded from 0 to 1 and relates to the proportion of positive examples that were labelled as positives, Equation \ref{eqn:recall}. A score of 1 means that all positive examples were found. Recall was selected because we assume that the police analysts are interested in finding all cases of the subject at hand. The down side of using recall alone is that a trivial strategy to label all cases as positive would give a recall of 1, but will not have advanced the analysts causes as they remain with the original sample size and all negative instances. However for our purposes the metric is adequate to explore the differences between the keyword model and the PTMs.
+
+\begin{equation}
+ Recall = TP / (TP + FN)
+ \label{eqn:recall}
+\end{equation}
+
+Where TP = True Positive and FN = False negative.
+
+
+ \subsubsection{Time} Analysts are busy people and so the models they use must not be too time consuming for the results that they offer. Time is used here to understand at a relatively high level how much effort an analyst will need to set aside in order to use one of the models, it will be a rough metric not least because there was no real experimental rigour to the generation of the time data. We assume firstly that test and validation sets will be required for each model, even for keyword searches MOs must be read to form a keyword strategy. The training sets need only be utilised by the ML models. When labelling it took approximately an hour to read 100 examples. Using this time metric we will also distinguish between elapsed time and user time. For instance reading a MO text uses an analysts time, but whilst waiting for a model to run an analyst can be usefully employing their time elsewhere. Thus the labelling time (user time ) does not have the same burden as the model training time (elapsed time).
+ 
+\subsubsection{Bias} \label{study1-bias}The Saferleeds data was not supplied with any victim characteristics so investigation of bias in this data set is limited. The Lancashire data did include victim characteristics and so bias is explored more thoroughly in the subsequent chapters. However it is useful to note if any of the characteristics of the text data is systematically influencing the ability of the model to calculate the correct classification. For this study three elements were investigated, these were 1) the length of the MO text. Longer MO texts may contain more information and so may be classified correctly more easily. 2) The number of word pieces, recall that BERT can only recognise certain words, words that are not recognised in their entirety are broken down into word pieces until they are recognised e.g. untidy becomes \say{un, ti and dy}. Word pieces are investigated through a count per MO and the ratio of word pieces to MO text length.
+
+The metric of interest is the Pearson Correlation coefficient as this allows an identification of correlation between the statistical property ( e.g. length of text) and the accuracy of the classification for each MO text within the test set. Accuracy of classification was formulated by calculating how inaccurate the model probability of classification was. So for example if the model predicted that a MO text was a positive example with probability 0.7 and it was a positive example then the error was 0.3. Using that same example if the MO text had turned out to be a negative example then the error would have been 0.7.
+
+As detailed in the Methods chapter, in order to get a more robust estimate of bias rather than a single value of a metric a multiple random selection approach is used to generate a spread of values. That is out of all the labelled data 20\% is randomly selected as the test set. The remaining 80\% of the labelled data is used to train the model. Once the model is trained the 20\% test set is used to generate the required metrics. This process is repeated 10 times with different random selections on each occasion therefore producing ten values for each metric.  
+
+
+
+
+\begin{table}[]
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+car          & dacia          & lamborghini & nissan      & toyota     \\ \hline
+alfa romeo   & ferrari        & land rover  & opel        & van        \\ \hline
+aston martin & fiat           & lexus       & peugeot     & vauxhall   \\ \hline
+astra        & focus          & lotus       & porsche     &  vehicle  \\ \hline
+audi         & ford           & maserati    & renault     &  vehicles    \\ \hline
+audi         & general motors & mazda       & rolls-royce & vespa  \\ \hline
+bentley      & honda          & mercedes    & saab        & volkswagen      \\ \hline
+bmw          & hummer         & mg          & seat        & volvo   \\ \hline
+bugatti      & hyundai        & mini        & skoda       & vw       \\ \hline
+cadillac     & isuzu          & mitsubishi  & smart       &       \\ \hline
+chevrolet    & jaguar         & motor       & subaru      &            \\ \hline
+chrysler     & jeep           & motorbike   & suzuki      &            \\ \hline
+cireon       & kia            & motorcycle  & tesla       &            \\ \hline
+\end{tabular}
+\caption{\label{tab:Keywords} A list of keywords used to populate the  keyword model for car stolen.}
+\end{table}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+\begin{tabular}{|c|c|c|c|}
+\hline
+smash  & prized & jemm    & forc      \\ \hline
+kick   & break  & attack  & damage    \\ \hline
+broken & snap   & removed & shattered \\ \hline
+\end{tabular}
+\caption{\label{tab:Keywords_force} A list of keywords used to populate the keyword model for force used.}
+\end{table}
+
+
+
+
+
+   
+
+\section{Results} This section will discuss the findings from experimentation of the BERT model with the SaferLeeds burglary data. The section will present findings in the three main areas of analysis, performance, explainability and bias. The impact of the active learning strategy will be discussed in the next chapter. After the findings have been stated they will be interpreted in the discussion section.
+
+
+
+\subsection{MCC and Recall} Table \ref{tab:results_study_1} gives the results for both the Force and the Motor Vehicle model, recall the out-building model was not used because of no suitable labels. These results are generated using the data from the active learning process for that model. The table includes test metrics from the PTM and the keyword model. As separate active learning processes were used for each model, there is the opportunity to combine the data from each active learning strategy to fine-tune a model on more data. The results using all labelled data (1500 MO texts) is given in Table \ref{tab:final-model}. This table has ten entries as the model was built ten times to get an accurate spread of results. Recall that the models are built with an element of randomness so can be different on each occasion.
+
+\paragraph{Motor Vehicle Model.} The BERT model has a MCC of 0.97 and a recall of 0.94 when using only the active learning data (900 texts). This increase to a MCC of 0.97 and Recall of 1.0 when all labelled data is used (1500 texts). In comparison the keyword model achieves a MCC of 0.81 and a Recall of 1.0. Its worth noting that the keyword test set result was unusually good - the validation set and the train set which were both used to create the model actually had lower MCC scores than the test set - which of course is the reverse of what we would expect because the model should always be better at classifying the data on which it was built.
+
+\paragraph{Force Model.} The results for the force model are similar. BERT has a MMC of 0.86 for the model built only on the active learning data (700 texts). Utilising all data (1500) the MCC rises to an average of 0.91. The keyword model for the force model gives a MCC of 0.51, significantly worse than the PTM. The recall values for the  two models however are closer. The keyword model has a recall of 0.96 and BERT has a recall of 0.94.
+
+\begin{table}[]
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+                         & \multicolumn{2}{c}{Motor vehicle} & \multicolumn{2}{c}{Force} \\ 
+                         & Recall           & MCC            & Recall       & MCC        \\\midrule
+Keyword (Validation)     & 1                & 0.65           & 1            & 0.56       \\
+Keyword (Test)           & 1                & 0.81           & 0.96         & 0.51       \\
+Keyword (Train)          & 0.97             & 0.62           & 0.94         & 0.45       \\\midrule
+Naïve Bayes (Validation) & 0.56             & 0.12           & 0.79            & 0.26          \\
+Naïve Bayes (Test)       & 0.71             & 0.07           & 0.78           & 0.13         \\
+Naïve Bayes (Train)      & NA               & NA             & NA           & NA         \\\midrule
+BERT (Validation)        & 0.94                & 0.85           & 0.94            & 0.89          \\
+BERT (Test)              & 0.94                & 0.97           &0.94           & 0.86         \\
+BERT (Train)             & NA               & NA             & NA           & NA         \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:results_study_1} Selected metrics from Study 1a results. These results are generated only from the MO text that was labeled within the active learning strategy for that model.}
+\end{table}
+
+
+\subsection{Time.} This next subsection compares the time taken for each model, and in particular to compare between the PTM and the keyword models. We assume in each case that the test data and the validation data will need to be labelled to assist in model development so will not be included in the comparisons. We assume that 100 MO texts take 1 hour to label. We do count additional time for the modelling within the active learning process, this is discussed in the next chapter. 
+
+\paragraph{Motor Vehicle Model} The motor vehicle PTM used 900 texts so required 9 hrs of labeling. fine-tuning the model required an additional seven hours, although this does not require any input after starting, so it can be completed overnight or whilst completing other tasks. The keyword PTM only required an additional 100 MO texts to label. The knowledge gained from reading the test, validation and the initial 100 train set was sufficient to produce a good recall keyword model on the validation set. The keyword model therefore required 1 hour of labelling plus 1 hour of research to expand the keywords found with plausible alternatives. This means that the keyword model is much quicker to build and implement, two hours of user time against the PTM time of nine user hours and seven elapsed hours as the model trains.  
+
+\paragraph{Force Model.} Similarly with the Force model the PTMs took much longer to build, in this case seven hours of labelling followed by six hours for the model fine-tune. The keyword model was ready in one and a half hours.
+
+\begin{table}[]
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+\multicolumn{1}{l}{} & \multicolumn{2}{c}{Force Model}       & \multicolumn{2}{c}{Car model} \\\midrule
+Run                  & MCC               & Recall            & MCC                & Recall   \\\midrule
+1                    & 0.97              & 0.99              & 0.97               & 1.0        \\
+2                    & 0.92              & 0.96              & 1.0                  & 1.0        \\
+3                    & 0.92              & 0.96              & 0.97               & 1.0        \\
+4                    & 0.90               & 0.94              & 0.97               & 1.0        \\
+5                    & 0.90               & 0.94              & 0.97               & 1.0        \\
+6                    & 0.90               & 0.94              & 0.97               & 1.0        \\
+7                    & 0.88              & 0.93              & 0.97               & 1.0        \\
+8                    & 0.89              & 0.94              & 0.97               & 1.0        \\
+9                    & 0.90               & 0.94              & 0.97               & 1.0        \\
+10                   & 0.90               & 0.94              & 0.97               & 1.0        \\\midrule
+Mean(CI)             & 0.908 (0.89-0.92) & 0.948 (0.94-0.96) & 0.973 (0.97-0.98)  & 1.0 (1.0-1.0)  \\\midrule
+Best Run             & 0.97              & 0.99              & 1.0                  & 1.0        \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:final-model} Each run represents the fine-tuning of a single model using all the labelled data. Each run is independent. Results are different between runs as there are random aspects to fine-tuning that can alter the end result. }
+\end{table}
+
+\subsection{Explainability} LIME was used to interrogate the PTMs to understand which words were having the greatest effect on the classifications. Figure \ref{fig:lime_out1} is an example of the LIME output for a single MO text, only the ten most influential words are highlighted.  The prediction was for a burglary with a motor vehicle theft. The words highlighted in orange contributed the most to that classification. The words highlighted in blue counted against that classification. In this case the most important top three words for the classification decision were all \say{Vehicle}. 
+
+\begin{figure}[!tbp]
+  \centering
+    \includegraphics[width=\textwidth]{images/lime_pred_output.png}
+    \caption{{Lime Output for a single MO text for the Motor vehicle theft during a burglary model.} The model correctly predicts that a vehicle was stolen. The model was ran 100 times and on each occasion ten words were masked. The output shows the ten most important words for influencing the prediction. Words highlighted with orange contributed to the positive prediction.}
+    \label{fig:lime_out1}
+\end{figure}
+
+
+
+Although the single LIME output gives a good visual representation of how the model works with a single MO text, that style of visualisation does not scale well to multiple texts. To take a more general view of the LIME output from many texts a different approach was taken.   The general approach was to run the LIME algorithm for every MO text in the test set, the coefficients from the local models were stored and the word clouds at Figure \ref{fig: wordcloud_mv_both}  and \ref{fig: wordcloud_force_both} were produced, for the motor-vehicle and force models respectively. The size of the word in the word cloud reflects how important that word was for the classification of all MO texts in the test set. Word sizes cannot be compared between word clouds.  
+
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.9\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/burg_safer_mv_wordcloud.png}
+         \caption{Words that contributed to a positive classification}
+         \label{fig: wordcloud_mv}
+     \end{subfigure}
+     \vfill
+     \begin{subfigure}[b]{0.9\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/burg_safer_mv_rev_wordcloud.png}
+         \caption{Words that contributed to a negative classification}
+         \label{fig: wordcloud_mv_rev}
+     \end{subfigure}
+        \caption{{Wordclouds from  \textbf{motor-vehicle} classification model. Saferleeds data.} These wordclouds were generated using a fine-tuned BERT model on the Saferleeds data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
+        \label{fig:wordcloud_mv_both}
+        
+\end{figure}
+
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.9\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/burg_safer_force_wordcloud.png}
+         \caption{Words that contributed to a positive classification}
+         \label{fig: wordcloud_force}
+     \end{subfigure}
+     \vfill
+     \begin{subfigure}[b]{0.9\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/burg_safer_force_rev_wordcloud.png}
+         \caption{Words that contributed to a negative classification}
+         \label{fig: wordcloud_mv_force}
+     \end{subfigure}
+        \caption{{Wordclouds from \textbf{force} classification model. Saferleeds data.} These wordclouds were generated using a fine-tuned BERT model on the Saferleeds data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
+        \label{fig:wordcloud_mv_both}
+        
+\end{figure}
+
+\subsection{Bias} Table \ref{tab:saferleeds_bias} highlights the mean of the Pearson correlation coefficients for the metric in the first column. The mean was calculated from ten randomly initiated model builds as described in Section \ref{study1-bias}. From the table it is clear that there are no linear correlations between the accuracy of the classification and the statistical properties of the MO text. All correlations are very close to zero and have ranges that are also close to zero.
+
+
+\begin{table}[]
+\begin{tabular}{@{}lll@{}}
+\toprule
+                               & Motorvehicle            & Force                    \\ \midrule
+MO Length                      & 0.092 (0.150 to 0.009)  & - 0.01 (0.071 to -0.099) \\
+Number of Word pieces          & 0.007 (0.060 to -0.085) & 0.001 (0.065 to -0.067)  \\
+Ratio MO Length to Word pieces & 0.066 (0.141 to -0.042) & -0.004 (0.089 to -0.069) \\ \bottomrule
+\end{tabular}
+
+\caption{\label{tab:saferleeds_bias} This table gives the mean Pearson correlation coefficients between the probability of classification from the NLP model and the metrics listed in the first column.  The value in the table is the mean of the ten Pearson coefficients. Figures in bracket are the range.}
+\end{table}
+
+
+
+
+
+\section{Discussion} This section discusses the results that have just been presented, using the questions outlined in Chapter xxx as a hand rail.
+
+\subsection{Can PTM accurately classify MO texts? } The results from Table \ref{tab:final-model} demonstrate that in the limited classification tasks explored here PTMs are capable of classifying MO texts accurately. High MCC scores indicate that the models have learnt the patterns well and are able to classify unseen texts with high accuracy. 
+
+\subsection{Are PTM better than the basic keyword method?} The results from PTM and the keyword method were compared in Table \ref{tab:results_study_1}. The keyword model and the PTM had similar recall values, they both did a good job of finding the positive instances. The MCC values however are different. This difference in MCC values shows that the PTM were much more efficient overall as although the keyword models were able to find most of the positive instances of a classification they also included lots of false positives. That is the keyword models classified more negative instances as positive than it should do. How much of a problem is this false positive problem? That answer depends on the problem and the amount of texts that are being over identified. For rare classes the absolute number of over classifications might be manageable, as even a large percentage of a small absolute number produces a small number of false positives. However for more balanced classes even a moderate over classification of a large number of instances may over classify a large absolute number of texts. This is indeed what is found with the keyword model and the different classification problems as explained next.
+
+In the train data set the keyword method was labelling around 40\% more MOs as motor vehicle theft than there actually was - this for instance includes examples of where the MO will describe the vehicle used to leave the scene of the crime whether it was stolen or not. So whilst the keyword search has a good recall - it is likely to find all of the burglaries that included the theft of a motor vehicle - it also labels so many other MOs that a thorough check of all labeled MOs is required to produce a reliable labelling scheme. This adds further time to model building that was not captured earlier. As an example, there were 9961 burglary texts , with an estimated underlying base rate of  9\% (estimated from test and validation sets) with a motor vehicle stolen. The expected number of motor vehicle thefts within the burglary texts would therefore be 897. Using the keyword model on all of the burglary texts though it classifies 1727 texts as having a vehicle stolen.  These 1727 texts would all then need to be read to filter out the false positives, we estimate this to take a further 17 hours based on the earlier assumption of 100 texts an hour. So although the keyword model is much quicker to build initially (2hrs), getting close to the same level of performance of the PTM requires more time overall (19hrs). 
+
+The motor vehicle classification above  was an imbalanced data class so the key word model was able to reduce the search space, to a relatively small size, an 80\% reduction from all burglary texts (9961 to 1727). However as the force model is a more balanced classification problem (the estimated split is 60\% force used to 40\% force not used) the keyword model is not able to reduce the search space as extensively as the motor vehicle classification problem. The force-used model is only able to reduce the search space by 17\% (9961 to 8268), because the Flase positive classification is so high. This means that 8268 texts , approximately 82 hours of labelling will have to be conducted to remove all of the incorrectly labelled texts to get a model that is comparable to the PTM.
+
+Therefore from this evidence we conclude that the PTM are better than the basic keyword model for classifying MO Texts. Although PTMs take more time to initially build and label the texts, they provide a much better result (as measured by MCC) than the basic keyword models for a comparably shorter time. Two issues that have not been explored are 1) PTMs require specialist skill to operate and 2) Keyword models can be made more intricate. That PTMs are more intricate is not in dispute, however it is possible that they can be packaged for simple operation by non-specialists so that there is no requirement to understand the intricacies of the models, however at this stage we do not dismiss the implementation issues of PTMs for police forces and so this is discussed further in the final part of the thesis. Secondly keyword models can be made more intricate and they will undoubtedly have a better MCC score, however PTMs were born because probabilistic models have proven to be more robust than intricate rule-based models, because they are easier to maintain and generally perform much better on unseen data.        
+
+\subsection{Are PTMs explainable?} The evidence from the LIME models is that the PTMs are using words that are consistent with human explanations for the classification of MO texts. Although it is worth reiterating at this stage is that the LIME models are investigating local models around a selection of MO texts, they are not explaining the model in a global context. That is not all words will have the same effect in every MO text. 
+
+The LIME output for the motor vehicle model, Figure \ref{fig: wordcloud_mv} shows that words such as \emph{vehicle} and \emph{car} are important for the classification of texts. This is commensurate with what a human would do and indicates that the model is operating in a similar fashion to how a human would classify the texts. That is it is highlighting meaningful words rather than those words with spurious correlations. An interesting counter-point is to look at the words that contribute negatively to the the motor vehicle classification Figure \ref{fig: wordcloud_mv_rev}. Here the words selected are more evenly sized, and therefore of even importance, they are mostly common words. This indicates that there are no particular patterns for negating the positive classification of motor vehicle burglaries. This is the result that we expect, because stealing motor vehicles during a burglary is a rare instance and, from experience of reading the MO texts, there are no examples of negative reporting e.g. no MO text states that a motor vehicle was not stolen. This however is not the case with the force used model where the use of force or not is generally commented upon.
+
+Similarly to the motor vehicle model the force-used model LIME output is commensurate with what you would expect a human to use to classify one of the MO texts. \emph{Force} and \emph{Smash} are prominent as an example. In contrast to the motor-vehicle model however is that the words that are contributing to the negative pattern also have a strong pattern, here it can be seen that the words \emph{Insecure} is prominent amongst the words that work against a positive classification. 
+
+Although only local explanations, the LIME output offers a good understanding of why a classification has been made. The ALGO-CARE framework (introduced earlier as the extant guidance adopted by the NPCC for using algorithms) under the Explainable heading asks \say{Is appropriate information available about the decision-making rule(s) and the impact that each factor has on the final score or outcome (in a similar way to a gravity matrix)?} In considering this question I believe that firstly, although the question is geared around tabulated data, there is sufficient explainability within the output to justify the classification of each text. At the individual level the texts are explainable and a justification can be given for each text classification through the use of the LIME explanations. At a global level the model is not totally explainable however. If one takes \say{factor}, from the quote above, to mean word in the MO texts then the \say{factor} will not have the same effect in all instance for the final score, this is because the model uses the context around the word as well as the individual words to compute the final effect. This will be a problem for all models where interaction effects between factors are present and not just text data.
+
+The question of sufficiently explainable is unlikely to be settled in this thesis, as it is likely to need to be tested on a number of different stakeholders in the model usage, including members of the public and police officers. However I think the use of the LIME output has shown that the models are working in the way we would expect and the output gives reassurance that the models are classifying for the right reasons rather than spurious correlations. 
+
+
+\subsection{Are PTMs biased?} Models are biased if they systematically perform differently in one type of instance from another. As previously mentioned the meta-data that accompanied the Saferleeds was limited. There was no victim data for which to perform bias against so the bias investigated in this instance is against text statistics, that is to see if there is any bias relating to the statistical properties of the text e.g length of the text or the words used. This limited investigation did not pick out any biases or systematic failings of the model in relation to certain types of the text as judged by the Pearson correlation coefficients. This has one important implication - if their is bias based on victim characteristics, that say impacts the length of an MO text, then this bias may not manifest itself in a degrading in the probability accuracy. Therefore a lack of correlation between victim characteristic and probability accuracy is not proof of no bias in the data recording, only in no bias of model performance. 
+
+
+
+\subsection{Limitations} General limitations will be discussed in the final part of the the thesis, this section is limitations specific to this study. In general the are two main limitations. Firstly is the number of classification tasks and secondly is the bias investigation.
+
+\begin{itemize}
+    \item Classification Tasks. Only two classifications tasks were selected, and both of these tasks were related to burglary. Although both tasks encompassed different problem types, balanced and unbalanced classes and produced good results, their generalisability to all crime types is limiting, as is there applicability to other classification tasks. However this does illustrate that there are problems where PTMs can be useful for MO text classification.
+    
+    \item Bias. The bias investigation was severely limited due to a lack of victim data within the data set. However the next part of the study with the Lancashire data is likely to make up for these short comings as it has victim data from which to asses bias in the classifications. 
+    
+\end{itemize}
+
+\section{Conclusion} In a narrowly focused study, PTMs were found to be good at classifying MO texts across both balanced and imbalanced classes. Namely to detect burglaries with motor vehicle thefts and if force was used during a burglary. In addition the PTM were found to be better than the simpler keyword models because they could discriminate more accurately to reduce false positives. So despite the longer set up time, particularly the labelling of the training data, PTMs are more efficient than the keyword models. LIME was used to understand how the model were making the classifications, and in all cases there seemed to be a sound rational for the models decisions. Words that were more influential in the classification were also words that made sense for human classification. Bias was only partially reviewed due to the lack of victim data, there did not appear to be any significant bias in those aspects tested. This first study has set a sound basis for the use of PTMS, however the use of active learning was not studied and the applicability was relatively narrow.
+
+For broader applicability we want to know whether these models will work in other types of police free text. Will they work on different crimes? As only burglary was studied here. Do they work in other police areas, and can they assist with other types of police data. These questions are partially answered in the subsequent chapters, in particular a replication study of the classification problems explored here is completed to understand if the results can be replicated in another police force. Before presenting the replication study however the next chapter investigates the use of active learning and how useful it was in reducing the labelling burden.
+

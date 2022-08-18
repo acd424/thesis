@@ -1,0 +1,119 @@
+
+{\tiny
+\begin{landscape}
+\begin{longtable}{p{2cm}p{4cm}p{4cm}p{3cm}p{3cm}p{3cm}}
+\caption{\large Literature Survey Results.}\\
+
+Authors &
+  Purpose &
+  Description &
+  Intrinsic validation &
+  Extrinsic validation &
+  Notes \\
+     \hline
+   \endhead
+\textcite{birks2020unsupervised} &
+  Efficiently group crimes within a single crime classification with the aim of developing a greater understanding of crime problems and supporting design of crime reduction interventions. &
+  Crimes from a single crime category, burglary, were analysed using Latent Dirichlet Allocation. Clusters were based on topic coherence. The clusters were then utilised to build a dashboard for analysts to geographically depict the distribution of the crime topics. &
+  Number of clusters was based on maximising topic coherence score. &
+  Dashboard app to geographically depict topics was built but no evaluation by practitioners of app or topics was reported. &
+  \begin{tabular}[c]{@{}l@{}}Primary model = LDA\\ Word representation = TF-IDF\\ Feature engineering = n-gramm frequency analysis.\\ Specific information Extraction = None\\ Data origin = UK\end{tabular} \\
+\textcite{Basilio2019333} &
+  Identify demand structure in certain geographic areas to enable selection of appropriate policing technique. &
+  Crime call transcripts are analysed as bags of words using LDA. Similar crimes are then grouped and ten topics for the two areas of interest were discovered. These 20 topics were then analysed to define the type of demand in each area. &
+  Domain experts were used to validate and name the topics discovered. &
+  None stated &
+  \begin{tabular}[c]{@{}l@{}}Primary model = LDA\\ Word representation = None\\ Feature engineering = None\\ Specific information Extraction = None\\ Data origin = Brazil\end{tabular} \\
+\textcite{karystianis2019automated} &
+  Automatically extract domestic violence information such as relationship and abuse types. &
+  Rules based classification. 100 narratives were read and used to build sophisticated and extensive lexical rules. These were then validated against a further 100 narratives, and new rules introduced to account for any errors. These rules were then tested against a further 100 labelled narratives. &
+  There was a test set of 100 narratives. Data had been labelled by domain experts. Precision of 90\% for abuse type and 85\% for victim injuries. &
+  None stated &
+  \begin{tabular}[c]{@{}l@{}}Primary model = Lexical rules\\ Word representation = None\\ Feature engineering = Rules and dictionary crafting.\\ Specific information Extraction = DV types\\ Data origin = Australia\end{tabular} \\
+\textcite{Krause2019} &
+  Analysis of accident type &
+  Police narrative road accident data was analysed through a bag of words approach to classify into one of six different road accident types. Data that had already been labelled by the police was used as the training set, test data, which hadn’t between labelled because it was not warranted, was used as the test set. Classification was done through SVM model. &
+  69\% accuracy across 6 classes on a held out test set. &
+  None stated &
+  \begin{tabular}[c]{@{}l@{}}Primary model = SVM\\ Word representation = Bag of words\\ Feature engineering = None\\ Specific information Extraction = Classification only.\\ Data origin = Germany\end{tabular} \\
+\textcite{Haleem20192279,} &
+  Strategic and Operational planning for mental health incidents &
+  Classification of police narrative reports, into mental health related incidents or not.  Police and academics were used to label the police narrative reports. Experimented with 5 different word embeddings and found a corpus generated Distributed Memory to be the best. &
+  Cross validation only on the training set- 89.5\% compared to the human generated labels. &
+  None stated &
+  \begin{tabular}[c]{@{}l@{}}Primary model = CNN\\ Word representation = 5 varieties tested.\\ Feature engineering = None\\ Specific information Extraction = Classification only.\\ Data origin = UK\end{tabular} \\
+\textcite{chohlas2019recommendation} &
+  To aid investigators in identifying groups of related crimes. (In this instance groups are related to the same serial offender, more crime linkage than POP.) &
+  The whole model used a variety of variables including time and space. MO data was used as one of 30 variables. The comparison of MO data was through similarity score using bag of words  model. &
+  The narrative free text data was consistently ranked in top 5 of feature importance for the overall crime linkage model. &
+  Deployed to every police officer in NYC PD. &
+  \begin{tabular}[c]{@{}l@{}}The narrative was used as part of a much larger model.\\ Primary model = Cosine similarity.\\ Word representation = Bag of Words\\ Feature engineering = None\\ Specific information Extraction = None. \\ Data origin = USA\end{tabular} \\
+\textcite{karystianis2018automatic} &
+  Automatically identify type of mental health from police narrative data. &
+  Rules based classification. 100 narratives were read and these were used to build sophisticated and extensive lexical rules. These were then validated against a further 100 narratives, and new rules introduced to account for any errors. These rules were then tested against a further 100 labelled narratives. &
+  Test set of 100 held out examples. Precision of 97.5\% of offender and 87.1\% of victim disorders extracted. &
+   &
+  \begin{tabular}[c]{@{}l@{}}Primary model = Lexical rules\\ Word representation = None\\ Feature engineering = Rules and dictionary crafting.\\ Specific information Extraction = MH Conditions\\ Data origin = Australia\end{tabular} \\
+\textcite{seo2018partially} &
+  To automate the classification of crimes as either gang related or not. &
+  The whole model was a Partially Generative Neural Network. The model used a variety of variables including  weapon type and location information along side a narrative variable. &
+  Narrative variable was included in the final model. Only 6 of 19 variables were selected. &
+  When conducting sensitivity analysis around missing features, they found the narrative variable to be the most important. &
+  \begin{tabular}[c]{@{}l@{}}The narrative was used as part of a much larger model.\\ Primary model = Ave Word2Vec score.\\ Word representation = Word2Vec\\ Feature engineering = None\\ Specific information Extraction = None. \\ Data origin = USA\end{tabular} \\
+\textcite{Pandey201876} &
+  Exploration of metrics for crime topic modelling. &
+  They cluster crimes from seven different administrative classifications into seven different topics. They then compute gini coefficients and topic coherence to compare with the data grouped and analysed in the original crime categories. &
+  Spatial concentration  was found to be higher in crimes grouped under topic models against those grouped by their administrative crime classification. &
+  None stated &
+  \begin{tabular}[c]{@{}l@{}}Primary model = LDA\\ Word representation = TF-IDF\\ Feature engineering = None\\ Specific information Extraction = None\\ Data origin = USA\end{tabular} \\
+\textcite{kuang2017crime} &
+  Goal is to discover ecologically more meaningful latent crime classes than the standard administrative classes, such that those crimes with similar conditions and or processes are grouped together. &
+  Using MO data they use NMF, an unsupervised learning technique, to cluster the crimes according to their MO text. No other variables were used. &
+  Cosine similarity between administrative classifications, generated through NMF process demonstrates expected similarities. Crime topics discovered the divide between property and violent crime reasonably well. &
+  None stated &
+  \begin{tabular}[c]{@{}l@{}}Primary model = NMF\\ Word representation = TF-IDF\\ Feature engineering = None\\ Specific information Extraction = None\\ Data origin = USA\end{tabular} \\
+\textcite{rogerson2016utility} &
+  Asses the feasibility of undertaking systematic analysis of descriptions of  high volume crimes for crime prevention. &
+  MO data was cleaned and prepared then bag of words models were used for k-means clustering. Analysis was based upon  theft from person and robbery crimes. &
+  Clusters validated against conceptual frameworks. Though clusters did not cluster around the same type of characteristic. For instance one clustered around an environment variable, while another clustered around the type of property stolen. &
+  None stated &
+  \begin{tabular}[c]{@{}l@{}}Primary model = K-means clustering\\ Word representation = TF-IDF\\ Feature engineering = Manual similarity engineering.\\ Specific information Extraction = None\\ Data origin = UK\end{tabular} \\
+\textcite{Helbich2013326} &
+  Promote text mining, particularly the self-organizing map algorithm and its visualization capabilities, in combination with point pattern analysis, to explore the value of otherwise hidden information in a geographical context &
+  Using text documents from a single criminal case they cluster using SOMs then plot the clusters on a normal geographical map to represent free text geographically. &
+  None stated &
+  Introduced new relationships between evidence items to the investigative team. &
+  \begin{tabular}[c]{@{}l@{}}Primary model = SOM\\ Word representation = TF-IDF\\ Feature engineering = None\\ Specific Information Extraction = None\\ Data origin = USA\end{tabular} \\
+\textcite{bache2010language} &
+  Use language models to infer the characteristics of an offender. Individual crime data sets were labelled with characteristics and statistical tests were used to ascertain if the language models for each classification were different. &
+  A variety of crime types were used to try and predict offender characteristics from the description of the crime by the police narrative data. These characteristics included age, sex and ethnicity. The narrative was represented by a bag of words model that was then analysed through Bernoulli models to generate word probabilities for each word in the respective classification. Offender characteristic classifications  was then calculated through aggregating individual word probabilities from the respective crime narrative. &
+  The models were only utilised on the training data. They find statistical significance for all crimes, but not all characteristics with each crime type. &
+  None &
+  \begin{tabular}[c]{@{}l@{}}Primary model = Bernoulli model\\ Word representation = Bag of Words\\ Feature engineering = None\\ Specific information Extraction = None. Classification only.\\ Data origin = UK\end{tabular} \\
+\textcite{Poelmans200911864} &
+  Improve accuracy of Domestic Violence classification for violent crimes. &
+  Using features from known domestic violence crimes they classify  crimes into two groups. Using ESOM to analyse the features and nearest neighbour to classify they then use MO data to classify other crimes as either DV or not. &
+  The classification accuracy was only 76\%. However they were able to mitigate that by highlighting those cases with sufficient uncertainty for additional manual classification. &
+  Companion studies show the model was used to further improve the definition of domestic violence and to improve police training. &
+  \begin{tabular}[c]{@{}l@{}}Primary model = ESOM\\ Word representation = Bag of words\\ Feature engineering = N-gram frequency extraction\\ Specific information Extraction = None\\ Data origin = Netherlands\end{tabular} \\
+\textcite{vandePutte2009425} &
+  Search for intelligence from observational messages about suspicious situations, amongst police routine activity reports. &
+  Using features of the police messages and the content, tree based rules were used to classify the messages as either administrative or as reporting suspicious activity. &
+  The algorithm was only validated on the train data set. Accuracy was 85\% though not reported explicitly. &
+  None stated &
+  \begin{tabular}[c]{@{}l@{}}Primary model = Rule based tree models.\\ Word representation = Bag of Words\\ Feature engineering = Properties of message such as length\\ Specific information Extraction = Classification only.\\ Data origin = Netherlands\end{tabular} \\
+\textcite{cocx2006distance} &
+  To automate the process of crime linkage through determining a distance measure between similar crimes. &
+  The whole model uses multiple document styles and is centred around cases rather than a single narrative. Entities are extracted from case documents, then similarity is measured between cases using matrix manipulation. Entities are extracted using SPSS software. &
+  None stated. &
+  In process of being validated by the respective investigative teams. &
+  \begin{tabular}[c]{@{}l@{}}Primary model = Entity extraction\\ Word representation = N/A\\ Feature engineering = None\\ Specific information Extraction = None. \\ Data origin = Netherlands\end{tabular}
+
+
+\label{tab:results} 
+\end{longtable}
+\end{landscape}
+
+}
+
+\normalfont
