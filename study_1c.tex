@@ -106,7 +106,74 @@ Best Run & 1.00            & 0.93           & 0.94        & 0.96        & 0.92  
 
 
 
-\subsection{Explainability} LIME was again used to understand how the words of the texts are contributing to the final classification. As a reminder BERT uses the word and the surrounding context of the word, so a global understanding of how the model works is difficult to ascertain. LIME provides a local understanding for each MO text by randomly deleting words to see what effect they have on the final classification. This is scaled up in this thesis by utilising LIME on all MOs in the test set then using word-clouds to show the most important words based on the individual LIME model coefficients. Word clouds for the motor vehicle, force and outbuildings model can be seen in Figures x , y and z respectively.
+\subsection{Explainability} LIME was again used to understand how the words of the texts are contributing to the final classification. As a reminder BERT uses the word and the surrounding context of the word, so a global understanding of how the model works is difficult to ascertain. LIME provides a local understanding for each MO text by randomly deleting words to see what effect they have on the final classification. This is scaled up in this thesis by utilising LIME on all MOs in the test set then using word-clouds to show the most important words based on the individual LIME model coefficients. Word clouds for the motor vehicle, force and outbuildings model can be seen in Figures \ref{fig:wordcloud_mv_both_lancs} ,\ref{fig:wordcloud_force_both_lancs} and \ref{fig:wordcloud_home_both_lancs respectively.}
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.9\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/mv_wordcloud_positive.png}
+         \caption{Words that contributed to a positive classification}
+         \label{fig: wordcloud_mv_lancs}
+     \end{subfigure}
+     \vfill
+     \begin{subfigure}[b]{0.9\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/mv_wordcloud_negative.png}
+         \caption{Words that contributed to a negative classification}
+         \label{fig: wordcloud_mv_rev_lancs}
+     \end{subfigure}
+        \caption{{Wordclouds from  \textbf{motor-vehicle} classification model. Lancashire data.} These wordclouds were generated using a fine-tuned BERT model on the Lancashire data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
+        \label{fig:wordcloud_mv_both_lancs}
+        
+\end{figure}
+
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.9\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/force_wordcloud_positive.png}
+         \caption{Words that contributed to a positive classification}
+         \label{fig: wordcloud_force_lancs}
+     \end{subfigure}
+     \vfill
+     \begin{subfigure}[b]{0.9\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/force_wordcloud_negative.png}
+         \caption{Words that contributed to a negative classification}
+         \label{fig: wordcloud_force_rev_lancs}
+     \end{subfigure}
+        \caption{{Wordclouds from  \textbf{force} classification model. Lancashire data.} These wordclouds were generated using a fine-tuned BERT model on the Lancashire data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
+        \label{fig:wordcloud_force_both_lancs}
+        
+\end{figure}
+
+
+
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.9\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/home_wordcloud_negative.png}
+         \caption{Words that contributed to a positive classification}
+         \label{fig: wordcloud_home_lancs}
+     \end{subfigure}
+     \vfill
+     \begin{subfigure}[b]{0.9\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/home_wordcloud_positive.png}
+         \caption{Words that contributed to a negative classification}
+         \label{fig: wordcloud_home_rev_lancs}
+     \end{subfigure}
+        \caption{{Wordclouds from  \textbf{outbuilding} classification model. Lancashire data.} These wordclouds were generated using a fine-tuned BERT model on the Lancashire data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
+        \label{fig:wordcloud_home_both_lancs}
+        
+\end{figure}
+
+
+
 
 The word clouds for the motor vehicle model demonstrate a similar pattern as those from the SaferLeeds data. Firstly the word cloud for the words contributing to a positive classification i.e. a motor vehicle was stolen are all words that a human would also expect to use. The three most important words being car, vehicle and keys. Also note that these words are disproportionately important, they are much larger than the remainder of the words. This contrast with those word contributing to a negative classification where the word sizes are much more even. Again the words for the negative classification have no real theme, and this is because it is not reported when a car is not stolen.
 

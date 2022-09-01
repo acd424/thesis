@@ -113,7 +113,7 @@ MCC =  \frac{(TP*TN – FP*FN)}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}
 \label{eqn:MCC}
 \end{equation}
 
-Where: TP = True Positive, TN = True Negative, FP = Fales Positive and FN = False Negative.
+Where: TP = True Positive, TN = True Negative, FP = False Positive and FN = False Negative.
 
 
 \subsection{Explainability}As explained earlier in Chapter 3 how a model came about its predictions is just as important as if it got the predictions correct, as being able to explain how a model is making decisions builds trust in the model. To be explainable the model must be able to explain or show why certain classifications were given. As mentioned in Chapter 3 these can either be global explanations, where the model can be explained for every possible input, or local explanations where the explanation is centred on the individual instances to be classified. For deep learning and in particular NLP it is very difficult to produce global explanations because of the vast array of possible inputs, for this reason we focus on local explanations using the LIME package introduced earlier. 
