@@ -12,6 +12,7 @@
 \usepackage{subcaption} %multiple images in single insert
 \usepackage{array}% http://ctan.org/pkg/array for extra row height
 \usepackage[table,xcdraw]{xcolor} % table colours
+\usepackage{fancyhdr} % for headers
 
 % Page formatting
 \addtolength{\textwidth}{5mm}
@@ -63,6 +64,11 @@
 
 \begin{document}
 
+
+
+
+
+
 \pagestyle{empty} \thispagestyle{empty}
 \begin{center}
 {\LARGE \bf  Improving Problem-Oriented Policing with\\ Natural Language Processing}\\[5cm]
@@ -111,6 +117,15 @@ This research has been carried out by a team which has included (name the indivi
 \newpage 
 \pagenumbering{arabic}
 \setcounter{page}{1}
+
+%%%%%% headers and footer %%%%%%
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\nouppercase{\rightmark\hfill\leftmark}}
+\fancyhead[RO]{\nouppercase{\leftmark\hfill\rightmark}}
+\fancyfoot[LE,RO]{\hfill\thepage\hfill}
+
+
 \part{Background}
 \include{introduction}
 \include{core_frameworks}
@@ -125,8 +140,11 @@ This research has been carried out by a team which has included (name the indivi
 \include{study_1a}
 \include{study_1b}
 \include{study_1c}
+\include{study_2}
 \part{Discussion}
-
+\include{implications_pop}
+\include{future_research}
+\include{concluding_thoughts}
 
 
 \newpage
@@ -142,7 +160,7 @@ This research has been carried out by a team which has included (name the indivi
 
 
 
-\parencite{maguire2015problem} This is the article with review of 753 cases in colorado. Although the data is old, they only investigated cases from 1995 to 99 they highlight three issues with implementation 1) Police partners do not play a big role, 2) Inconsistent record keeping makes institutional learning about what works difficult, 3) Evaluations were sporadic and porrly conducted. They conclude in part that 'Police Agencies may simply not have the capacity to implement the analytical elements of POP"
+\parencite{maguire2015problem} This is the article with review of 753 cases in colorado. Although the data is old, they only investigated cases from 1995 to 99 they highlight three issues with implementation 1) Police partners do not play a big role, 2) Inconsistent record keeping makes institutional learning about what works difficult, 3) Evaluations were sporadic and poorly conducted. They conclude in part that 'Police Agencies may simply not have the capacity to implement the analytical elements of POP"
 
 One commander, reflecting on the poor performance in Iraq lamented the fact that he could spend thousands of pounds on missiles to kill a single person - but was not empowered to spend a fraction of that money in creating work to
 but in more complex security environments they become even more meaningless. In these cases  counting mundane elements such as tomatoes can be more beneficial than offenders neutralised.
@@ -384,3 +402,4 @@ Additionally a specific weakness of MO data and police incident logs is that the
 
    From \citep{brown_sturge} the definition of ASB is  Anti-social behaviour (ASB) encompasses criminal and nuisance behaviour that causes distress to others. Typical examples include: noisy neighbours, vandalism, graffiti, public drunkenness, littering, fly tipping and street drug dealing. 
 
+This work appears as published in Appendix C for reference. I declare that the research for this publication was solely my own work and that I am the lead author. The contribution of the other named authors, Alison Heppenstall and Linda See, were purely editorial and advisory.
