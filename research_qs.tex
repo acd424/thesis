@@ -15,7 +15,9 @@ With supporting objectives:
 
 \item Evaluate how effective Active learning is with police data.
 
-\item Review the key findings of the research studies and suggest which parts of the POP process might be best supported by the use of these techniques.
+\item Identify which parts of the POP process might be best supported by the use of PTMs.
+
+\item Identify implementation barriers for PTMs.
 
 \end{itemize}
 
@@ -54,83 +56,44 @@ The next two objectives will focus on the use of PTMs with two different text ty
 
 \subsection{Evaluate how effective PTMs are with police incident data.} Police MO data is not the only data that describes crimes. Another ubiquitous source of data is police incident logs. For this reason PTM effectiveness will also be judged against police incident logs. In particular police incident logs describing anti-social behaviour (ASB). Choosing another text type is important because different texts are formed in different ways and can use different language. These linguistic differences may mean that PTM effectiveness changes between text types.  
 
-\subsection{Evaluate how effective Active learning is with police data.}
+\subsection{Evaluate how effective Active Learning is with police data.} Using PTMs generally requires labelled data. Labelled data however requires resource to generate. Resource that would otherwise be applied to POP problem soling in other ways. One method that has been developed to reduce this resource requirement is Active Learning.  In keeping with lowering the burden on POP, Active Learning will be investigated to understand what kind of efficiencies can be achieved by adopting the technique.
 
-\subsection{Review the key findings of the research studies and suggest which parts of the POP process might be best supported by the use of these techniques.}
+\subsection{Suggest which parts of the POP process might be best supported by the use of these techniques.} The proceeding three supporting objectives will form the middle part of the thesis. This final supporting objective will review what has been learned in that middle part of the thesis and then suggest how the POP burden may be lowered. This analysis will be achieved using the SARA framework. The SARA framework is a xxx for implementing POP.
 
-Models are only useful if they produce a meaning simplification of the original data. The purpose of this question is to begin to explore if the models that have been built can extract useful information. That is it extends beyond the technical competence of the model and will try to understand the utility of the information provided. 
-
-As explored in Chapter 3, the analytical burden of POP to implement the SARA framework is high, and is frequently an impediment to the successful conduct of POP. Even though the problems solvers have the required data, they do not have the resources to process and analyse it to produce the right information. Lack of processing power is especially true when the data is contained in free text information. 
-
-Although the final of the three sub-questions in many ways this is the first to be considered. What information POP analysts and practitioners need will need to drive the design of the models, how the data is labelled and what is extracted. This question will certainly require interaction with those who need the information to both define the information required and secondly to adjudicate on the utility of the information extracted.
-
-Perhaps, as intimated by the lack of practical feedback within the literature survey in chapter 6, this will be difficult to quantify, but nevertheless it is essential to attempt to asses the final output. Links with police forces have been established and problems have been shared, principally these include how to utilise police Modus Operandi data to cluster similar crimes at a strategic level
-
-This question will be further split to understand how effective PTMs can be across  The MO data will be Burglary MOs. The second study, study 2, will investigate police incident logs from a single police force. This split and an additional investigation into the utility of active learnign as a labelling strategy will be discussed next before finally addressing how 
+\subsection{Identify implementation barriers for PTMs.} Introducing any new practice or software is likely to hit barriers. These barriers can stop a new practice being implemented if they are not identified and addressed. This  supporting objective will highlight the most important barriers, suggesting how they may be over come.
 
 
 
 
-
-
-
-
-\begin{itemize}
-
-\item Classification models only. Question  and Answering and information extraction will be more powerful and would be an obvious next step if the more basic models are successful.
-
-\item No model retraining. The research will seek to test existing models such as NER and POS taggers, where these models are found deficient it will be noted, but there will be no effort to retrain them.
-
-\item Single crime models. The models will be built for crime as it has been classified, models will not be built across crime classifications.
-
-\end{itemize}
-
-The experimental outline is focussed on whole NLP models. Sub elements will be judged on their abilities both as stand-alone elements, but also by how much they alter the end results of the whole model. This will allow a broad view of the expected benefit from fine tuning sub-elements.
-
-
-\section{How effective are established NLP models in analysing police generated modus operandi free text?}
-
-\subsection{Aim} Find the optimum set of state of the art models for analysing police free text data.
-
-
-\subsection{Discussion}
-
-This question relates to those tasks labeled 1 in Figure \ref{fig:questions}. As discussed in chapters 4 and 5 – there are a wide array of existing machine learning and natural language processing methods that can be applied to free text data. Extending on from the literature survey, in addressing this question I will investigate the applicability of a range of these methods and models to extract meaningful insights from police modus operandi notes. As an example as stated in chapter 5 there are a number of existing open source Part of Speech taggers, evaluating their performance on Police Free text data will highlight the most appropriate tagger to use. 
-
-In addition to existing NLP models I will also explore the accuracy of different machine learning model types. The appropriateness of machine learning models - will also need to consider the explainability of the model and how analysts may be able to interface with the model as well as the more traditional accuracy metrics. In this sense the research will  attempt to quantify the trade-off between accuracy and explainability that different models may offer.
-
-
-\subsection{Experimentation Outline}Many of the standard NLP tasks have existing solutions, and to some extent are considered solved tasks. For example for part of speech tagging there are a number of freely available models \parencite{toutanova2003feature} that have been pre-trained and are available for use. However as the data they used for training (Penn Treebank\footnote{\protect\url{https://catalog.ldc.upenn.edu/LDC2015T13}} )may differ from the Police MO data the models may not work as well as they have on other datasets. 
-
-Testing the appropriateness of these pre-trained models will be an important first step in building the NLP pipelines. Steps to be tested will included POS taggers, Named Entity Recognition, word disambiguation and word embeddings. Most of the NLP task experiments will based on a simple run of the existing model on the data, followed by a review of the results. As an example POS tagging will be run on a random selection of MO data, the tags will then be reviewed by a panel to adjudicate on the appropriateness of the tag or not.
-
-The second stage of appropriateness will be focussed on the Machine learning models. The main aim of this experiment, given the current research, will be to understand how well shallow models (Naive Bayse, decision trees etc) perform against deep learning models such as neural networks. This will then allow an informed decision on the explainability/accuracy trade-off. 
-
-Where possible these experiments will be replicated across data from different police forces and or crimes to understand the generalisability of the results, as shown in Figure \ref{fig:experiment}
-
-
-\section{What are the challenges associated with labelling modus operandi data for analyses by existing NLP methods, and how might they be overcome?  }
-
-\subsection{Aim} Explore the most efficient means of labelling police data sets for use with supervised models. 
-
-\subsection{Discussion}In order to utilise the more powerful machine learning techniques it is necessary to first label the data. As we have seen this can be a time consuming process, and if the labels or models are not generalisable then it can be necessary to repeat the process for each investigation into the data. By exploring different procedures for labelling the data the barrier to utilising the powerful analytical techniques can be reduced, making the application of these models in a practical setting more likely.  
-
-As demonstrated in chapter 4 there are a number of different labelling strategies that can be implemented. The focus for this research will  be to compare the effectiveness of rule based labelling against active learning. Rule based learning and active learning have been chosen because their strengths and weaknesses compliment each other. Active learning can be rapidly employed to different information extraction problems, however offers no portability of labelling effort over random labelling. Rules based learning which may take longer to initially set-up may have have greater portability between similar information extraction problems, and so may be more appropriate for analysts with many different but suitably similar tasks.
-
-
-\subsection{Experimentation Outline} Whichever labelling strategy is used, resources will be required to label the data, or produce rules to do so. This resource will need to be tightly managed as it will require external participants from the project and potentially subject matter expertise. This will impact the experimentation as the ability to run multiple labelling strategies across different sets of data will be limited. Thus there will be a tension between exploring active labelling, and understanding the portability of models across crimes and police forces. 
-
-
-\section{Which parts of the POP process might be best supported by the use of NLP techniques?}
-
-
-\subsection{Aim} Understand the utility of the information generated from Police Modus Operandi data to POP and where in the POP process the application of NLP models is best utilised.  
-
-
-\subsection{Discussion} 
-
-\subsection{Experimentation} Experimentation is likely to focus on two key areas. Firstly I will explore how NLP models can enhance the strategic scanning of problems.  Strategic scanning will help in the initial effort to identify problems at the force level. As mentioned in Chapter 3 identifying problems at a high level can be difficult because the particulars of a crime can be poorly understood at that level. Although there will be access to crime classification and accompanying meta-data, details of the crimes are either in free-text data and/or in the minds of the Officers dealing with the case, that is they are not readily accessible. By extracting information likely to characterise the crime these characteristics can be used as additional variables for which to either asses the sub-type of crime or increase specificity relating to the severity of the crime. This may allow a different strategic perspective to be taken to inform resource application. 
-
-Secondly I will investigate the application of NLP models in the assessment phase of POP. In particular for detecting an intra-crime change after an intervention or event. The crime classifications that the Police are directed to use are relatively wide and as seem by the previous research \parencite{kuang2017crime, birks2020unsupervised} have substantial intra-classification variation. This internal variation means that an intervention could have changed the mechanism or severity of criminal behaviour, without necessarily reducing the total number of incidents. A change may itself be a success for POP techniques if the harm is reduced, or of a process has been altered to a narrower set of crime generating mechanisms, thus making it more vulnerable to further action.
-
-
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[]
+\begin{tabular}{c c p{0.5\linewidth}}
+\toprule
+\rowcolor[HTML]{9B9B9B} 
+\multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}Data}  & \multicolumn{1}{c|}{\cellcolor[HTML]{9B9B9B}Study Focus}      & \multicolumn{1}{c}{\cellcolor[HTML]{9B9B9B}Task details}          \\ \midrule
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{3}{c}{\cellcolor[HTML]{C0C0C0}\textbf{Study 1a - Supporting Objective 2}}                                                                                                 \\
+\multicolumn{1}{l|}{}                              & \multicolumn{1}{l|}{}                                         & Classification - Is force used?                                   \\
+\multicolumn{1}{l|}{\multirow{-2}{*}{MO  (PF1)}}   & \multicolumn{1}{l|}{\multirow{-2}{*}{Information extraction}} & Classification - Is a car stolen?                                 \\ \midrule
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{3}{c}{\cellcolor[HTML]{C0C0C0}\textbf{Study 1b - Supporting Objective 4}}                                                                                                 \\
+\multicolumn{1}{l|}{MO  (PF1)}                     & \multicolumn{1}{l|}{Active Learning}                          & Comparison of model metrics - Active learning v random selection \\ \midrule
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{3}{c}{\cellcolor[HTML]{C0C0C0}\textbf{Study 1c - Supporting Objective 2}}                                                                                                 \\
+\multicolumn{1}{l|}{}                              & \multicolumn{1}{l|}{}                                         & Classification - Is force used?                                   \\
+\multicolumn{1}{l|}{}                              & \multicolumn{1}{l|}{}                                         & Classification - Is a car stolen?                                 \\
+\multicolumn{1}{l|}{}                              & \multicolumn{1}{l|}{\multirow{-3}{*}{Information extraction}} & Classification - Outbuilding only?                                \\ \cmidrule(l){2-3} 
+\multicolumn{1}{l|}{}                              & \multicolumn{1}{l|}{}                                         & Comparison of model metrics - Over time                        \\
+\multicolumn{1}{l|}{\multirow{-5}{*}{MO  (PF2)}}   & \multicolumn{1}{l|}{\multirow{-2}{*}{Transfer learning}}      & Comparison  of model metrics - Across police forces             \\ \midrule
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{3}{c}{\cellcolor[HTML]{C0C0C0}\textbf{Study 2 - Supporting Objective 3}}                                                                                                  \\
+\multicolumn{1}{l|}{}                              & \multicolumn{1}{l|}{}                                         & Classification  - Traditional ASB                                 \\
+\multicolumn{1}{l|}{}                              & \multicolumn{1}{l|}{}                                         & Classification  - Covid complaint                                 \\
+\multicolumn{1}{l|}{\multirow{-3}{*}{Logs  (PF2)}} & \multicolumn{1}{l|}{\multirow{-3}{*}{Information extraction}} & Classification  - Group present                                   \\ \midrule
+\end{tabular}
+\caption{\label{tab:study} Study focus and objectives. This table breaks down what the focus of each study within this thesis are and what data is used.}
+\end{table}
