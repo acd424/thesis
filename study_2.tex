@@ -62,7 +62,7 @@ The remainder of this chapter will follow the same format as the earlier studies
 
 \section{Data}
 
-The data used for this study consisted of police ASB incident logs from Lancashire Police for the year 2020,  93,809 logs. Incident logs were only included if the final classification of that log was ASB. A detailed description of the ASB data was given in the data chapter, Chapter 8.  However as a recap there are three main differences between the MO data used in the earlier studies and the incident log data analysed here. The first difference is length, the incident logs are much longer than the MO data. The median word count for the MO data was 31 and for the ASB logs the median count is 166. Secondly the police incident logs are also generated in a different manner to the MO data, they are an on going log of what is happening in that incident. The logs are rarely edited, rather they are generated as the incident unfolds by the operator in the the control room.  Incident logs are intended for internal use only, whereas MO data is generally written post hoc by a police officer for external use - so names of suspects or other personal data are not routinely used. Thirdly although the same whitelisting process was used for both text types, the process was tailored to the redaction of the MO data and not the ASB logs. Coupled with a different generation process this means that a higher proportion of words were redacted in the ASB log data (8\%) than the MO data (2\%), meaning that close to one in every 12 words was redacted.
+The data used for this study consisted of police ASB incident logs from PF2 Police for the year 2020,  93,809 logs. Incident logs were only included if the final classification of that log was ASB. A detailed description of the ASB data was given in the data chapter, Chapter 8.  However as a recap there are three main differences between the MO data used in the earlier studies and the incident log data analysed here. The first difference is length, the incident logs are much longer than the MO data. The median word count for the MO data was 31 and for the ASB logs the median count is 166. Secondly the police incident logs are also generated in a different manner to the MO data, they are an on going log of what is happening in that incident. The logs are rarely edited, rather they are generated as the incident unfolds by the operator in the the control room.  Incident logs are intended for internal use only, whereas MO data is generally written post hoc by a police officer for external use - so names of suspects or other personal data are not routinely used. Thirdly although the same whitelisting process was used for both text types, the process was tailored to the redaction of the MO data and not the ASB logs. Coupled with a different generation process this means that a higher proportion of words were redacted in the ASB log data (8\%) than the MO data (2\%), meaning that close to one in every 12 words was redacted.
 
 \section{Method}
 
@@ -138,6 +138,32 @@ The third word cloud relates to the Group classification. This word cloud is at 
 
 
 
+\begin{table}[]
+\centering
+\begin{tabular}{@{}llccc@{}}
+\toprule
+\rowcolor[HTML]{BFBFBF} 
+\multicolumn{5}{c}{\cellcolor[HTML]{BFBFBF}Equality Of Outcome}                                                                             \\ \midrule
+
+\multicolumn{1}{c}{Model} & \multicolumn{1}{c}{Partition} & Test Set & CV Mean & CV p value \\ \midrule
+Traditional ASB                                   & Electronic                                            & -0.128   & -0.067  & 0.005*      \\
+Traditional ASB                                   & Telephone                                             & 0.103    & 0.060   & 0.003*      \\
+Covid complaint                                   & Electronic                                            & 0.264    & 0.190   & 0.002*      \\
+Covid Complaint                                   & Telephone                                             & -0.264   & -0.175  & 0.002*      \\
+Group                                        & Electronic                                            & -0.023   & 0.039   & 0.007*      \\
+Group                                         & Telephone                                             & 0.018    & -0.037  & 0.006*      \\ \midrule
+\multicolumn{5}{c}{\cellcolor[HTML]{BFBFBF}Predictive Parity}                                                                                                       \\ \midrule
+
+\multicolumn{1}{c}{Model} & \multicolumn{1}{c}{Partition} & Test Set & CV Mean & CV p value \\ \midrule
+Traditional ASB                                   & Electronic                                            & -0.007   & -0.151  & 0.002*      \\
+Traditional ASB                                   & Telephone                                             & 0.000    & 0.139   & 0.002*      \\
+Covid complaint                                   & Electronic                                            & 0.435    & 0.166   & 0.003*      \\
+Covid Complaint                                   & Telephone                                             & -0.375   & -0.160  & 0.008*      \\
+Group                                         & Electronic                                            & 0.049    & 0.014   & 0.610      \\
+Group                                         & Telephone                                             & -0.004   & -0.009  & 0.754      \\ \bottomrule
+\end{tabular}
+\caption{\label{tab:asb_bias} Extrinsic bias metrics for the PF2 ASB models. The model is denoted by the classification task. The partition is the factor used to split the data. The test set metric is calculated from the original test set. CV refers to cross validation. \emph{CV mean} is the mean of metrics from the 10 fold cross validation experiment. \emph{CV p value} is the p value for the hypothesis that the CV mean value is not zero. * indicates a p value that is significant.}
+\end{table}
 
 \section{Discussion} This section discusses the results that have just been presented, particularly with reference to the earlier studies exploring the MO data.  There is consistency between the findings with this study, investigating the use of PTMs with police incident data and the earlier studies with PTMs and MO data. However there are some important differences that will now be explored.
 
