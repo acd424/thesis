@@ -40,7 +40,7 @@ Example Text                                                                    
 an email request has been made . default email notification has been made to xxxxx . com . email received xxxxx xxxxx 22/10/2020 22 xxxxx 12 incident relates to xxxxx group time of incident xxxxx 22 xxxxx 05 date of incident xxxxx additional information xxxxx i believe my neighbours are currently having a party with people outside of their household . i also believe that they have done this a few times recently . location address xxxxx flat xxxx , the village , xxxx xxxxx road , xxxxx xxxxx name of persons involved if known xxxxx is the subject displaying any covid 19 symptoms xxxxx unknown & N               & Y                                                          & Y     \\
 - INFORMANT reporting there are 6 young men on motorbikes on the xxxxx way , riding round - INFORMANT said he cant see regs and DOESN'T want to get up close to them , - INFORMANT said they are right to the xxxxx way - xxxxx to covid-19 this is low asb and                                                                                                                                                                                                                                                                                                                                                       & Y               & N                                                          & Y     \\ \hline
 \end{tabular}
-\caption{\label{tab:class_example} Examples of ASB incident logs and the labelled classifications}
+\caption[ASB Incident Log Examples]{\label{tab:class_example} Examples of ASB incident logs and the labelled classifications}
 \end{table}
 
 \subsection{Article Conclusion}
@@ -99,7 +99,7 @@ Run      & Trad ASB & Covid & Groups \\ \midrule
 Mean     & 0.636    & 0.597 & 0.795  \\
 Best Run & 0.71     & 0.81  & 0.83   \\ \bottomrule
 \end{tabular}
-    \caption{{Table of ASB model metrics} MCC scores for the three ASB classification problems. Each model was trained 10 times with the same data.}
+    \caption[Table of ASB model metrics]{{Table of ASB model metrics} MCC scores for the three ASB classification problems. Each model was trained 10 times with the same data.}
     \label{tab: asb_metrics}
 \end{table}
 
@@ -109,7 +109,7 @@ The word cloud for the traditional ASB classification is at Figure \ref{fig:word
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{images/trad_asb_wordcloud_100.png}
-    \caption{{Word cloud for traditional ASB classification.} The top 100 words that contributed to a positive classification of traditional ASB}
+    \caption[Word cloud for traditional ASB classification.]{{Word cloud for traditional ASB classification.} The top 100 words that contributed to a positive classification of traditional ASB}
     \label{fig: wordcloud_trad}
 \end{figure}
 
@@ -119,7 +119,7 @@ Figure \ref{fig: wordcloud_covid} is the word cloud for the classification of Co
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{images/covid_wordcloud_100.png}
-    \caption{{Word cloud for Covid ASB classification}Words that contributed to a positive classification}
+    \caption[Word cloud for Covid ASB classification]{{Word cloud for Covid ASB classification}Words that contributed to a positive classification}
     \label{fig: wordcloud_covid}
 \end{figure}
 
@@ -128,7 +128,7 @@ The third word cloud relates to the Group classification. This word cloud is at 
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{images/gather_wordcloud_100.png}
-    \caption{{Wordcloud for group ASB classification.} Words that contributed to a positive classification}
+    \caption[Wordcloud for group ASB classification.]{{Wordcloud for group ASB classification.} Words that contributed to a positive classification}
     \label{fig: wordcloud_gather}
 \end{figure}
    
@@ -162,7 +162,7 @@ Covid Complaint                                   & Telephone                   
 Group                                         & Electronic                                            & 0.049    & 0.014   & 0.610      \\
 Group                                         & Telephone                                             & -0.004   & -0.009  & 0.754      \\ \bottomrule
 \end{tabular}
-\caption{\label{tab:asb_bias} Extrinsic bias metrics for the PF2 ASB models. The model is denoted by the classification task. The partition is the factor used to split the data. The test set metric is calculated from the original test set. CV refers to cross validation. \emph{CV mean} is the mean of metrics from the 10 fold cross validation experiment. \emph{CV p value} is the p value for the hypothesis that the CV mean value is not zero. * indicates a p value that is significant.}
+\caption[ASB incident logs Bias Table]{\label{tab:asb_bias} Extrinsic bias metrics for the PF2 ASB models. The model is denoted by the classification task. The partition is the factor used to split the data. The test set metric is calculated from the original test set. CV refers to cross validation. \emph{CV mean} is the mean of metrics from the 10 fold cross validation experiment. \emph{CV p value} is the p value for the hypothesis that the CV mean value is not zero. * indicates a p value that is significant.}
 \end{table}
 
 \section{Discussion} This section discusses the results that have just been presented, particularly with reference to the earlier studies exploring the MO data.  There is consistency between the findings with this study, investigating the use of PTMs with police incident data and the earlier studies with PTMs and MO data. However there are some important differences that will now be explored.

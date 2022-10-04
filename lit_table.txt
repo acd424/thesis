@@ -1,7 +1,7 @@
 
 {\tiny
 \begin{landscape}
-\begin{longtable}{p{2cm}p{4cm}p{4cm}p{3cm}p{3cm}p{3cm}}
+\begin{longtable}{p{0.15\textwidth}p{0.15\textwidth}p{0.20\textwidth}p{0.15\textwidth}p{0.15\textwidth}p{0.05\textwidth}}
 \caption{\large Literature Survey Results.}\\
 
 Authors &

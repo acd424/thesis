@@ -36,7 +36,7 @@ Figure \ref{fig:active_process} depicts the general process for the active learn
 \begin{figure}[!h]
   \centering
     \includegraphics[width=\linewidth]{images/Slide1.jpeg}
-    \caption{Active Learning Process. Start by randomly selecting data and labelling. Step 1 and 2 randomly label Test and Validations sets. Step 3 uses randomly labelled data to train a model and to classify all unlabelled data. The texts with the most uncertain scores are then labelled and added to the train set to further fine-tune the model.Data is iteratively added to the data set until the model has satisfactory performance.}
+    \caption[Active Learning Process.]{Active Learning Process. Start by randomly selecting \emph{n} data and labelling. Steps 1 and 2 randomly label Test and Validations sets. Step 3 uses randomly labelled data to train a model and to classify all unlabelled data. The texts with the most uncertain scores are then labelled and added to the train set to further fine-tune the model.Data is iteratively added to the data set until the model has satisfactory performance.}
     \label{fig:active_process}
 \end{figure}
 
@@ -122,7 +122,7 @@ Where: TP = True Positive, TN = True Negative, FP = False Positive and FN = Fals
 \begin{figure}[!tbp]
   \centering
     \includegraphics[width=\textwidth]{images/Slide2.png}
-    \caption{{Toy LIME example.} The bold red cross is the original unmodified instance ( original text) , smaller red crosses are the modified instances (texts with a word removed). The resulting black line is from the regression and is the learned explanation that is locally faithful i.e built on a single text. The true complex decision boundary is represented by the pink/blue background and is true globally. Reproduced from \parencite{ribeiro2016should} }
+    \caption[Toy LIME example.]{ Toy LIME example. The bold red cross is the original unmodified instance ( original text) , smaller red crosses are the modified instances (texts with a word removed). The resulting black line is from the regression and is the learned explanation that is locally faithful i.e built on a single text. The true complex decision boundary is represented by the pink/blue background and is true globally, although generally unknown. Reproduced from \parencite{ribeiro2016should} }
     \label{fig:LIME}
 \end{figure}
 

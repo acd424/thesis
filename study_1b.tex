@@ -10,7 +10,7 @@ The hypothesis for this study is that active learning will reduce the amount of 
 \begin{figure}[!tbp]
   \centering
     \includegraphics[width=\textwidth]{images/Slide1.jpeg}
-    \caption{Active Learning Process. Step 1 and 2 randomly label Test and Validations sets. Steps greater than two use initially randomly labelled data to iteratively train a model and then select labels based on model predictions.}
+    \caption[Active Learning Process.]{Active Learning Process. Step 1 and 2 randomly label Test and Validations sets. Steps greater than two use initially randomly labelled data to iteratively train a model and then select labels based on model predictions.}
     \label{fig:active_process}
 \end{figure}
 
@@ -52,7 +52,7 @@ Panel (b) plots the proportion of data with a positive classification for one mo
 \begin{figure}[!ht]
   \centering
     \includegraphics[width=\textwidth]{images/car_plots_active.png}
-    \caption{{Active labelling - Motor vehicle model.} Plots showing the proportion of positively labelled MO notes for a burglary where there was also the theft of a motor vehicle. The labelled index (x-axis) indicates the order in which the data was selected and labelled. Panel a is for active learning based on motor vehicle model probabilities. Panel b is for selection using probabilities based upon the force models.}
+    \caption[Active labelling - Motor vehicle model. ]{{Active labelling - Motor vehicle model.} Plots showing the proportion of positively labelled MO notes for a burglary where there was also the theft of a motor vehicle. The labelled index (x-axis) indicates the order in which the data was selected and labelled. Panel a is for active learning based on motor vehicle model probabilities. Panel b is for selection using probabilities based upon the force models.}
     \label{fig:active_car}
 \end{figure}
 
@@ -66,7 +66,7 @@ The result from these two plots and the investigation of the selection overlap, 
 \begin{figure}[!ht]
   \centering
     \includegraphics[width=\textwidth]{images/force_plots_active.png}
-    \caption{{Active labelling - Force model.} Plots showing the proportion of positively labelled MO notes for a burglary where Force was reported as being used. The labelled index (x-axis) indicates the order in which the data was selected and labelled. Panel (a) is for active learning based on Force model probabilities. Panel (b) is for selection using probabilities based upon the motor vehicle models.}
+    \caption[Active labelling - Force model.]{{Active labelling - Force model.} Plots showing the proportion of positively labelled MO notes for a burglary where Force was reported as being used. The labelled index (x-axis) indicates the order in which the data was selected and labelled. Panel (a) is for active learning based on Force model probabilities. Panel (b) is for selection using probabilities based upon the motor vehicle models.}
     \label{fig:active_force}
 \end{figure}
 
@@ -88,7 +88,7 @@ The result from these two plots and the investigation of the selection overlap, 
 Batch  & 1 & 2    & 3 & 4    & 5    & 6    & 7    & \multicolumn{1}{l}{8} & \multicolumn{1}{l}{9} & \multicolumn{1}{l}{Force (7)} \\ \midrule
 MCC    & 0 & 0.38 & 0 & 0.66 & 0.78 & 0.86 & 0.88 & 0.85                  & 0.91                  & 0.80                             \\ \midrule
 \end{tabular}
-\caption{\label{tab:active_results_car} MCC metrics for the motor vehicle model with the data selected through active learning. Each entry is the MCC metric after that batch. The final column refers to data that was selected using the alternative model (force model), the number seven in brackets refers to that data being the seventh batch and for most similar comparisons should be compared to the seventh active learning batch}
+\caption[MCC metrics. PF1 data. Car stolen model]{\label{tab:active_results_car} MCC metrics for the motor vehicle model with the data selected through active learning. Each entry is the MCC metric after that batch. The final column refers to data that was selected using the alternative model (force model), the number seven in brackets refers to that data being the seventh batch and for most similar comparisons should be compared to the seventh active learning batch}
 \end{table}
 
 \begin{table}[]
@@ -98,7 +98,7 @@ MCC    & 0 & 0.38 & 0 & 0.66 & 0.78 & 0.86 & 0.88 & 0.85                  & 0.91
 Batch    & \multicolumn{1}{c}{1} & \multicolumn{1}{c}{2} & \multicolumn{1}{c}{3} & \multicolumn{1}{c}{4} & \multicolumn{1}{c}{5} & \multicolumn{1}{c}{6} & \multicolumn{1}{c}{7} & \multicolumn{1}{c}{Motor (7)} \\ \midrule
 MCC    & 0.52                  & 0.70                  & 0.82                  & 0.55                  & 0.83                  & 0.91                  & 0.92   & 0.89                \\ \bottomrule
 \end{tabular}
-\caption{\label{tab:active_results_force} MCC metrics for the force model with the data selected through active learning. The final column refers to data that was selected using the alternative model (motor vehicle), the number seven in brackets refers to that data being the seventh batch and for most similar comparisons should be compared to the seventh  active learning batch}
+\caption[MCC metrics. PF1 data. force used model]{\label{tab:active_results_force} MCC metrics for the force model with the data selected through active learning. The final column refers to data that was selected using the alternative model (motor vehicle), the number seven in brackets refers to that data being the seventh batch and for most similar comparisons should be compared to the seventh  active learning batch}
 \end{table}
 
 

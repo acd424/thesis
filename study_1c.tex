@@ -50,7 +50,7 @@ The comparison to a basic keyword model was not conducted.
 \begin{figure}[!tbp]
   \centering
     \includegraphics[width=\textwidth]{images/mcc_burg_lancs.png}
-    \caption{{MCC scores for the Lancashire burglary models.} MCC scores are shown after each iteration of the active learning strategy. The Force and Outbuilding models peak relatively early on at batch 5 and 6. Whereas the motor vehicle model peaks at 11. Some of the variation will be attributable to the random initialisation of the models.}
+    \caption[MCC scores for the Lancashire burglary models.]{{MCC scores for the Lancashire burglary models.} MCC scores are shown after each iteration of the active learning strategy. The Force and Outbuilding models peak relatively early on at batch 5 and 6. Whereas the motor vehicle model peaks at 11. Some of the variation will be attributable to the random initialisation of the models.}
     \label{fig:mcc_burg_lancs}
 \end{figure}
 
@@ -76,7 +76,7 @@ Motor vehicle         & 0.75 & 0.72 & 0.88 & 0.86 & 0.82 & 0.75 & 0.82 & 0.72 \\
 Force       & 0.88 & 0.92 & 0.92 & 0.9  & 0.92 & 0.91 & 0.93 & 0.91 \\
 Outbuilding & 0.85 & 0.86 & 0.85 & 0.84 & 0.86 & 0.84 & 0.85 & 0.86 \\ \bottomrule
 \end{tabular}
-\caption{\label{tab:results_1c}MCC values (based on the validation set) for models fine-tuned on Lancashire Burglary data. Batch refers to the active learning batch e.g. after 5 batches of labelling (500 MO texts) the motor vehicle model had an MCC of 0.56 }
+\caption[Batch metrics - PF2 data. All models]{\label{tab:results_1c}MCC values (based on the validation set) for models fine-tuned on Lancashire Burglary data. Batch refers to the active learning batch e.g. after 5 batches of labelling (500 MO texts) the motor vehicle model had an MCC of 0.56 }
 \end{table}
 
 
@@ -100,7 +100,7 @@ Run      & 18/19           & 20/21          & 18/19       & 20/21       & 18/19 
 Mean     & 0.98            & 0.90           & 0.93        & 0.94        & 0.90           & 0.94           \\\midrule
 Best Run & 1.00            & 0.93           & 0.94        & 0.96        & 0.92           & 0.96           \\ \bottomrule
 \end{tabular}
-\caption{\label{tab:lancs_mcc}MCC values (based on the test sets) for models fine-tuned on Lancashire Burglary data. Scores are generated from 10 separate fine-tunes based on all labelled data. 18/19 refers to the test set from only the years 2018 and 2019, similarly 20/21 refers to the years 2020 and 2021.}
+\caption[Final model MCC metrics. PF2 data. All models.]{\label{tab:lancs_mcc}MCC values (based on the test sets) for models fine-tuned on Lancashire Burglary data. Scores are generated from 10 separate fine-tunes based on all labelled data. 18/19 refers to the test set from only the years 2018 and 2019, similarly 20/21 refers to the years 2020 and 2021.}
 \end{table}
 
 
@@ -123,7 +123,7 @@ Best Run & 1.00            & 0.93           & 0.94        & 0.96        & 0.92  
          \caption{Words that contributed to a negative classification}
          \label{fig: wordcloud_mv_rev_lancs}
      \end{subfigure}
-        \caption{{Wordclouds from  \textbf{motor-vehicle} classification model. Lancashire data.} These wordclouds were generated using a fine-tuned BERT model on the Lancashire data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
+        \caption[Wordclouds from  \textbf{motor-vehicle} classification model. Lancashire data.]{{Wordclouds from  \textbf{motor-vehicle} classification model. Lancashire data.} These wordclouds were generated using a fine-tuned BERT model on the Lancashire data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
         \label{fig:wordcloud_mv_both_lancs}
         
 \end{figure}
@@ -144,7 +144,7 @@ Best Run & 1.00            & 0.93           & 0.94        & 0.96        & 0.92  
          \caption{Words that contributed to a negative classification}
          \label{fig: wordcloud_force_rev_lancs}
      \end{subfigure}
-        \caption{{Wordclouds from  \textbf{force} classification model. Lancashire data.} These wordclouds were generated using a fine-tuned BERT model on the Lancashire data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
+        \caption[Wordclouds from  \textbf{force} classification model. Lancashire data.]{{Wordclouds from  \textbf{force} classification model. Lancashire data.} These wordclouds were generated using a fine-tuned BERT model on the Lancashire data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
         \label{fig:wordcloud_force_both_lancs}
         
 \end{figure}
@@ -167,7 +167,7 @@ Best Run & 1.00            & 0.93           & 0.94        & 0.96        & 0.92  
          \caption{Words that contributed to a negative classification}
          \label{fig: wordcloud_home_rev_lancs}
      \end{subfigure}
-        \caption{{Wordclouds from  \textbf{outbuilding} classification model. Lancashire data.} These wordclouds were generated using a fine-tuned BERT model on the Lancashire data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
+        \caption[Wordclouds from  \textbf{outbuilding} classification model. Lancashire data.]{{Wordclouds from  \textbf{outbuilding} classification model. Lancashire data.} These wordclouds were generated using a fine-tuned BERT model on the Lancashire data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
         \label{fig:wordcloud_home_both_lancs}
         
 \end{figure}
@@ -200,13 +200,13 @@ When reviewing the results of the model built from the active learning data we s
 \begin{table}[]
 \begin{tabular}{@{}llcc@{}}
 \toprule
-\multicolumn{1}{c}{Test Set} & \multicolumn{1}{c}{Model} & Leeds Model Lancs Data & Lancs Model Lancs Data \\ \midrule
+\multicolumn{1}{c}{Test Set} & \multicolumn{1}{c}{Model} & PF2 Model PF1 Data & PF1 Model PF1 Data \\ \midrule
 18/19                        & Motor vehicle             & 0.93                   & 0.98                   \\
 20/21                        & Motor vehicle             & 0.80                   & 0.90                   \\
 18/19                        & Force                     & 0.91  & 0.93  \\
 20/21                        & Force                     & 0.90  & 0.94 \\ \bottomrule
 \end{tabular}
-\caption{\label{tab:results_transfer} MCC scores for the use of models built with SaferLeeds data and used to classify Lancashire data. Lancashire metrics included for comparison. }
+\caption[Model metrics. Models tested on alternate police force.]{\label{tab:results_transfer} MCC scores for the use of models built with SaferLeeds data and used to classify PF2 data. Lancashire metrics included for comparison. }
 \end{table}
 
 \subsection{Performance over time} Test sets were built for 2018/19 and 2020/21, even though the training data only came from 2018/19. This allowed a view of how the models would fare overtime. The results in Table \ref{tab:lancs_mcc} show the results of the 10 model initialisation using the active learning data to fine-tune the PTM, the mean result of the ten initialisations is reported here. For the motor-vehicle model there is a sizeable drop in performance from a 0.98 to 0.90. For the force model there is an increase, but it is very small from 0.93 to 0.94 (also not the the 20/21 test set has a higher top scoring run than the 18/19 set). The outbuilding model also increase this time by a larger amount going from 0.90 to 0.94.
@@ -242,7 +242,6 @@ However there is no evidence to suggest that, despite a general decline in burgl
 These studies have shown that PTM can be effective with MO text data, across a number of different classification problems. However MO texts are the only text that police forces have. Another style of text are police incident logs, that encompass crime and non-crime data. The next study will take forward the success from this chapter and use PTMs to classify Anti-social behaviour incident logs.
 
 
-\chapter{Applied Insights from Study 1}
 
 
 

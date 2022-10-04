@@ -38,7 +38,7 @@ The data was split into three sets as previously mentioned. The test set was 200
 MO 1 “Attacked property is mid town house with driveway to the front along with gardens to both front and rear located within a residential area. At time stated person/s unknown go to front door and open letter box and using unknown instrument hook door key from a shelf in the porch. Use same keys to open front door and gain entry remove two sets of car keys from the porch area. Go to a XXXX parked on the drive gain access using keys. Make off at speed with both vehicles direction of travel towsrds XXXX having been disturbed by the occupant.”             \\ \midrule
 MO 2 “Attacked property is a large detached dwelling on a busy road. Property is surrounded by large fences, gates and bushes. Between times stated suspect approach rear patio doors at locus and attempt to gain entry by using mole grip type implement to snap lock. Lock snapped however unable to gain entry. Suspects then use molegrip type implement to snap lock on front porch door. Lock snapped, door opened and house alarm sounds. Suspects jump over wall at front of dwelling, get into vehicle parked opposite and make off down XXXXX in direction of XXXXX.” \\ \bottomrule
 \end{tabular}
-\caption{\label{tab:MOexample} An example of MO texts from SaferLeeds Burglary data. Reproduced from \cite{birks}.}
+\caption[Example MO texts]{\label{tab:MOexample} An example of MO texts from PF1 Burglary data. Reproduced from \cite{birks}.}
 \end{table}
 
 
@@ -96,7 +96,7 @@ chevrolet    & jaguar         & motor       & subaru      &            \\ \hline
 chrysler     & jeep           & motorbike   & suzuki      &            \\ \hline
 cireon       & kia            & motorcycle  & tesla       &            \\ \hline
 \end{tabular}
-\caption{\label{tab:Keywords} A list of keywords used to populate the  keyword model for car stolen.}
+\caption[Keywords for keyword model - motor vehicle stolen]{\label{tab:Keywords} A list of keywords used to populate the  keyword model for motor vehicle stolen.}
 \end{table}
 
 
@@ -109,7 +109,7 @@ smash  & prized & jemm    & forc      \\ \hline
 kick   & break  & attack  & damage    \\ \hline
 broken & snap   & removed & shattered \\ \hline
 \end{tabular}
-\caption{\label{tab:Keywords_force} A list of keywords used to populate the keyword model for force used.}
+\caption[Keywords for keyword model - force used]{\label{tab:Keywords_force} A list of keywords used to populate the keyword model for force used.}
 \end{table}
 
 
@@ -143,7 +143,7 @@ BERT (Validation)        & 0.94                & 0.85           & 0.94          
 BERT (Test)              & 0.94                & 0.97           &0.94           & 0.86         \\
 BERT (Train)             & NA               & NA             & NA           & NA         \\ \bottomrule
 \end{tabular}
-\caption{\label{tab:results_study_1} Selected metrics from Study 1a results. These results are generated only from the MO text that was labeled within the active learning strategy for that model.}
+\caption[Model metrics. PF1 data. Force used and motor vehicle model.]{\label{tab:results_study_1} Selected metrics from Study 1a results. These results are generated only from the MO text that was labeled within the active learning strategy for that model.}
 \end{table}
 
 
@@ -156,7 +156,7 @@ BERT (Train)             & NA               & NA             & NA           & NA
 \begin{table}[]
 \begin{tabular}{@{}ccccc@{}}
 \toprule
-\multicolumn{1}{l}{} & \multicolumn{2}{c}{Force Model}       & \multicolumn{2}{c}{Car model} \\\midrule
+\multicolumn{1}{l}{} & \multicolumn{2}{c}{Force Model}       & \multicolumn{2}{c}{Motor vehicle model} \\\midrule
 Run                  & MCC               & Recall            & MCC                & Recall   \\\midrule
 1                    & 0.97              & 0.99              & 0.97               & 1.0        \\
 2                    & 0.92              & 0.96              & 1.0                  & 1.0        \\
@@ -171,7 +171,7 @@ Run                  & MCC               & Recall            & MCC              
 Mean(CI)             & 0.908 (0.89-0.92) & 0.948 (0.94-0.96) & 0.973 (0.97-0.98)  & 1.0 (1.0-1.0)  \\\midrule
 Best Run             & 0.97              & 0.99              & 1.0                  & 1.0        \\ \bottomrule
 \end{tabular}
-\caption{\label{tab:final-model} Each run represents the fine-tuning of a single model using all the labelled data. Each run is independent. Results are different between runs as there are random aspects to fine-tuning that can alter the end result. }
+\caption[Model metrics. PF1 data. Force used and motor vehicle stolen models]{\label{tab:final-model} Each run represents the fine-tuning of a single model using all the labelled data. Each run is independent. Results are different between runs as there are random aspects to fine-tuning that can alter the end result. }
 \end{table}
 
 \subsection{Explainability} LIME was used to interrogate the PTMs to understand which words were having the greatest effect on the classifications. Figure \ref{fig:lime_out1} is an example of the LIME output for a single MO text, only the ten most influential words are highlighted.  The prediction was for a burglary with a motor vehicle theft. The words highlighted in orange contributed the most to that classification. The words highlighted in blue counted against that classification. In this case the most important top three words for the classification decision were all \say{Vehicle}. 
@@ -179,7 +179,7 @@ Best Run             & 0.97              & 0.99              & 1.0              
 \begin{figure}[!tbp]
   \centering
     \includegraphics[width=\textwidth]{images/lime_pred_output.png}
-    \caption{{Lime Output for a single MO text for the Motor vehicle theft during a burglary model.} The model correctly predicts that a vehicle was stolen. The model was ran 100 times and on each occasion ten words were masked. The output shows the ten most important words for influencing the prediction. Words highlighted with orange contributed to the positive prediction.}
+    \caption[Lime Output for a single MO text for the Motor vehicle theft during a burglary model.]{ Lime Output for a single MO text for the Motor vehicle theft during a burglary model. The model correctly predicts that a vehicle was stolen. The model was ran 100 times and on each occasion ten words were masked. The output shows the ten most important words for influencing the prediction. Words highlighted with orange contributed to the positive prediction.}
     \label{fig:lime_out1}
 \end{figure}
 
@@ -203,7 +203,7 @@ Although the single LIME output gives a good visual representation of how the mo
          \caption{Words that contributed to a negative classification}
          \label{fig: wordcloud_mv_rev}
      \end{subfigure}
-        \caption{{Wordclouds from  \textbf{motor-vehicle} classification model. Saferleeds data.} These wordclouds were generated using a fine-tuned BERT model on the Saferleeds data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
+        \caption[Wordclouds from  \textbf{motor-vehicle} classification model. Saferleeds data.]{Wordclouds from  \textbf{motor-vehicle} classification model. Saferleeds data. These wordclouds were generated using a fine-tuned BERT model on the Saferleeds data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
         \label{fig:wordcloud_mv_both}
         
 \end{figure}
@@ -224,7 +224,7 @@ Although the single LIME output gives a good visual representation of how the mo
          \caption{Words that contributed to a negative classification}
          \label{fig: wordcloud_mv_force}
      \end{subfigure}
-        \caption{{Wordclouds from \textbf{force} classification model. Saferleeds data.} These wordclouds were generated using a fine-tuned BERT model on the Saferleeds data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
+        \caption[Wordclouds from \textbf{force} classification model. Saferleeds data.]{{Wordclouds from \textbf{force} classification model. Saferleeds data.} These wordclouds were generated using a fine-tuned BERT model on the Saferleeds data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
         \label{fig:wordcloud_mv_both}
         
 \end{figure}
@@ -241,7 +241,7 @@ Number of Word pieces          & 0.007 (0.060 to -0.085) & 0.001 (0.065 to -0.06
 Ratio MO Length to Word pieces & 0.066 (0.141 to -0.042) & -0.004 (0.089 to -0.069) \\ \bottomrule
 \end{tabular}
 
-\caption{\label{tab:saferleeds_bias} This table gives the mean Pearson correlation coefficients between the probability of classification from the NLP model and the metrics listed in the first column.  The value in the table is the mean of the ten Pearson coefficients. Figures in bracket are the range.}
+\caption[PF1 data - bias results]{\label{tab:saferleeds_bias} This table gives the mean Pearson correlation coefficients between the probability of classification from the NLP model and the metrics listed in the first column.  The value in the table is the mean of the ten Pearson coefficients. Figures in bracket are the range.}
 \end{table}
 
 
@@ -278,7 +278,7 @@ The question of sufficiently explainable is unlikely to be settled in this thesi
 \subsection{Limitations} General limitations will be discussed in the final part of the the thesis, this section is limitations specific to this study. In general the are two main limitations. Firstly is the number of classification tasks and secondly is the bias investigation.
 
 \begin{itemize}
-    \item Classification Tasks. Only two classifications tasks were selected, and both of these tasks were related to burglary. Although both tasks encompassed different problem types, balanced and unbalanced classes and produced good results, their generalisability to all crime types is limiting, as is there applicability to other classification tasks. However this does illustrate that there are problems where PTMs can be useful for MO text classification.
+    \item Classification Tasks. Only two classifications tasks were selected, and both of these tasks were related to burglary. Although both tasks encompassed different problem types, balanced and unbalanced classes and produced good results, their generalisability to all crime types is limiting, as is their applicability to other classification tasks. However this does illustrate that there are problems where PTMs can be useful for MO text classification.
     
     \item Bias. The bias investigation was severely limited due to a lack of victim data within the data set. However the next part of the study with the Lancashire data is likely to make up for these short comings as it has victim data from which to asses bias in the classifications. 
     
