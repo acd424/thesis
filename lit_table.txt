@@ -1,7 +1,7 @@
 
 {\tiny
 \begin{landscape}
-\begin{longtable}{p{0.15\textwidth}p{0.15\textwidth}p{0.20\textwidth}p{0.15\textwidth}p{0.15\textwidth}p{0.05\textwidth}}
+\begin{longtable}{p{0.15\textwidth}p{0.15\textwidth}p{0.3\textwidth}p{0.15\textwidth}p{0.15\textwidth}p{0.3\textwidth}}
 \caption{\large Literature Survey Results.}\\
 
 Authors &
@@ -17,7 +17,7 @@ Authors &
   Crimes from a single crime category, burglary, were analysed using Latent Dirichlet Allocation. Clusters were based on topic coherence. The clusters were then utilised to build a dashboard for analysts to geographically depict the distribution of the crime topics. &
   Number of clusters was based on maximising topic coherence score. &
   Dashboard app to geographically depict topics was built but no evaluation by practitioners of app or topics was reported. &
-  \begin{tabular}[c]{@{}l@{}}Primary model = LDA\\ Word representation = TF-IDF\\ Feature engineering = n-gramm frequency analysis.\\ Specific information Extraction = None\\ Data origin = UK\end{tabular} \\
+  \begin{tabular}[c]{p{0.3\textwidth}}Primary model = LDA\\ Word representation = TF-IDF\\ Feature engineering = n-gramm frequency analysis.\\ Specific information Extraction = None\\ Data origin = UK\end{tabular} \\
 \textcite{Basilio2019333} &
   Identify demand structure in certain geographic areas to enable selection of appropriate policing technique. &
   Crime call transcripts are analysed as bags of words using LDA. Similar crimes are then grouped and ten topics for the two areas of interest were discovered. These 20 topics were then analysed to define the type of demand in each area. &
