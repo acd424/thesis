@@ -1,9 +1,9 @@
 \chapter{Implications for POP}
 
 
-\section{Introduction} This chapter is the first chapter in the third and final part of this thesis. The aim of this part of the thesis is to draw together the lessons from the previous two parts and then asses what they mean for the future of POP and NLP.  This chapter will synthesise the results form the previous studies and describe what implications they have for Problem-oriented policing(POP). The following chapter will look more broadly at the possible future research directions for NLP with police data.
+\section{Introduction} This chapter is the first chapter in the third and final part of this thesis. The aim of this part of the thesis is to draw together the lessons from the previous two parts and then asses what they mean for the future of POP and NLP.  This chapter will synthesise the results form the previous studies and describe what implications they have for problem-oriented policing(POP). The following chapter will look more broadly at the possible future research directions for NLP with police data.
 
-This chapter will be broken into four main sections. The first section will review the results from the studies and draw conclusions based on the main research question and the supporting objectives. The next section will explore the limitations fo this work. The third section will utilise the conclusions and limitations presented and using the SARA framework for POP will suggest where PTMs might be best employed. The final section will conclude with barriers to the implementation of PTMs in the POP cycle.
+This chapter will be broken into four main sections. The first section will review the results from the studies and draw conclusions based on the main research question and the supporting objectives. The second section will utilise the conclusions and limitations presented and using the SARA framework for POP will suggest where PTMs might be best employed. The final section will conclude with barriers to the implementation of PTMs in the POP cycle.
 
 As a reminder the research question was:
 
@@ -11,37 +11,74 @@ As a reminder the research question was:
 
 The supporting objectives were:
 \begin{enumerate}
-\item {\bf Identify the extent of NLP usage with police data.} This will be largely conducted in the literature survey which will be the focus of Chapter 6.
-
-\item {\bf Evaluate how effective PTMs are with MO data.} PTMs will be formally introduced and explained in Chapter 5. MO data will be introduced in Chapter 8. Study 1 will investigate the use of PTMs to classify MO text data.
-
-\item {\bf Evaluate how effective PTMs are with Police Incident data.} As mentioned police incident data is another source of information on problems the police face. Using PTMs to classify police incident logs will be investigated in Study 2 
-
-\item {\bf Evaluate how effective Active Learning is with police data.}  Active Learning is a method to reduce the amount of data that PTMs need to learn. It has been found to work with other data types but its effectiveness with police data is unknown. Active Learning is introduced in Chapter 4 and studied in study 1.
-
-\item {\bf Identify which parts of the POP process might be best supported by the use of PTMs.} The POP process will be explained fully in Chapter 3. It is likely that different parts of the process will find differing uses and utility for PTMs. Lesson for POP will be drawn from both studies and outlined in Part 3. 
-
-\item {\bf Identify implementation barriers for PTMs.} Any new process is likely to have implementation barriers, these are important to identify so that they can be minimised. Discussed in Part 3. 
-
+\item {\bf Identify the extent of NLP usage with police data.} 
+\item {\bf Evaluate how effective PTMs are with MO data.} .
+\item {\bf Evaluate how effective PTMs are with Police Incident data.} 
+\item {\bf Evaluate how effective Active Learning is with police data.}  
+\item {\bf Identify which parts of the POP process might be best supported by the use of PTMs.} 
+\item {\bf Identify implementation barriers for PTMs.} 
 \end{enumerate}
 
-\section{Synthesis and Assessment of Findings from Case Studies.} This section will use the supporting objectives as a handrail to explore the cross cutting issues identified in the studies as outlined in part 2 of this thesis.
+\section{Summary of Study Results.} This section will use the supporting objectives as a handrail to explore the cross cutting issues identified in the studies as outlined in the earlier parts of this thesis.
 
-\subsection{Extent of NLP usage with police data.} The literature survey in Chapter 6 covered this. The findings were that there was no recorded use of PTMs with police free text data. This was 
+\subsection{Extent of NLP usage with police data.} This was conducted in the literature survey Chapter 6. The main findings from this chapter were that although there were a selection of research using NLP models to analysis police generated data, PTMs had not previously been studied. The study of PTMs with police data is important because PTMs are currently the most powerful NLP models, as judged by academic NLP benchmarks, and so may offer better performance with police data than existing methods. Additionally Chapter 6 also set out that in order to use the algorithms and NLP models the police were also concerned about factors wider than just performance. The police were also concerned about factors such as bias within the models and explainability of the models. These  factors were taken forward to the studies and when performance was assessed it also included bias and explainability as well as the performance metric MCC.
+
+\subsection{Evaluate how effective PTMs are with MO data.} Evaluation of PTMs with MO data was the subject of Studies 1a and 1c. In Study 1a investigated two different classifications with PF1 MO data. Study 1c investigated three different classification tasks with PF2 MO data. In addition Study 1a compared the PTM models to a simple keyword approach. Study 1c additionally investigated the application of PTMs across police forces and over time. The results form the classifications of both studies will be discussed first, then the more minor experimentations will be discussed.
+
+In Study 1a two classification tasks were undertaken with Burglary MO data. The first classification was to test if a motor vehicle had been stolen during the burglary. The second classification task was to understand if force had been used to enter the building during the burglary. In both classifications the fine-tuned PTM provided high performance classifications with MCC scores above 0.97. In the motor vehicle model one fine-tuned model correctly labeled every MO text in the test set.  The downside to this model performance is the labelled data that is required. PTMs are a supervised learning model which means they require labelled data from which to learn. In these examples there was a requirement for around 900 labelled examples. This equates to a time resource of about 9 hours or 1.5 days work.  In the case of the PF1 data there were 9961 burglaries. So hand labelling 900 examples is much quicker than reading 9961 MO texts. However if the amount of burglaries of interest was smaller, for example because the area for a POP intervention was limited, then the time spent labelling the data and fine-tuning the PTM may not be an efficient use of time.
 
 
+Both studies also investigated the explainability of the models. Explainability is important because it helps develop trust in the models and police officers might need to explain how results were generated. Explainability was investigated though the LIME tool that culminated in word clouds that highlighted the most important words for the classification.  The word clouds that were generated with the MO data reflected words that human might use to make the same classifications. For example the word \say{smash} is very prominent in the force used word cloud. Indicating, as we would expect, that if the word smash is used then a property is broken into. However when an act is not described, such as \emph{not} stealing a car, then the word cloud can appear inconclusive. An inconclusive word cloud is where the words are all of a similar size and no words are prominent. This is however just a reflection of the MO structure overall.
 
-\section{Limitations}
+Bias was investigated across both studies. Due to the difference in available data across police forces, bias was investigated using different factors for the different police forces. For PF1 the bias was investigated along MO statistical characteristics, namely 1)the length of an MO and 2) the number of word pieces. Word pieces are important because they are a measure of how many out of vocabulary words were used in the MO. an out of vocabulary word is one that the PTM does not have in its pre-determined vocabulary as a whole word and so breaks into multiple pieces that it does understand, As an example PTMs do not have the word  \say{Untidy} in their vocabulary so it is broken into \say{un} and \say{tidy}. The bias investigation used the Pearson correlation coefficient to determine if there was a relationship between the accuracy of the model prediction and the statistical property. No evidence of a relationship between PTM performance and number of word pieces or length of MO text was found.
 
 
-\section{Applications for POP}
+For PF2 the bias investigation was conducted using victim characteristics, namely gender and ethnicity. This bias study used two metrics 1) Equality of opportunity which .... and 2) Predictive parity which ..... These metrics were calculated for the test set and then ten cross-validation test sets. Using all of the labelled data a cross validation (CV) experiment was conducted. The CV experiment randomly sampled the data on ten separate occasions to produce a train set ( 80\% of the data ) and a test set (20\% of the data), each CV model trained a PTM and then the labelled test set was used to derive the bias metrics. Thus from the CV experiment 10 values of each metric were produced and a test of differences was conducted. There was no strong or consistent evidence from the PF2 bias investigation of the PTM mis-classifying along victim characteristics.
 
-S
-A
-R
-A
+Additionally Study 1c investigated the use of PTM models over time and across police forces. The investigation over time found no significant drop in performance. The study across forces indicates that PTMs fine-tuned in one force can be used in another force - however the PTM performance does drop. 
+ 
+ 
+\subsection{Evaluate how effective PTMs are with Police Incident data.} Police incident data is different from MO data. The main differences are that police incident data is longer and less well edited than the MO data. The incident data also had more words redacted through the white-listing process. Each of these differences may contribute to poorer performance by the PTMs. Importantly due to the length of the incident texts a different PTM (longformer) was used for the analysis.
 
-\section{implementation issues}
+Police incident data was explored in a similar manner to the MO data , although it was only explored in one police force, PF2. Three classification tasks were used to explore the use of PTMs. These classification tasks were explored for performance (using MCC) explainability ( using LIME and word clouds) and bias using the bias metric Equality of Opportunity and Predictive Parity. The bias investigation was conducted into complaint delivery method e.g. electric or telephone.
+
+The performance of the PTMs with police incident data was not as high as the performance of the PTMs with the MO data. Although the results with the police incident data were still comparable to the PTM performance with recognised academic benchmarks. Part, but certainly not all,  of this lower performance may be attributed to factors specific to this research. These factors include 1) The incident text was redacted 2) the computing power was sub-optimal. Data being redacted would mean that some information was lost, the redaction rate in the police incident text (8\%)  was higher than the MO text (2\%), however the police themselves would not need to do this redaction and so if PTMs were used with the police then the performance will not be hampered by the redaction factor as it was in this study. Secondly the computing power available for this study was sub-optimal, this meant that the PTMs could not be fine-tuned in an optimal way and so the top performance may not have been reached. 
+
+The investigation into explainability uncovered that the PTMs were using system generated text to aid predictions. System generated text is text that is generated by the police computer systems as it processes complaints made electronically e.g. by email. This reliance on system generated text was also reflected in the bias investigation.
+
+As there was no victim or offender characteristics data the bias investigation was conducted into the complaint delivery method. Broadly this was split into two methods - telephone (emergency and non-emergency) and electronic ( either email or online form). The investigation showed that the PTMs were biased when classifying the incident texts, and that bias was consistent with the underlying base rates of the classification type in the method delivery type. As an example as a high percentage of covid complaints were sent electronically then the PTM was more likely to over classify logs as covid complaints if they were electronically delivered.  It is likely that this bias was in part due to the system generated text which effectively identified the text as an electronically delivered incident log.
+
+\subsection{Evaluate how effective Active Learning is with police data.}  Active learning is a method designed to reduce the overall number of data that needs labelling. Active learning achieves this by incrementally fine-tuning a PTM and using that model to select the next set of data to label. The results from study 1a showed that there was on average around a 14\% reduction in the data required to be labelled. However this was partially offset by the additional process time to fine-tune the PTM on each round of active learning. Therefore the results were not conclusive, and the decision to use active learning will in part be determined by available analyst time ( if in short supply then active learning is useful as there is less data to label)  and time to deadline (if close then active learning with PTMs may take too long due to additional process time).
+
+
+\section{Applications for POP} Part 1 of this thesis included an exploration of POP. As part of this exploration the framework for POP known as SARA was introduced, see Figure \ref{}. SARA is a four point framework, the elements of the framework are - Scanning, Analysis, Response and Assessment.  Although there is a natural order to the framework, it should be stressed that moving backwards and between the elements is encouraged to refine the process.  The following sections will briefly recap the aim of the element from the SARA framework and explore how PTMs might be applicable.
+
+\subsection{Scanning} Scanning is the first stage in the process and is centred on finding and defining the problem to be solved. As a reminder a problem is a cluster of similar related incidents, that are causing harm to the public and can be considered police business to deal with it. Problems do not have to just be crimes. In fact we have seen looking at anti-social behaviour in Study 2 that non-crimes can be serious problems. 
+
+Generally scans are conducted with prior information about what the scan is looking for. That is the conductor of the scan already has an idea about for example the incident type and what variation they are looking for. In this instance they are trying to confirm or deny that variation and find additional problems with the same characteristics. An alternative is if the scan is searching for unknown problems for example high harm problems or new problems - but without knowing what form the problems are or what variation groups them. This alternative scan type will be returned to at the end of the section.
+
+The scan is conducted with a general idea in mind about the problem type. As an example we can use the second problem identified in Chapter 10 (10.1.1). The detective was aware of a spate of burglaries but believed it was a result of a high proportion of outbuilding only burglaries.  In this instance the need for PTMs can be determined with ease. The first consideration is whether there exists suitable structured data to answer the question. Structured data is much easier to handle and analyse than unstructured data and so should always be the first port of call. If structured data is found then the suitability of the data should also be tested e.g. for completeness and accuracy.  For this example some structured data will be available, crimes will be classified as burglaries for instance. This structured data helps to reduce the search space but does not enable a detailed scan on the variation within the burglary. In this instance we know that the information on the variation was not accessible from structured data. Therefore PTMs will be useful to extract information from the unstructured data source and present it in a structured manner. This was achieved in this thesis by classifying burglaries as either only occurring in an outbuilding or not.  
+
+The second consideration is the volume of potential incidents that need to be scanned. As we have seen from all studies in this thesis PTMs are a form of supervised learning and as such require labelled data for fine-tuning. For PTMs to be accurate with the data used in this thesis between 700 and 900 crimes needed to be read and labelled. This impacts the utility of the PTMs, as in order for it to be worthwhile to label the data the pool of potential incidents must be sufficiently large to make it an efficient endeavour. If the area of interest only had 100 burglaries in the last year, then PTMs may not be an efficient use of time if used for this problem alone. However if the area, and perhaps the comparison area, had thousands of burglaries then it becomes more likely that PTMs will be useful.
+
+PTMs are likely to be useful in the scanning stage, however this will depend on a gap in knowledge from the structured data and sufficient potential problems to warrant the process costs (primarily data labelling) of using the PTMs.  This was predicated on a \emph{known} problem. There can be occasions were the exact nature of the problem is not known, as alluded to at the start of this section. In this case PTMs and NLP techniques can be used, but not as they have been used in the studies here. An example of how they might be used is unsupervised learning .... This remains a key limitation of the use of PTMs as explored in this thesis - you must know what variation you are looking for.     
+
+
+\subsection{Analysis}
+\subsection{Response}
+\subsection{Assessment}
+
+\subsection{POP implementation} Chapter 3 introduced two broad implementations of POP - the generalist and the specialist approach. The generalist approach allows individual officers to conduct POP cycles. The specialist approach involves the building of specialist capacity within a police force and the unit conducting larger POP xxx. The question that this presents is can PTMs be used for each implementation type? Can PTMs support both the generalist and specialist POP approach? 
+
+In considering the question of PTM support to the generalist and specialist POP approaches two dominating factors emerge from the research conducted here. They are problem size and technical capacity. 
+
+Firstly problem size, the number of problems in the area of interest. Problem size is important as PTMs require a certain amount of sample data fo them to learn. For example in the PF1 Burglary data the PTMs required 700 to 900 MOs texts to learn the classification accurately, the built model was then able to go onto label thousands of crimes and thus time was saved. However if the problem size is small, for instance because the area of interest is small, then there may not be enough problem texts for PTMs to be trained and used.  In the generalist approach where individual officers are conducting their own POP the number of  problems may not be that large, and so consequently PTMs may not be that useful to them. Specialist teams who might be operating on a larger scale are more likely to have a more appropriate problem size.  
+
+Secondly, and relatedly, is the resources required to utilise the PTM, this includes the effort to label the texts, the know how to use the PTMs and the computing power. Generalist implementations may not have the resources at hand to use the PTMs effectively, whereas resourced teams are more likely to be able to call on the skills and hardware required to operate the PTMs. Some of these issues can be overcome through more accessible tooling for the PTMs. Tooling that can automate some of the implementation requirements and cloud based solutions are able to more easily offer additional computing power for short projects. However these potential tools were not investigated in this thesis.
+
+It is therefore more likely that, at least in the short term, that PTMs will have more utility with specialised POP units who have sufficient appropriate data and the resources to implement the PTMs correctly.
+
+\section{Implementation Issues}
 
 physical
 
@@ -50,3 +87,4 @@ technical
 Ethical
 
 
+\section{Research Limitations}

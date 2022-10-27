@@ -105,22 +105,26 @@ As an example of classification with extrinsic validation, police free text data
 
 \subsection{Police and Algorithms}
 
-Although not specifically associated with NLP  \textcite{babuta2018machine} is a RUSI publication that explores the use of algorithms in a UK police context. Although the focus is on predictions of individuals' proclivity for future crime, rather than crime events themselves it highlights the lack of frameworks and direction from central policy makers that would be used to govern and direct the research in this area. Explaining the rational behind decisions to interested bodies has and will continue to be an important part of transparency which is one part of policing by consent, this transparency needs to be borne in mind with the adoption of different methods of decision support. 
+Although not specifically associated with NLP  \textcite{babuta2018machine} is a RUSI publication that explores the use of algorithms in a UK police context. Although the papers focus is on predictions of individuals' proclivity for future crime, rather than crime events themselves. The paper highlights the lack of frameworks and direction from central policy makers in the area of algorithmic usage for UK police forces. However there is one framework that has been partly adopted by the National Police Chiefs Council, that is currently filling the policy void. This framework is ALGO-CARE.
 
-\subsubsection{ALGOCARE}
+\subsubsection{ALGO-CARE}
+
+One tool that has been developed, and partially adopted by the a police governing body for UK police (National Police Chiefs Council) - find citation -, is ALGO-CARE  \parencite{oswald2018algorithmic} . ALGO-CARE was developed alongside an automatic risk assessment tool in Durham police force and is a \say{decision-making guidance framework for the deployment of algorithmic assessment tools in the policing context} \parencite{oswald2018algorithmic}. In short ALGO-CARE is a mnemonic that has been developed to allow police leadership to understand whether or not to deploy an algorithmic tool. The mnemonic is explained below.
+
 
 \begin{itemize}
-\item{A}
-\item{}
-\item{}
-\item{}
-\item{}
-\item{}
-\item{}
-\item{}
+\item{Advisory.} Is there a human in the loop? Or is the process/tool fully automated between input and output. 
+\item{Lawful.} Is the purpose necessary and legitimate for policing purposes?
+\item{Granularity.} This factor encompasses granularity of data and decisions at all levels and is split into 6 sub-areas.
+\item{Ownership.} Who owns the algorithm and the data on which it is trained?
+\item{Challengeable.} What are the post-implementation oversight and audit mechanisms e.g. to identify any bias?
+\item{Accuracy.} Covers all elements of performance fo the algorithm. Essentially is the performance good enough for the intended usage.
+\item{Responsible.}Covering such elements as a fair, accountable and ethical approach.
+\item{Explainable.} Can appropriate information be given about how the algorithm has come about each score?
 \end{itemize}
 
-ALGOCARE is used to expand the performance investigations into the modesl. As demonstrated above an accurate model alone is not good enough, it must also have certain other characteristics that will increase the chances of police forces using it. For this reason model performance is expanded to include explainability and bias. This links into the ......x.x.x.x..x 
+Although ALGO-CARE was developed for risk assessment tools it is has wider applicability to other applications. The most important message that the tool conveys is that good performance (their Accuracy) is not the only consideration for implementation. Other requirements such as on what problem the tool is used, how Officers use the information and issues of fairness are all important factors for the utilisation of modern NLP models. This spread of requirements is reflected in the Methods Chapter where the performance of the PTMs is not just predicated on a measure of correctness ( the metric used will be MCC), but also explainability and bias. 
+
 
 \section{ NLP with Crime Conclusions} In summary there has been a spread of use of NLP with police generated free-text or narrative data. Most of that presented in the literature survey has been intrinsically successful, that is the models built have generally been found to prove accurate results. Giving confidence that using NLP with police free text data is possible. Extrinsic validation has been less well shown however, and by this I mean that the models built have not shown real utility for their intended ultimate purpose.  This in part may be down to most of the research emanating from the computer science community who may not benefit from the stronger working relationships with police forces that the criminologists do. The NLP success rate will of course have benefited from publication bias, but knowing the relative recent success of NLP in the larger community, and against published standardised data sets,  it is not surprising that success has been found with police free-text data.
 
