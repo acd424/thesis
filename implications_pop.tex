@@ -5,7 +5,7 @@
 
 This chapter will be broken into four main sections. The first section will review the results from the studies and draw conclusions based on the main research question and the supporting objectives. The second section will utilise the conclusions and limitations presented and using the SARA framework for POP will suggest where PTMs might be best employed. The final section will conclude with barriers to the implementation of PTMs in the POP cycle.
 
-As a reminder the research question was:
+As a reminder the research question is:
 
 \textbf{Can PTMs be used efficiently to extract information from police free-text data, and if so what practical applications for problem-oriented policing does this approach have?}
 
@@ -53,7 +53,7 @@ As there was no victim or offender characteristics data the bias investigation w
 
 \section{Applications for POP} Part 1 of this thesis included an exploration of POP. As part of this exploration the framework for POP known as SARA was introduced, see Figure \ref{}. SARA is a four point framework, the elements of the framework are - Scanning, Analysis, Response and Assessment.  Although there is a natural order to the framework, it should be stressed that moving backwards and between the elements is encouraged to refine the process.  The following sections will briefly recap the aim of the element from the SARA framework and explore how PTMs might be applicable.
 
-\subsection{Scanning} Scanning is the first stage in the process and is centred on finding and defining the problem to be solved. As a reminder a problem is a cluster of similar related incidents, that are causing harm to the public and can be considered police business to deal with it. Problems do not have to just be crimes. In fact we have seen looking at anti-social behaviour in Study 2 that non-crimes can be serious problems. 
+\subsection{Scan for Problems} Scanning is the first stage in the process and is centred on finding and defining the problem to be solved. As a reminder a problem is a cluster of similar related incidents, that are causing harm to the public and can be considered police business to deal with it. Problems do not have to just be crimes. In fact we have seen looking at anti-social behaviour in Study 2 that non-crimes can be serious problems. 
 
 Generally scans are conducted with prior information about what the scan is looking for. That is the conductor of the scan already has an idea about for example the incident type and what variation they are looking for. In this instance they are trying to confirm or deny that variation and find additional problems with the same characteristics. An alternative is if the scan is searching for unknown problems for example high harm problems or new problems - but without knowing what form the problems are or what variation groups them. This alternative scan type will be returned to at the end of the section.
 
@@ -61,10 +61,14 @@ The scan is conducted with a general idea in mind about the problem type. As an 
 
 The second consideration is the volume of potential incidents that need to be scanned. As we have seen from all studies in this thesis PTMs are a form of supervised learning and as such require labelled data for fine-tuning. For PTMs to be accurate with the data used in this thesis between 700 and 900 crimes needed to be read and labelled. This impacts the utility of the PTMs, as in order for it to be worthwhile to label the data the pool of potential incidents must be sufficiently large to make it an efficient endeavour. If the area of interest only had 100 burglaries in the last year, then PTMs may not be an efficient use of time if used for this problem alone. However if the area, and perhaps the comparison area, had thousands of burglaries then it becomes more likely that PTMs will be useful.
 
-PTMs are likely to be useful in the scanning stage, however this will depend on a gap in knowledge from the structured data and sufficient potential problems to warrant the process costs (primarily data labelling) of using the PTMs.  This was predicated on a \emph{known} problem. There can be occasions were the exact nature of the problem is not known, as alluded to at the start of this section. In this case PTMs and NLP techniques can be used, but not as they have been used in the studies here. An example of how they might be used is unsupervised learning .... This remains a key limitation of the use of PTMs as explored in this thesis - you must know what variation you are looking for.     
+PTMs are likely to be useful in the scanning stage, however this will depend on a gap in knowledge from the structured data and sufficient potential problems to warrant the process costs (primarily data labelling) of using the PTMs.  This was predicated on a \emph{known} problem. There can be occasions were the exact nature of the problem is not known, as alluded to at the start of this section. In this case PTMs and NLP techniques can be used, but not as they have been used in the studies here. PTMs must be used in an unsupervised manner where the machine learning algorithm clusters the data according to variation the PTM finds, a similar method is used by \textcite{birks2020unsupervised} where they cluster burglary crimes without using any prior information on what the themes of the clusters should be. This highlights a key limitation of the use of PTMs as explored in this thesis - you must know what problem variation you are looking for in order to find it.
+
+In summary PTMs can be useful for the scanning element of the POP process as they allow additional information to be found in unstructured information sources that can then be utilised to group problems. Once grouped the problems then need to be analysed to understand how they are occurring. This is the subject of the next section. 
 
 
-\subsection{Analysis}
+\subsection{Analyse in Depth} This part of the framework is about understanding more fully how the problems are occurring. What are the underlying mechanisms that are generating the problem? Although there will be some variations between problems - what are the key areas of overlap? In this part of the framework POP practitioners must delve deeper into each problem than they did in the scanning phase. They must gain more information about the problems in order to fully understand what is happening. This more in depth analysis is likely to involve more unstructured data, and PTMs can assist with analysing this unstructured data  in a systematic fashion. The data sources is likely to widen, although the scanning phase may only utilise high level overviews of the problem, the analysis phase is likely to want to utilise more detailed and lengthier documents such as witness statements and other reports.   
+
+
 \subsection{Response}
 \subsection{Assessment}
 
