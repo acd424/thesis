@@ -1,4 +1,4 @@
-\chapter{Aims and Objectives} This chapter is the final chapter in the first part of the thesis. The main aim of this Chapter is to state the research question and the sub questions to set the agenda for the rest of the thesis. Firstly the main research question and the sub-questions will be stated. Then each research question is restated before a detailed review into how each question will be explored. Finally a table is given to show where each reseaerch question will be answered related to the studies in part 2 of the thesis.
+\chapter{Aims and Objectives} This chapter is the final chapter in the first part of the thesis. The main aim of this chapter is to state the research question and the sub questions to set the agenda for the rest of the thesis. Firstly the main research question and the sub-questions will be stated. Then the main research question and the sub-questions are individually explored. Finally a table is given to show where each research question will be answered related to the studies in part 2 of the thesis.
 
 \section{Primary Research Aim}
 The thesis will be motivated by the following overarching research question: 
@@ -13,7 +13,7 @@ With supporting objectives:
 
 \item Evaluate how effective PTMs are with police incident data.
 
-\item Evaluate how effective Active learning is with police data.
+\item Evaluate how effective active learning is with police data.
 
 \item Identify which parts of the POP process might be best supported by the use of PTMs.
 
@@ -27,9 +27,7 @@ With supporting objectives:
 
 \subsection{Aim} 
 
-The overarching aim of this study is to extend investigation into the effectiveness of NLP methods in analysing police free text data. There will be a focus on how modern PTMs can be used to classify police texts. This classification will enable a greater understanding of intra-crime variation and so may provide novel insights into the specificity of problems, thus supporting the application of POP.
-
-
+The overarching aim of this study is to extend research into the effectiveness of NLP methods at analysing police free text data. The focus will be on how modern PTMs can be used to classify police texts. This classification will enable a greater understanding of intra-crime variation and so may provide  insights into the specificity of problems, thus supporting the application of POP.
 
 \subsection{Discussion} 
 
@@ -39,33 +37,26 @@ Chapter 5 discussed how a diverse range of NLP methods can be used to extract me
 
 When considering if PTMs can be used to extract information from police free text data, there are wider concerns than just the accuracy of the model. Therefore, other factors that allow a technique, especially an AI technique, to be used in a public service capacity will also be considered. The additional factors will be model bias and explainability. These factors were introduced at the end of Chapter 6 and were seen as important to track to understand if a model was suitable for use.
 
-The next sections introduces the objectives stated above, which will be explored to answer the main research question.
+The next sections introduces the supporting objectives, which will be explored to answer the main research question.
  
-
-
-
 \section{Supporting Objectives} 
-
-
-
 
 \subsection{Identify the extent of NLP usage with police data.}  This was already completed in the previous chapter by way of a literature survey. As a brief recap, it was found that NLP techniques have been used with police generated data, both academically and practically. However, the NLP work is not extensive, and no work with PTMs has been recorded. This sets the research objective of reviewing the performance of PTMs with police generated data to understand how these PTMs can be used with little additional manipulation and what results they will offer.
 
 The next two objectives focus on the use of PTMs with two different text types. The two different types are MO data and police incident logs. These data types were briefly introduced in the Introduction and will be described more fully in the Data chapter.
 
 
-\subsection{Evaluate how effective PTMs are with MO data.} MO data is a short description of a crime. MO data records aspects of intra-crime variation for each crime and so can be a useful source of information for POP practitioners. This objective will investigate how well PTM models can extract this intra-crime variation. The evaluation of this objective will be conducted in Study 1. Study 1 will focus on MO data, in particular burglary MO data. Model effectiveness will encompass performance, explainability and the presence (or absence) of bias. In addition, where data availability allows, performance over time and across police forces will be investigated. Performance over time is important because effort spent building models that last longer will be more efficient. Performance across police forces is important because wider use of a single model means more efficient use of the resources required to build the model.
+\subsection{Evaluate how effective PTMs are with MO data.} MO data is a short description of a crime. MO data records aspects of intra-crime variation for each crime and so can be a useful source of information for POP practitioners. This objective will investigate how well PTM models can extract this intra-crime variation. The evaluation of this objective will be conducted in Study 1. Study 1 will focus on MO data, in particular burglary MO data. The data for this study will be drawn from two police forces known as PF1 and PF2. These police forces will be described in the data chapter.
 
-\subsection{Evaluate how effective PTMs are with police incident data.} Police MO data is not the only data that describes crimes. Another ubiquitous source of data is police incident logs. For this reason, PTM effectiveness will also be judged against police incident logs, particularly police incident logs describing anti-social behaviour (ASB). Choosing another text type is important because different texts are formed in different ways and can use different language. These linguistic differences may mean that PTM effectiveness changes between text types.
+ Model effectiveness will encompass performance, explainability and the presence (or absence) of bias. In addition, where data availability allows, performance over time and across police forces will be investigated. Performance over time is important because effort spent building models that last longer will be more efficient. Performance across police forces is important because wider use of a single model means more efficient use of the resources required to build the model.
 
-\subsection{Evaluate how effective Active Learning is with police data.} Using PTMs generally requires labelled data. Labelled data, however, requires resources to generate, which would otherwise be applied to POP problem solving in other ways. One method that has been developed to reduce this resource requirement is active learning. In keeping with lowering the burden on POP, active learning will be investigated to understand what kind of efficiencies can be achieved by adopting the technique.
+\subsection{Evaluate how effective PTMs are with police incident data.} Police MO data is not the only data that describes police problems. Another ubiquitous source of data is police incident logs. For this reason, PTM effectiveness will also be judged against police incident logs, particularly police incident logs describing anti-social behaviour (ASB). The police incident log data is only drawn from PF2.  Choosing another text type is important because different texts are formed in different ways and can use different language. These linguistic differences may mean that PTM effectiveness changes between text types.
+
+\subsection{Evaluate how effective active learning is with police data.} Using PTMs generally requires labelled data. Labelled data, however, requires resources to generate, resources which would otherwise be applied to POP problem solving in other ways. One method that has been developed to reduce this resource requirement is active learning. In keeping with lowering the burden on POP, active learning will be investigated to understand what kind of efficiencies can be achieved by adopting the technique.
 
 \subsection{Identify which parts of the POP process might be best supported by the use of PTMs.} The proceeding three supporting objectives will form the middle part of the thesis. This final supporting objective will review what has been learned in that middle part of the thesis and then suggest how the POP burden may be lowered. This analysis will be achieved using the SARA framework. The SARA framework is a framework for implementing POP that was introduced in Chapter 3.
 
-\subsection{Identify implementation barriers for PTMs.}Introducing any new practice or software is likely to hit barriers. These barriers can stop a new practice being implemented if they are not identified and addressed. This supporting objective highlights the most important barriers, suggesting how they may be overcome. 
-
-
-
+\subsection{Identify implementation barriers for PTMs.}Introducing any new practice or software is likely to hit barriers. These barriers can stop a new practice being implemented if they are not identified and addressed. This supporting objective highlights the most important barriers, suggesting how they may be overcome.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -102,6 +93,6 @@ The next two objectives focus on the use of PTMs with two different text types. 
 
 
 
-\section{Conclusion} This Chapter has set out the research question and sub questions that the studies in this thesis will go onto address. The next part of this thesis relates to the practical aspects of this thesis. Principally testing PTMs to see if they perform well with police free-text data. After part 2 the third and final part of the thesis will draw together the results form part 2 and use them to explore how PTMs might be best used in assisting POP interventions.  
+\section{Conclusion} This chapter has set out the research question and sub questions that the studies in this thesis will go onto address. The next part of this thesis relates to the practical aspects of this thesis. Principally testing PTMs to see if they perform well with police free-text data. After Part 2 the third and final part of the thesis will draw together the results from Part 2 and use them to explore how PTMs might be best used in assisting POP interventions.  
 
 
