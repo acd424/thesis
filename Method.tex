@@ -174,7 +174,11 @@ P(\hat{Y}=1|A=x,Y =0)=P(\hat{Y} =1|A=y,Y =0)
 
 \item \textbf{Predictive parity} \parencite{verma2018fairness}. Predictive parity is similar to equality of opportunity above, but relates to the probability of incorrect predictions as seen in Equation \ref{eqn:PPprob}. In this case parity occurs when the precision from each group is the same, that is the probability of being identified, given that it wasn't a positive instance is the same regardless of the group the sample is drawn from. Again a simplified form to calculate the metric is given at Equation \ref{eqn:PP}
 
+These Extrinsic bias metrics were calculated for each test set. However the weakness with this approach is that only a single data point is obtained on which to judge bias. In order to provide more evidence, rather than just a single metric, a cross-validation process was implemented to provide a bias estimate with confidence interval. This cross-validation process is explained next. 
 
+For the cross validation process 20\% of the available labelled data was randomly selected (available includes all data labelled for the test, validation and train data sets). This 20\% was used as the test set. The remaining 80\% was used as the train set. There was no validation set as the hyper parameters were fixed. A PTM was fine-tuned using the 80\% train set then used to label the 20\% test set. Bias metrics EoO and PP were then calculated on the  20\% test set. This whole process was repeated 10 times so that there were 10 sets of bias metrics. 
+
+For each bias metric a non-parametric hypothesis test of equal means was conducted for each metric, testing if the mean of the metric was 0 or not using all ten data points. A significant p value would indicate bias at a statistically significant level across the experiment. The mean of the ten metrics indicates the direction and the size of the bias. 
 
 
 \end{itemize}
