@@ -176,7 +176,7 @@ Best Run             & 0.97              & 0.99              & 1.0              
 
 
 
-Although the LIME output that is displayed in Figure 10.1 provides an adequate visual representation of the operation of the model with a single MO text, that style of visualisation does not scale well to multiple texts. Accordingly, a different approach was adopted in order to arrive at a more general representation of the LIME output from several texts. The general approach was to run the LIME algorithm for every MO text in the test set. The coefficients from the local models that were generated for each MO text were stored, and the word clouds in Figure \ref{fig: wordcloud_mv_both}  and Figure \ref{fig: wordcloud_force_both} were generated. The size of a word in the word cloud reflects how important it is for the classification of all MO texts in the test set. Word sizes cannot be compared across word clouds.  
+Although the LIME output that is displayed in Figure 10.1 provides an adequate visual representation of the operation of the model with a single MO text, that style of visualisation does not scale well to multiple texts. Accordingly, a different approach was adopted in order to arrive at a more general representation of the LIME output from several texts. The general approach was to run the LIME algorithm for every MO text in the test set. The coefficients from the local models that were generated for each MO text were stored, and the word clouds in Figure \ref{fig:wordcloud_mv_both}  and Figure \ref{fig:wordcloud_force_both} were generated. The size of a word in the word cloud reflects how important it is for the classification of all MO texts in the test set. Word sizes cannot be compared across word clouds.  
 
 
 
@@ -217,7 +217,7 @@ Although the LIME output that is displayed in Figure 10.1 provides an adequate v
          \label{fig: wordcloud_mv_force}
      \end{subfigure}
         \caption[Wordclouds from \textbf{force} classification model. PF1 data.]{{Wordclouds from \textbf{force} classification model. PF1 data.} These wordclouds were generated using a fine-tuned BERT model on the PF1 data. The larger a word the more important it is for a classification. Words size is derived from a summation of the coefficients from individual LIME models. Word sizes are not comparable across figures.}
-        \label{fig:wordcloud_mv_both}
+        \label{fig:wordcloud_force_both}
         
 \end{figure}
 
